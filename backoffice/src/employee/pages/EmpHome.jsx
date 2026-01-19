@@ -5,6 +5,9 @@ import Dashboard from "./Dashboard";
 import { Routes, Route } from "react-router-dom";
 import {useUserDetails} from "../../utility/UserDetailsContext" ;
 import Profile from "./Profile";
+import Settings from "./Settings"
+import AddItem from "./AddItem";
+import AddBanner from "./AddBanner"
 
 
 
@@ -35,9 +38,9 @@ const EmpHome = () => {
     <Routes>
                             <Route path={"/"} element={<Dashboard />}></Route>
                             <Route path={"/profile"} element={<Profile />}></Route>
-                            {/* <Route path={"/settings"} element={<Settings />}></Route> */}
-                            {/* <Route path={"/attandance"} element={<Attandance/>}></Route> */}
-                            {/* <Route path={"/leave"} element={<Leave/>}></Route> */}
+                            <Route path={"/settings"} element={<Settings />}></Route>
+                            <Route path={"/addItem"} element={<AddItem/>}></Route>
+                            <Route path={"/addBanner"} element={<AddBanner/>}></Route>
 
                             
 

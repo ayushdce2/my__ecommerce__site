@@ -24,8 +24,8 @@ const Sidebar = (props) => {
       <aside className={`${openSidebar == true ? "w-64 absolute inset-0 z-1" : "w-0"} overflow-hidden md:w-64 shrink-0 bg-gradient-to-b from-blue-400 to-indigo-200 text-white  flex md:flex flex-col transition-all duration-300 dark:from-blue-700 darak:to-indigo-500`} >
         <div className="p-6 text-4xl font-bold flex items-center gap-2 justify-between ">
           <div className="flex">
-            <FaUserTie />
-            HRMS
+            {/* <FaUserTie /> */}
+            <span className="text-2xl">My Shop</span>
           </div>
           <div className="bg-gray-800  rounded-full p-1 md:hidden ">
             <FaTimes className="text-2xl " onClick={() => { setOpenSidebar(!openSidebar) }} />
@@ -39,16 +39,17 @@ const Sidebar = (props) => {
           <Link to="/employee" onClick={() => { setOpenSidebar(false) }} className={`${pathname=="/employee" && "bg-white/20"} flex items-center gap-3 p-3 rounded-lg cursor-pointer transition-all  hover:bg-white/20 hover:bg-white/20 hover:translate-x-1 `}>
             <FaTachometerAlt /> Dashboard
           </Link>
-          <Link to="" className={`flex items-center gap-3 p-3 rounded-lg cursor-pointer transition-all hover:bg-white/20 hover:bg-white/20 hover:translate-x-1 `}>
-            <FaUsers /> Employees
+          {/* <Link to="" className={`flex items-center gap-3 p-3 rounded-lg cursor-pointer transition-all hover:bg-white/20 hover:bg-white/20 hover:translate-x-1 `}>
+            <FaUsers /> Add Banner
+          </Link> */}
+          <Link to="/employee/addBanner" onClick={() => { setOpenSidebar(false) }} className={`${pathname=="/employee/addBanner" && "bg-white/20"} flex items-center gap-3 p-3 rounded-lg cursor-pointer transition-all hover:bg-white/20 hover:bg-white/20 hover:translate-x-1 `}>
+            <FaMoneyCheckAlt /> Add Banner
           </Link>
-          <Link to="" className={`flex items-center gap-3 p-3 rounded-lg cursor-pointer transition-all hover:bg-white/20 hover:bg-white/20 hover:translate-x-1 `}>
-            <FaClipboardList /> Attendance
+          <Link to="/employee/addItem" onClick={() => { setOpenSidebar(false) }} className={`${pathname=="/employee/addItem" && "bg-white/20"} flex items-center gap-3 p-3 rounded-lg cursor-pointer transition-all hover:bg-white/20 hover:bg-white/20 hover:translate-x-1 `}>
+            <FaClipboardList /> Add Item
           </Link>
-          <Link to="" className={`flex items-center gap-3 p-3 rounded-lg cursor-pointer transition-all hover:bg-white/20 hover:bg-white/20 hover:translate-x-1 `}>
-            <FaMoneyCheckAlt /> Payroll
-          </Link>
-          <Link to="" className={`flex items-center gap-3 p-3 rounded-lg cursor-pointer transition-all hover:bg-white/20 hover:bg-white/20 hover:translate-x-1 `}>
+          
+          <Link to="/employee/settings" onClick={() => { setOpenSidebar(false) }} className={`${pathname=="/employee/settings" && "bg-white/20"} flex items-center gap-3 p-3 rounded-lg cursor-pointer transition-all hover:bg-white/20 hover:bg-white/20 hover:translate-x-1 `}>
             <FaCog /> Settings
           </Link>
                     <Link to="/employee/profile" onClick={() => { setOpenSidebar(false) }} className={`${pathname=="/employee/profile" && "bg-white/20"} flex items-center gap-3 p-3 rounded-lg cursor-pointer transition-all hover:bg-white/20 hover:bg-white/20 hover:translate-x-1 `}>
