@@ -24,7 +24,7 @@ const App = () => {
       <nav className="bg-white shadow-sm sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
           <h1 className="text-2xl font-bold text-indigo-600">
-            Techbit
+            My Shop
           </h1>
 
           <div className="hidden md:flex gap-8 font-medium">
@@ -187,7 +187,7 @@ const App = () => {
       {/* FOOTER */}
       <footer className="bg-slate-900 text-slate-300">
         <div className="max-w-7xl mx-auto px-6 py-8 text-center text-sm">
-          © 2025 Techbeat. All rights reserved.
+          © 2025 My Shop. All rights reserved.
         </div>
       </footer>
     </div>
