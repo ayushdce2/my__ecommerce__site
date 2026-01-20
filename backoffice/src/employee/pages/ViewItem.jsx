@@ -108,10 +108,11 @@ const data = res.data;
 
 
 
-      await  API.delete(
+      const productDeleteStatus = await  API.delete(
   `employee/product/delete/${id}`,
   headers
 )
+console.log(productDeleteStatus,"productDeleteStatus")
 
     fetchProducts();
   };

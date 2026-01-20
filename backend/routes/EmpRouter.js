@@ -10,7 +10,7 @@ const router = require("express").Router();
 
 router.post("/product/add",isUserAuthenticated, isUserAuthorize("employee"), isProductDataValid,addProductfunction);
 router.get("/product/view",isUserAuthenticated, isUserAuthorize("employee"),ViewAllProducts);
-router.put("/product/update/:id",isUserAuthenticated, isUserAuthorize("employee"),UpdateProduct);
+router.put("/product/update/:id",isUserAuthenticated, isUserAuthorize("employee"),isProductDataValid,UpdateProduct);
 router.delete("/product/delete/:id",isUserAuthenticated, isUserAuthorize("employee"),DeleteProduct);
 // addProductfunction
 // router.get("/product/view",isUserAuthenticated, isUserAuthorize("employee"), getProductSummary); 

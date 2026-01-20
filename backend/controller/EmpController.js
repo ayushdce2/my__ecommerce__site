@@ -63,16 +63,26 @@ const { page, limit, search, category, sortBy, order } = req.query;
 }
 
 const UpdateProduct = async (req, res) => {
+  try{
 const product = await ProductModel.findByIdAndUpdate(
     req.params.id,
     req.body,
     { new: true }
   );
-  res.json(product);
+  res.status(200).json({message: 'Updated Successfully', success: true,product});
+}catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Internal Server Error', success: false });
+    }
 }
 
 const DeleteProduct =async (req,res)=>{
-await ProductModel.findByIdAndDelete(req.params.id);
-  res.json({ message: "Product deleted" });
+try{
+  await ProductModel.findByIdAndDelete(req.params.id);
+  res.status(200).json({ message: "Product deleted" });
+  } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Internal Server Error', success: false });
+    }
 }
 module.exports = {addProductfunction, ViewAllProducts,UpdateProduct,DeleteProduct };
