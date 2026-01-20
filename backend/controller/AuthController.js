@@ -35,11 +35,12 @@ const LoginFunction = async (req,res)=>{
         if(!isPassEqual){
             return res.status(403).json({ message: 'Invalid Password', success: false });
         }
-
+// console.log(existingUser,"existingUser")
+const existinguserRole = existingUser.userRole;
         const jwtToken = jwt.sign(
-                {email:existingUser.email, _id:existingUser._id},
+                {email:existingUser.email, _id:existingUser._id,userRole:existinguserRole},
                 process.env.JWT_Secret,
-                {expiresIn:"20m"}
+                // {expiresIn:"20m"}
         )
         
 

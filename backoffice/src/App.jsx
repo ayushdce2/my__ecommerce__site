@@ -12,7 +12,7 @@ import {UserDetailsProvider} from "./utility/UserDetailsContext.jsx";
 import {AppThemeProvider} from "./utility/ThemeContext.jsx";
 import EmployeeHome from './employee/pages/EmpHome.jsx';
 import Unauthorized from "./utility/Unauthorized.jsx"
-// import Demo from "./Demo.jsx"
+import Demo from "../src/employee/pages/demo.jsx"
 function App() {
 
     const [isAuthenticated,setisAuthenticated]=useState(false);
@@ -33,7 +33,7 @@ function App() {
           <Route path="/signup" element={<Signup/>}></Route>
           <Route path="/unauthorized" element={<Unauthorized/>}></Route>
           
-          {/* <Route path='/demo' element={<Demo/>}></Route> */}
+          <Route path='/demo' element={<Demo/>}></Route>
 
           
           <Route path={"/employee/*"} element={<PrivateRoute element={<UserDetailsProvider><UserRolePermission roles={["employee"]}><AppThemeProvider><EmployeeHome/></AppThemeProvider></UserRolePermission></UserDetailsProvider>}/>}></Route>

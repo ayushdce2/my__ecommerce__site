@@ -46,7 +46,10 @@ const Sidebar = (props) => {
             <FaMoneyCheckAlt /> Add Banner
           </Link>
           <Link to="/employee/addItem" onClick={() => { setOpenSidebar(false) }} className={`${pathname=="/employee/addItem" && "bg-white/20"} flex items-center gap-3 p-3 rounded-lg cursor-pointer transition-all hover:bg-white/20 hover:bg-white/20 hover:translate-x-1 `}>
-            <FaClipboardList /> Add Item
+            <FaClipboardList /> Add Product
+          </Link>
+          <Link to="/employee/viewItem" onClick={() => { setOpenSidebar(false) }} className={`${pathname=="/employee/viewItem" && "bg-white/20"} flex items-center gap-3 p-3 rounded-lg cursor-pointer transition-all hover:bg-white/20 hover:bg-white/20 hover:translate-x-1 `}>
+            <FaClipboardList /> View Product
           </Link>
           
           <Link to="/employee/settings" onClick={() => { setOpenSidebar(false) }} className={`${pathname=="/employee/settings" && "bg-white/20"} flex items-center gap-3 p-3 rounded-lg cursor-pointer transition-all hover:bg-white/20 hover:bg-white/20 hover:translate-x-1 `}>

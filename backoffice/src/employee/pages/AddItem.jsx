@@ -23,7 +23,7 @@ const AddItem = () => {
             </label>
             <input
               type="text"
-              name="name"
+              name="pname"
               onChange={handleChange}
               className="w-full rounded-lg border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-900 px-4 py-2 text-slate-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
               placeholder="Nike Air Max"
@@ -38,7 +38,7 @@ const AddItem = () => {
             </label>
             <input
               type="number"
-              name="price"
+              name="pprice"
               onChange={handleChange}
               className="w-full rounded-lg border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-900 px-4 py-2 text-slate-800 dark:text-white focus:ring-2 focus:ring-blue-500"
               placeholder="199.99"
@@ -52,7 +52,7 @@ const AddItem = () => {
               Category
             </label>
             <select
-              name="category"
+              name="pcategory"
               onChange={handleChange}
               className="w-full rounded-lg border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-900 px-4 py-2 text-slate-800 dark:text-white focus:ring-2 focus:ring-blue-500"
             >
@@ -70,7 +70,7 @@ const AddItem = () => {
             </label>
             <input
               type="number"
-              name="stock"
+              name="pstock"
               onChange={handleChange}
               className="w-full rounded-lg border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-900 px-4 py-2 text-slate-800 dark:text-white focus:ring-2 focus:ring-blue-500"
               placeholder="50"
@@ -84,7 +84,7 @@ const AddItem = () => {
             Description
           </label>
           <textarea
-            name="description"
+            name="pdescription"
             onChange={handleChange}
             rows="4"
             className="w-full rounded-lg border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-900 px-4 py-2 text-slate-800 dark:text-white focus:ring-2 focus:ring-blue-500"
@@ -99,7 +99,7 @@ const AddItem = () => {
           </label>
           <input
             type="file"
-            name="image"
+            // name="pimage"
             onChange={handleChange}
             className="block w-full text-sm text-slate-600 dark:text-slate-300
               file:mr-4 file:rounded-lg file:border-0

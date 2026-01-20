@@ -1,17 +1,25 @@
-// const {ProfileFunction, UpdatePersonalDetails,UpdatePassword, PunchInFunction,PunchOutFunction,getattandancedetails, applyleavefunction, getLeaveSummary} = require("../controllers/UserController.js");
-// const {isUserAuthenticated} = require("../middlewares/isUserAuthenticated.js");
-// const {isUpdatePersonalDataValid} = require("../middlewares/isUpdatePersonalDataValid.js");
-// const {isUpdatePasswordDataValid} = require("../middlewares/isUpdatePasswordDataValid.js");
-// const {isPunchInDataValid} = require("../middlewares/isPunchInDataValid.js");
-// const {isPunchOutDataValid} = require("../middlewares/isPunchOutDataValid.js");
-// const {isLeaveDataValid} = require("../middlewares/isLeaveDataValid.js")
+
+const {isProductDataValid} = require("../middleware/EmployeeMiddleware.js")
+const {isUserAuthorize} = require("../middleware/isUserAuthorize");
+const {isUserAuthenticated} = require("../middleware/isUserAuthenticated");
+const {addProductfunction,ViewAllProducts,UpdateProduct ,DeleteProduct} = require("../controller/EmpController.js")
+// const {applyattendancefunction,attendancehistoryfunction, applyleavefunction,getLeaveSummary} = require("../controller/EmpController")
+
 
 const router = require("express").Router();
 
-// router.post("/leave/apply",isUserAuthenticated, isLeaveDataValid, applyleavefunction);
-// router.get("/leave/summary",isUserAuthenticated, getLeaveSummary); 
-// router.post("/attendance/applyattendance",isUserAuthenticated, isLeaveDataValid, applyleavefunction);
-// router.get("/attendance/viewattendance",isUserAuthenticated, getLeaveSummary); 
+router.post("/product/add",isUserAuthenticated, isUserAuthorize("employee"), isProductDataValid,addProductfunction);
+router.get("/product/view",isUserAuthenticated, isUserAuthorize("employee"),ViewAllProducts);
+router.put("/product/update/:id",isUserAuthenticated, isUserAuthorize("employee"),UpdateProduct);
+router.delete("/product/delete/:id",isUserAuthenticated, isUserAuthorize("employee"),DeleteProduct);
+// addProductfunction
+// router.get("/product/view",isUserAuthenticated, isUserAuthorize("employee"), getProductSummary); 
+
+
+
+// router.post("/banner/add",isUserAuthenticated, isUserAuthorize("employee"), applyattendancefunction);
+// router.get("/banner/view",isUserAuthenticated, isUserAuthorize("employee"), attendancehistoryfunction);
+
 
 
 

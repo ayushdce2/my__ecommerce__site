@@ -22,7 +22,7 @@ export const handleError = (msg)=>{
         pauseOnFocusLoss: false,
         pauseOnBlur: true,
         style: {
-            background: "#eee",
+            background: "#1e2939",
             color: "#71b1e5",
             border:"1px solid #71b1e5"
         }

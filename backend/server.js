@@ -17,10 +17,10 @@ const AuthRouter = require("./routes/AuthRouter.js");
 app.use("/api/auth",AuthRouter);
 const EmpRouter = require("./routes/EmpRouter.js");
 app.use("/api/employee",EmpRouter);
-// const AdminRouter = require("./routes/AdminRouter.js");
-// app.use("/api/admin",AdminRouter);
-const HrRouter = require("./routes/HrRouter.js");
-app.use("/api/hr",HrRouter);
+const AdminRouter = require("./routes/AdminRouter.js");
+app.use("/api/admin",AdminRouter);
+// const HrRouter = require("./routes/HrRouter.js");
+// app.use("/api/hr",HrRouter);
 
 app.get("/api/",(req,res)=>{
     console.log("hi");
