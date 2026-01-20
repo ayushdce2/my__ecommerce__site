@@ -1,8 +1,15 @@
 import React from 'react';
 import useAddItem from '../hook/useAddItem';
+import useViewCategory from "../hook/useViewCategory";
 
 const AddItem = () => {
     const {handleChange, handleSubmit} = useAddItem();
+    const {allCategories,loading} = useViewCategory();
+    if(loading){
+      return "Categories are loading"
+    }
+    console.log(allCategories,"<===========allCategories")
+
   return (
     <>
     <div className='p-1 rounded bg-gradient-to-r from-blue-400 to-indigo-200 text-white dark:from-blue-600 dark:to-indigo-400'>
@@ -57,9 +64,16 @@ const AddItem = () => {
               className="w-full rounded-lg border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-900 px-4 py-2 text-slate-800 dark:text-white focus:ring-2 focus:ring-blue-500"
             >
               <option value="">Select Category</option>
-              <option>Shoes</option>
+              {
+                allCategories && allCategories.map((data,index)=>{
+                  return <>
+                    <option>{data.categoryname}</option>
+                  </>
+                })
+              }
+              {/* <option>Shoes</option>
               <option>Clothing</option>
-              <option>Electronics</option>
+              <option>Electronics</option> */}
             </select>
           </div>
 
@@ -91,12 +105,11 @@ const AddItem = () => {
             placeholder="Product details..."
           />
         </div>
+<div className='flex justify-between items-center'>
 
-        {/* Image Upload */}
-        <div className="mt-6">
-          <label className="block mb-1 text-sm font-medium text-slate-700 dark:text-slate-300">
-            Product Image
-          </label>
+  {/* Image Upload */}
+        <div className="mt-6 ">
+          
           <input
             type="file"
             // name="pimage"
@@ -107,6 +120,28 @@ const AddItem = () => {
               file:text-white hover:file:bg-blue-700"
           />
         </div>
+
+
+  {/* latest */}
+          <div className='flex gap-2 items-center'>
+            <label className="shrink-0 block mb-1 text-sm font-medium text-slate-700 dark:text-slate-300">
+            Latest 
+          </label>
+            <select
+              name="platest"
+              onChange={handleChange}
+              className="w-full rounded-lg border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-900 px-4 py-2 text-slate-800 dark:text-white focus:ring-2 focus:ring-blue-500"
+            >
+              <option value="" >Choose</option>
+             
+              <option>Yes</option>
+              <option>No</option>
+              
+            </select>
+          </div>
+
+</div>
+        
 
         {/* Actions */}
         <div className="mt-8 flex justify-end gap-4">

@@ -1,6 +1,7 @@
 import React,{ useState } from 'react';
 import API from '../../utility/axios.jsx';
 import { handleSuccess, handleError } from '../../utility/ToastCustom.jsx';
+import { useEffect } from 'react';
 
 const useAddItem = () => {
 
@@ -11,6 +12,7 @@ const useAddItem = () => {
     pstock: "",
     pdescription: "",
     pimage: null,
+    platest:""
   });
   const handleChange = (e) => {
     const { name, value, files } = e.target;
@@ -59,13 +61,15 @@ const useAddItem = () => {
 
 
   }
-  
-  const addProducttoDB =async()=>{
-            const headers = {
+
+  const headers = {
         headers: {
             "Authorization": localStorage.getItem("token"),
         }
     }
+  
+  const addProducttoDB =async()=>{
+            
 
 console.log(product,"actual product")
             try {
@@ -94,7 +98,9 @@ console.log(product,"actual product")
             }
 }
 
-  return {handleChange, handleSubmit, }
+
+
+  return {handleChange, handleSubmit}
 }
 
 export default useAddItem

@@ -1,9 +1,10 @@
-import React from 'react'
+import React from 'react';
+
 
 const useViewItem = () => {
-  return (
-    <div>useViewItem</div>
-  )
+
+
+  return {}
 }
 
 export default useViewItem

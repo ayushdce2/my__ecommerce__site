@@ -25,6 +25,30 @@ const isProductDataValid = (req, res, next) => {
   next();
 };
 
+
+
+const isCategoryDataValid = (req, res, next) => {
+  console.log(req.body, "req.body validData");
+  const { categoryName, description } = req.body;
+  // console.log(pimage,"valid pimage")
+
+  const schema = Joi.object({
+    categoryName: Joi.string().trim().min(3).required(),
+    description: Joi.string().trim().min(5).required(),
+            
+  });
+
+  const { error, value } = schema.validate({categoryName,description}, {
+  abortEarly: false,
+});
+
+  if (error) {
+    return res.status(400).json({ message: "Validation error", error });
+  }
+  // console.log("working in validation")
+  next();
+};
+
 module.exports = {
-  isProductDataValid,
+  isProductDataValid,isCategoryDataValid
 };

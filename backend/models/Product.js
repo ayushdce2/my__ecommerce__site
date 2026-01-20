@@ -33,6 +33,11 @@ const ProductSchema = new Schema({
         type:String,
         required:true,
         // unique: true
+    },
+    platest:{
+      type:String,
+
+
     }
 },{
   timestamps:true

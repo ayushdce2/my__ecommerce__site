@@ -1,6 +1,7 @@
 // const UserModel = require("../models/User.js");
 const ProductModel = require("../models/Product.js");
 const cloudinary = require("../config/cloudinary");
+const CategoryModel = require("../models/Category.js")
 // const jwt = require("jsonwebtoken");
 // const bcrypt = require("bcrypt");
 
@@ -9,14 +10,17 @@ const addProductfunction = async (req, res) => {
         // console.log(req.body,"req.body");
         // console.log(req.user,"req.user")
         const {email,userRole} = req.user;
-        const { pname, pprice, pcategory, pstock, pdescription, pimage } = req.body;
+        let { pname, pprice, pcategory, pstock, pdescription, pimage,platest } = req.body;
         console.log(pimage,"<=========pimage")
         // console.log(name, email, password, userRole,"signup Controller");
+        if(platest == ""){
+          platest="NO";
+        }   
         const existingProduct = await ProductModel.findOne({ pname:pname.trim(),pcategory });
         if (existingProduct) {
             return res.status(409).json({ success: false, message: 'Product already exists' });
         }
-        const product = new ProductModel({ pname, pprice, pcategory, pstock, pdescription, pimage,email });
+        const product = new ProductModel({ pname, pprice, pcategory, pstock, pdescription, pimage,email,platest });
         // const image = await Image.create(req.body);
         // user.password = await bcrypt.hash(password, 10);
         await product.save();
@@ -63,7 +67,14 @@ const { page, limit, search, category, sortBy, order } = req.query;
 }
 
 const UpdateProduct = async (req, res) => {
+  console.log(req.body)
+          const { pname, pprice, pcategory, pstock, pdescription, pimage } = req.body;
   try{
+
+    //  const existingProduct = await ProductModel.findOne({ pname:pname.trim(),pcategory });
+    //     if (existingProduct) {
+    //         return res.status(409).json({ success: false, message: 'Product already exists' });
+    //     }
 const product = await ProductModel.findByIdAndUpdate(
     req.params.id,
     req.body,
@@ -85,4 +96,41 @@ try{
         res.status(500).json({ message: 'Internal Server Error', success: false });
     }
 }
-module.exports = {addProductfunction, ViewAllProducts,UpdateProduct,DeleteProduct };
+
+
+const addCategoryfunction = async (req, res) => {
+    try {
+        // console.log(req.body,"req.body");
+        // console.log(req.user,"req.user")
+        const {email,userRole} = req.user;
+        const { categoryName, description, imageFile, status } = req.body;
+        
+        // console.log(name, email, password, userRole,"signup Controller");
+        const existingCategory = await CategoryModel.findOne({ categoryname:categoryName.trim() });
+        if (existingCategory) {
+            return res.status(409).json({ success: false, message: 'categoryName already exists' });
+        }
+        const category = new CategoryModel({ categoryname:categoryName, description, status,email });
+        // const image = await Image.create(req.body);
+        // user.password = await bcrypt.hash(password, 10);
+        await category.save();
+        res.status(201).json({ category, success: true, message: "category Added" });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Internal Server Error', success: false });
+    }
+}
+
+const viewCategoryfunction = async (req,res)=>{
+  
+console.log(req.user,"req.body <==========",req.body);
+// const { page, limit, search, category, sortBy, order } = req.query;
+
+  const all_category = await CategoryModel.find()
+
+// console.log(products,">===============products")
+  res.status(200).json({ all_category, success:true });
+}
+
+
+module.exports = {addProductfunction, ViewAllProducts,UpdateProduct,DeleteProduct,addCategoryfunction,viewCategoryfunction };

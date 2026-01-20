@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import API from '../../utility/axios.jsx';
+import { handleSuccess, handleError } from '../../utility/ToastCustom.jsx';
+import useViewCategory from "../hook/useViewCategory.js"
 
 const LIMIT = 5;
 
@@ -8,7 +10,8 @@ const initialForm = {
   pprice: "",
   pstock: "",
   pcategory: "",
-  pdescription:""
+  pdescription:"",
+  platest:""
 };
         const headers ={
       headers:{
@@ -16,6 +19,8 @@ const initialForm = {
       }
     }
 const ViewItem = () => {
+  const {allCategories} = useViewCategory();
+
   const [products, setProducts] = useState([]);
   const [total, setTotal] = useState(0);
   const [loading, setLoading] = useState(false);
@@ -84,22 +89,31 @@ const data = res.data;
       pprice: product.pprice,
       pstock: product.pstock,
       pcategory: product.pcategory,
-      pdescription:product.pdescription
+      pdescription:product.pdescription,
+      platest:product.platest
     });
     setShowEdit(true);
   };
 
   const updateProduct = async () => {
-  await  API.put(
+    try{
+  const updateProdStatus = await  API.put(
   `employee/product/update/${editingId}`,form,
   headers
-)
+);
+
+// console.log(updateProdStatus,"updateProdStatus")
   
     //   body: JSON.stringify(form)
     
 
     setShowEdit(false);
     fetchProducts();
+    }catch(error){
+      console.log(error,"error")
+      error.status==400 && handleError(error.response.data.error.details[0].message)
+      error.status==409 && handleError(error.response.data.message)
+    }
   }
 
   /* ---------------- DELETE ---------------- */
@@ -142,9 +156,14 @@ console.log(productDeleteStatus,"productDeleteStatus")
           }}
         >
           <option>All</option>
-          <option>Shoes</option>
-          <option>Clothing</option>
-          <option>Electronics</option>
+          {
+            allCategories && allCategories.map((data,index)=>{
+              return <>
+              <option>{data.categoryname}</option>
+                
+              </>
+            })
+          }
         </select>
 
         <select
@@ -186,29 +205,33 @@ console.log(productDeleteStatus,"productDeleteStatus")
               <th className="px-6 py-4">Price</th>
               <th className="px-6 py-4">Stock</th>
               <th className="px-6 py-4">Desc</th>
+              <th className="px-6 py-4">Latest</th>
               <th className="px-6 py-4">Image</th>
               <th className="px-6 py-4 text-right">Actions</th>
             </tr>
           </thead>
           <tbody>
+            {console.log(products,"products")}
             {loading ? (
               <tr>
                 <td colSpan="5" className="text-center py-6">
                   Loading...
                 </td>
               </tr>
-            ) : (
-              products.map((p) => (
+            ) : (products.length !=0 ? (
+              products?.map((p) => (
                 <tr
                   key={p._id}
                   className="border-b border-slate-700 hover:bg-slate-800"
                 >
                   <td className="px-6 py-4">{p.pname}</td>
                   <td className="px-6 py-4 text-center">{p.pcategory}</td>
-                  <td className="px-6 py-4 text-center">${p.pprice}</td>
+                  <td className="px-6 py-4 text-center">Rs. {p.pprice}</td>
                   <td className="px-6 py-4 text-center">{p.pstock}</td>
                   <td className="px-6 py-4 text-center">{p.pdescription}</td>
+                  <td className="px-6 py-4 text-center">{p.platest}</td>
                   <td className="px-6 py-4 text-center">{p.pimage}</td>
+                  
                   <td className="px-6 py-4 text-right space-x-2">
                     <button
                       onClick={() => openEditModal(p)}
@@ -225,7 +248,7 @@ console.log(productDeleteStatus,"productDeleteStatus")
                   </td>
                 </tr>
               ))
-            )}
+            ):<tr><td colSpan={7} className="p-5 text-center"><p className="text-3xl text-gray-200">No Data Found</p></td></tr>)}
           </tbody>
         </table>
       </div>
@@ -253,7 +276,7 @@ console.log(productDeleteStatus,"productDeleteStatus")
           <div className="bg-slate-900 p-6 rounded-xl w-96">
             <h2 className="text-lg font-semibold mb-4">Edit Product</h2>
 
-            {["pname", "pprice", "pstock", "pcategory","pdescription"].map((field) => (
+            {["pname", "pprice", "pstock", "pcategory","pdescription","platest"].map((field) => (
               <>
               <label>{field}</label>
               <input

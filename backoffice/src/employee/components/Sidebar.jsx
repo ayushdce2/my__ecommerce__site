@@ -42,15 +42,20 @@ const Sidebar = (props) => {
           {/* <Link to="" className={`flex items-center gap-3 p-3 rounded-lg cursor-pointer transition-all hover:bg-white/20 hover:bg-white/20 hover:translate-x-1 `}>
             <FaUsers /> Add Banner
           </Link> */}
-          <Link to="/employee/addBanner" onClick={() => { setOpenSidebar(false) }} className={`${pathname=="/employee/addBanner" && "bg-white/20"} flex items-center gap-3 p-3 rounded-lg cursor-pointer transition-all hover:bg-white/20 hover:bg-white/20 hover:translate-x-1 `}>
-            <FaMoneyCheckAlt /> Add Banner
+          <Link to="/employee/addCategory" onClick={() => { setOpenSidebar(false) }} className={`${pathname=="/employee/addCategory" && "bg-white/20"} flex items-center gap-3 p-3 rounded-lg cursor-pointer transition-all hover:bg-white/20 hover:bg-white/20 hover:translate-x-1 `}>
+            <FaMoneyCheckAlt /> Add Category
           </Link>
-          <Link to="/employee/addItem" onClick={() => { setOpenSidebar(false) }} className={`${pathname=="/employee/addItem" && "bg-white/20"} flex items-center gap-3 p-3 rounded-lg cursor-pointer transition-all hover:bg-white/20 hover:bg-white/20 hover:translate-x-1 `}>
+           <Link to="/employee/addItem" onClick={() => { setOpenSidebar(false) }} className={`${pathname=="/employee/addItem" && "bg-white/20"} flex items-center gap-3 p-3 rounded-lg cursor-pointer transition-all hover:bg-white/20 hover:bg-white/20 hover:translate-x-1 `}>
             <FaClipboardList /> Add Product
           </Link>
           <Link to="/employee/viewItem" onClick={() => { setOpenSidebar(false) }} className={`${pathname=="/employee/viewItem" && "bg-white/20"} flex items-center gap-3 p-3 rounded-lg cursor-pointer transition-all hover:bg-white/20 hover:bg-white/20 hover:translate-x-1 `}>
             <FaClipboardList /> View Product
           </Link>
+          <Link to="/employee/addBanner" onClick={() => { setOpenSidebar(false) }} className={`${pathname=="/employee/addBanner" && "bg-white/20"} flex items-center gap-3 p-3 rounded-lg cursor-pointer transition-all hover:bg-white/20 hover:bg-white/20 hover:translate-x-1 `}>
+            <FaMoneyCheckAlt /> Add Banner
+          </Link>
+         
+          
           
           <Link to="/employee/settings" onClick={() => { setOpenSidebar(false) }} className={`${pathname=="/employee/settings" && "bg-white/20"} flex items-center gap-3 p-3 rounded-lg cursor-pointer transition-all hover:bg-white/20 hover:bg-white/20 hover:translate-x-1 `}>
             <FaCog /> Settings
