@@ -7,10 +7,13 @@ import ProductSlide from "./ProductSlide";
 import NewProducts from  "./NewProducts"
 import Footer from './Footer';
 
+
 const Homepage = () => {
 
+     
+
     
-    
+   
 
 
 

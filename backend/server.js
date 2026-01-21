@@ -19,8 +19,9 @@ const EmpRouter = require("./routes/EmpRouter.js");
 app.use("/api/employee",EmpRouter);
 const AdminRouter = require("./routes/AdminRouter.js");
 app.use("/api/admin",AdminRouter);
-// const HrRouter = require("./routes/HrRouter.js");
-// app.use("/api/hr",HrRouter);
+// frontoffice
+const frontofficeRouter = require("./routes/FrontofficeRouter.js");
+app.use("/api/frontoffice",frontofficeRouter);
 
 app.get("/api/",(req,res)=>{
     console.log("hi");

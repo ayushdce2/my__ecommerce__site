@@ -13,7 +13,7 @@ router.get("/product/view",isUserAuthenticated, isUserAuthorize("employee"),View
 router.put("/product/update/:id",isUserAuthenticated, isUserAuthorize("employee"),isProductDataValid,UpdateProduct);
 router.delete("/product/delete/:id",isUserAuthenticated, isUserAuthorize("employee"),DeleteProduct);
 
-// 
+//
 
 router.post("/product/category/add",isUserAuthenticated, isUserAuthorize("employee"), isCategoryDataValid,addCategoryfunction);
 router.get("/product/category/view",isUserAuthenticated, isUserAuthorize("employee"),viewCategoryfunction);

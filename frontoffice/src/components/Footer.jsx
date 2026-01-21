@@ -4,9 +4,12 @@ const Footer = () => {
   return (
     <>
     
-    <div className='bg-gray-500 p-3 h-[15vh] flex items-center justify-center'>
-        <p className='text-2xl text-white font-bold'>Footer</p>
-    </div>
+    {/* FOOTER */}
+      <footer className="bg-slate-900 text-slate-300">
+        <div className="max-w-7xl mx-auto px-6 py-8 text-center text-sm">
+          © 2025 My Shop. All rights reserved.
+        </div>
+      </footer>
     
     </>
   )

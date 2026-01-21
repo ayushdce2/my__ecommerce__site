@@ -7,8 +7,10 @@ import {
 } from "react-icons/fi";
 
 import Banner from './Banner';
-import ProductSlide from "./ProductSlide";
-import ProductSlide1 from './ProductSlide1';
+import Footer from "./Footer";
+import OurCategoryBanner from './OurCategoryBanner';
+import AllProducts from './AllProducts';
+import NewArrivals from './NewArrivals';
 
 const App = () => {
   return (
@@ -89,7 +91,7 @@ const App = () => {
       </section>
 
    <div className='mb-5'></div>
-        <ProductSlide1/>
+        <OurCategoryBanner/>
 
       {/* MAIN CONTENT */}
       <section className="bg-slate-100">
@@ -134,62 +136,35 @@ const App = () => {
         {/* PRODUCTS */}
         <div className="col-span-12 md:col-span-9 space-y-12 ">
 
-          {["New Arrivals", "Best Sellers", "All Products"].map(
-            (section, idx) => (
-              <div key={idx}>
-                <h3 className="text-xl font-bold mb-6">{section}</h3>
+
+              <div >
+                <h3 className="text-xl font-bold mb-6">New Arrivals</h3>
 
                 <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6">
-                  {Array.from({ length: 8 }).map((_, i) => (
-                    <div
-                      key={i}
-                      className="bg-white rounded-xl shadow hover:shadow-xl transition hover:-translate-y-1 group"
-                    >
-                      <div className="h-40 bg-slate-200 rounded-t-xl flex items-center justify-center">
-                        <span className="text-slate-400 text-sm">
-                          Product Image
-                        </span>
-                      </div>
 
-                      <div className="p-4">
-                        <h4 className="font-medium mb-1 group-hover:text-indigo-600 transition">
-                          Modern Product
-                        </h4>
-                        <p className="text-sm text-slate-500 mb-3">
-                          Category
-                        </p>
+<NewArrivals/>
 
-                        <div className="flex items-center justify-between">
-                          <span className="font-semibold text-indigo-600">
-                            $99.00
-                          </span>
-
-                          <div className="flex gap-3 opacity-0 group-hover:opacity-100 transition">
-                            <button className="hover:text-red-500">
-                              <FiHeart />
-                            </button>
-                            <button className="hover:text-indigo-600">
-                              <FiShoppingCart />
-                            </button>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  ))}
+                    
+                  
                 </div>
               </div>
-            )
-          )}
+                            <div >
+                <h3 className="text-xl font-bold mb-6">All Products</h3>
+
+                <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6">
+
+                    <AllProducts/>
+
+                                        
+                  
+                </div>
+              </div>
+            
         </div>
         </div>
       </section>
 
-      {/* FOOTER */}
-      <footer className="bg-slate-900 text-slate-300">
-        <div className="max-w-7xl mx-auto px-6 py-8 text-center text-sm">
-          © 2025 My Shop. All rights reserved.
-        </div>
-      </footer>
+      <Footer/>
     </div>
 
     </>
