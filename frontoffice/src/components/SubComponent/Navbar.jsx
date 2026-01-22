@@ -1,5 +1,5 @@
 import React from 'react'
-import ThemeDarkLight from "../redux/ThemeDarkLight";
+import ThemeDarkLight from "../../redux/ThemeDarkLight";
 import {
   FiSearch,
   FiShoppingCart,
@@ -18,20 +18,20 @@ const Navbar = () => {
           </Link>
 
           <div className="hidden md:flex gap-8 font-medium">
-            <a className="hover:text-indigo-600 transition">Home</a>
-            <a className="hover:text-indigo-600 transition">About</a>
-            <a className="hover:text-indigo-600 transition">Categories</a>
-            <a className="hover:text-indigo-600 transition">Contact</a>
+            <Link to="/" className="hover:text-indigo-600 transition">Home</Link>
+            {/* <Link to="/category" className="hover:text-indigo-600 transition">Category</a> */}
+            <Link to="/about" className="hover:text-indigo-600 transition">About</Link>
+            <Link to="/contact" className="hover:text-indigo-600 transition">Contact</Link>
           </div>
 
           <div className="flex items-center gap-4">
-            <div className="relative">
+            {/* <div className="relative">
               <FiSearch className="absolute top-3 left-3 text-slate-400" />
               <input
                 className="pl-10 pr-4 py-2 rounded-full border focus:ring-2 focus:ring-indigo-500 outline-none"
                 placeholder="Search products..."
               />
-            </div>
+            </div> */}
             <Link to={"/cart"} className="relative">
               <FiShoppingCart size={22} />
               <span className="absolute -top-2 -right-2 bg-amber-500 text-white text-xs w-5 h-5 flex items-center justify-center rounded-full">

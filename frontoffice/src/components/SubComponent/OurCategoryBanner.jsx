@@ -1,10 +1,11 @@
 import React from 'react';
 import { FiArrowUpRight } from "react-icons/fi";
-import useOurCategoryBanner from "./hook/useOurCategoryBanner";
+import useOurCategoryBanner from "../hook/useOurCategoryBanner";
+import { Link } from 'react-router-dom';
 
 const OurCategoryBanner = () => {
   const{allCategories,loading}=useOurCategoryBanner();
-  console.log(allCategories,"allCategories");
+  // console.log(allCategories,"allCategories");
    if(loading){
         return (<div className=' h-full bg-gradient-to-b from-blue-400 to-indigo-200 text-gray-200 border-r-gray-950 p-3 flex flex-col gap-5 items-center justify-center'><img src="/images/loading.gif" className='w-[5rem]' /> <p className='font-bold text-3xl text-shadow-2xs'>Loading</p></div>)
     }
@@ -42,9 +43,9 @@ const OurCategoryBanner = () => {
                   <h3 className="text-lg font-semibold mb-2">
                     {data.description}
                   </h3>
-                  <button className="inline-flex items-center gap-2 px-4 py-2 bg-white text-indigo-600 rounded-full font-medium hover:scale-105 transition">
+                  <Link to={"/mainCategory/"+data.categoryname} className="inline-flex items-center gap-2 px-4 py-2 bg-white text-indigo-600 rounded-full font-medium hover:scale-105 transition relative z-20">
                     View Products <FiArrowUpRight />
-                  </button>
+                  </Link>
                 </div>
               </div>
             </div>

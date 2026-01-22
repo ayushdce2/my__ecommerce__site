@@ -14,8 +14,12 @@ import {AppThemeProvider} from "./utility/ThemeContext.jsx";
 // import Unauthorized from "./utility/Unauthorized.jsx"
 // import Demo from "../src/employee/pages/demo.jsx"
 import Homepage from "./components/Homepage.jsx";
-import ProductDetails from "./components/ProductDetails";
-import CartPage from "./components/CartPage";
+import ProductDetails from "./components/Pages/ProductDetails.jsx";
+import CartPage from "./components/Pages/CartPage.jsx";
+import CategoryPage from "./components/Pages/CategoryPage.jsx";
+import About from "./components/Pages/About.jsx";
+import Contact from "./components/Pages/Contact.jsx"
+import HomepageCatProDynamic from "./components/SubComponent/HomepageCatProDynamic.jsx"
 function App() {
 
     // const [isAuthenticated,setisAuthenticated]=useState(false);
@@ -31,13 +35,14 @@ function App() {
       {/* <RefreshHandler setisAuthenticated={setisAuthenticated}/> */}
         <Routes>
 
-          <Route path="*" element={<NotFound />} />
-          <Route path="/" element={<ProductDetailsProvider><Homepage/></ProductDetailsProvider>}></Route>
+          {/* <Route path="*" element={<NotFound />} /> */}
+          <Route path="/*" element={<ProductDetailsProvider><Homepage/></ProductDetailsProvider>}></Route>
           {/* <Route path="/signup" element={<Signup/>}></Route> */}
           {/* <Route path="/unauthorized" element={<Unauthorized/>}></Route> */}
           
-<Route path="/product/:id" element={<ProductDetailsProvider><ProductDetails /></ProductDetailsProvider>} />
-<Route path="/cart" element={<CartPage />} />
+
+{/* <Route path="/homepage/category/*" element={<HomepageCatProDynamic/>}/> */}
+
 
           
           {/* <Route path={"/employee/*"} element={<PrivateRoute element={<UserDetailsProvider><UserRolePermission roles={["employee"]}><AppThemeProvider><EmployeeHome/></AppThemeProvider></UserRolePermission></UserDetailsProvider>}/>}></Route> */}

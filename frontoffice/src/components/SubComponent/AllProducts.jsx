@@ -5,7 +5,7 @@ import {
   FiHeart,
   FiChevronRight,
 } from "react-icons/fi";
-import {useProductDetails} from "../utility/ProductDetailsContext" ;
+import {useProductDetails} from "../../utility/ProductDetailsContext" ;
 import {Link} from "react-router-dom";
 
 const AllProducts = () => {

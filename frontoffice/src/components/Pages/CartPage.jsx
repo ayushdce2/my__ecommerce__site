@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import Navbar from "./Navbar";
-import Footer from "./Footer";
+import Navbar from "../SubComponent/Navbar";
+import Footer from "../SubComponent/Footer";
 import { useNavigate } from "react-router-dom";
 
 
@@ -112,7 +112,10 @@ const CartPage = () => {
       setShowSuccessModal(true);
     } finally {
       setSubmitting(false);
-      navigate("/"); // Redirect
+      setTimeout(()=>{
+ navigate("/"); // Redirect
+      },1000)
+     
     }
   };
 
@@ -194,7 +197,7 @@ const CartPage = () => {
 
       {/* ---------------- CHECKOUT MODAL ---------------- */}
       {showCheckoutModal && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+        <div className="fixed inset-0 bg-[#f6f3f4c4] bg-opacity-50 flex items-center justify-center z-50">
           <div className="bg-white w-full max-w-md p-6 rounded shadow">
             <h2 className="text-xl font-bold mb-4">Customer Details</h2>
 

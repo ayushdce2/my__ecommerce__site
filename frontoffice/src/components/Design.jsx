@@ -6,12 +6,15 @@ import {
   FiChevronRight,
 } from "react-icons/fi";
 
-import Banner from './Banner';
-import Footer from "./Footer";
-import OurCategoryBanner from './OurCategoryBanner';
-import AllProducts from './AllProducts';
-import NewArrivals from './NewArrivals';
-import Navbar from './Navbar';
+import Banner from './SubComponent/Banner';
+import Footer from "./SubComponent/Footer";
+import OurCategoryBanner from './SubComponent/OurCategoryBanner';
+import AllProducts from './SubComponent/AllProducts';
+import NewArrivals from './SubComponent/NewArrivals';
+import Navbar from './SubComponent/Navbar';
+import CategorySidebar from "./SubComponent/CategorySidebar";
+import HomepageCategoryProducts from "./SubComponent/HomepageCategoryProducts";
+
 
 const App = () => {
   return (
@@ -28,17 +31,7 @@ const App = () => {
 
       {/* HERO BANNER */}
       <section className="bg-gradient-to-r from-indigo-600 to-blue-500 text-white">
-        {/* <div className="max-w-7xl mx-auto px-6 py-20 text-center">
-          <h2 className="text-4xl md:text-5xl font-bold mb-4">
-            Discover Modern Essentials
-          </h2>
-          <p className="max-w-xl mx-auto text-indigo-100 mb-8">
-            Premium quality products curated for your lifestyle.
-          </p>
-          <button className="bg-white text-indigo-600 px-8 py-3 rounded-full font-semibold hover:scale-105 transition">
-            Shop Now
-          </button>
-        </div> */}
+        
         <Banner/>
        
       </section>
@@ -71,18 +64,9 @@ const App = () => {
 
         {/* SIDEBAR */}
         <aside className="col-span-12 md:col-span-3 bg-white rounded-xl shadow p-6 space-y-4">
-          <h3 className="font-semibold text-lg mb-2">Categories</h3>
-          {["Electronics", "Fashion", "Home", "Accessories"].map(
-            (cat, i) => (
-              <div
-                key={i}
-                className="flex items-center justify-between p-3 rounded-lg hover:bg-indigo-50 cursor-pointer transition"
-              >
-                {cat}
-                <FiChevronRight />
-              </div>
-            )
-          )}
+          
+          <CategorySidebar/>
+          
 
           <div className="bg-gradient-to-r from-indigo-500 to-blue-500 text-white rounded-xl p-4 mt-6">
             <h4 className="font-semibold mb-1">Summer Sale Banner</h4>
@@ -108,29 +92,8 @@ const App = () => {
         {/* PRODUCTS */}
         <div className="col-span-12 md:col-span-9 space-y-12 ">
 
-
-              <div >
-                <h3 className="text-xl font-bold mb-6">New Arrivals</h3>
-
-                <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6">
-
-<NewArrivals/>
-
-                    
-                  
-                </div>
-              </div>
-                            <div >
-                <h3 className="text-xl font-bold mb-6">All Products</h3>
-
-                <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6">
-
-                    <AllProducts/>
-
-                                        
-                  
-                </div>
-              </div>
+<HomepageCategoryProducts />
+              
             
         </div>
         </div>

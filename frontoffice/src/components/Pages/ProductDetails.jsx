@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
-import { useProductDetails } from "../utility/ProductDetailsContext";
-import Navbar from "./Navbar";
-import Footer from "./Footer";
+import { useProductDetails } from "../../utility/ProductDetailsContext";
+import Navbar from "../SubComponent/Navbar";
+import Footer from "../SubComponent/Footer";
 
 const ProductPage = () => {
   const navigate = useNavigate();
