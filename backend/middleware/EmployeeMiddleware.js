@@ -29,16 +29,18 @@ const isProductDataValid = (req, res, next) => {
 
 const isCategoryDataValid = (req, res, next) => {
   console.log(req.body, "req.body validData");
-  const { categoryName, description } = req.body;
+  const { categoryName, description,catPriority } = req.body;
   // console.log(pimage,"valid pimage")
 
   const schema = Joi.object({
-    categoryName: Joi.string().trim().min(3).required(),
-    description: Joi.string().trim().min(5).required(),
+    categoryName: Joi.string().trim().min(1).required(),
+    description: Joi.string().trim().min(1).required(),
+    catPriority: Joi.number().required(),
+
             
   });
 
-  const { error, value } = schema.validate({categoryName,description}, {
+  const { error, value } = schema.validate({categoryName,description,catPriority}, {
   abortEarly: false,
 });
 

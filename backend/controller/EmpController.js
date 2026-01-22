@@ -103,14 +103,14 @@ const addCategoryfunction = async (req, res) => {
         // console.log(req.body,"req.body");
         // console.log(req.user,"req.user")
         const {email,userRole} = req.user;
-        const { categoryName, description, imageFile, status } = req.body;
+        const { categoryName, description, imageFile, status,catPriority } = req.body;
         
         // console.log(name, email, password, userRole,"signup Controller");
         const existingCategory = await CategoryModel.findOne({ categoryname:categoryName.trim() });
         if (existingCategory) {
             return res.status(409).json({ success: false, message: 'categoryName already exists' });
         }
-        const category = new CategoryModel({ categoryname:categoryName, description, status,email });
+        const category = new CategoryModel({ categoryname:categoryName, description, status,email,catpriority:catPriority });
         // const image = await Image.create(req.body);
         // user.password = await bcrypt.hash(password, 10);
         await category.save();
@@ -132,5 +132,70 @@ console.log(req.user,"req.body <==========",req.body);
   res.status(200).json({ all_category, success:true });
 }
 
+const viewMainCategoryfunction = async (req,res)=>{
+// console.log(req.body,"<===req.body");
+try {
+    const {
+      search = "",
+      status,
+      sortBy = "priority",
+      order = "asc",
+      page = 1,
+      limit = 10,
+    } = req.query;
 
-module.exports = {addProductfunction, ViewAllProducts,UpdateProduct,DeleteProduct,addCategoryfunction,viewCategoryfunction };
+    // Build filter query
+    const filter = {
+      categoryname: { $regex: search, $options: "i" },
+    };
+    if (status) filter.status = status;
+
+    // Build sort object dynamically
+    const sortField = sortBy === "status" ? "status" : "catpriority";
+    const sortOrder = order === "desc" ? -1 : 1;
+    const sortObj = { [sortField]: sortOrder };
+console.log(sortField,"<============================>",sortOrder)
+    const pageNum = parseInt(page);
+    const limitNum = parseInt(limit);
+
+    // Query categories
+    const categories = await CategoryModel.find(filter)
+      .sort(sortObj)
+      .skip((pageNum - 1) * limitNum)
+      .limit(limitNum);
+
+    const total = await CategoryModel.countDocuments(filter);
+// console.log(categories, total,"<=================categories, total")
+    res.json({ categories, total });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Server error" });
+  }
+}
+
+const updateMainCategoryfunction =async(req,res)=>{
+  // console.log(req.params.id,"<========req.params.id")
+  // console.log(req.body,"<==========req.body,")
+  const {name, status, priority, desc}=req.body;
+try{
+  const updated = await CategoryModel.findByIdAndUpdate(
+    req.params.id,
+    {categoryname:name, status:status, catpriority:priority, description:desc},
+    { new: true }
+  );
+  res.json(updated);
+}catch(error){
+  console.log(error)
+}
+}
+
+const deleteMainCategoryfunction =async (req,res)=>{
+  try{
+await CategoryModel.findByIdAndDelete(req.params.id);
+  res.json({ message: "Category deleted" });
+  }catch(error){
+    console.log(error)
+  }
+}
+
+module.exports = {deleteMainCategoryfunction,updateMainCategoryfunction, addProductfunction, ViewAllProducts,UpdateProduct,DeleteProduct,addCategoryfunction,viewCategoryfunction,viewMainCategoryfunction };

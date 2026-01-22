@@ -10,6 +10,7 @@ import AddItem from "./AddItem";
 import AddBanner from "./AddBanner"
 import ViewItem from "./ViewItem";
 import AddCategory from "./AddCategory"
+import ViewCategory from "./ViewCategory";
 
 
 
@@ -46,6 +47,8 @@ const EmpHome = () => {
                             
                             <Route path={"/addBanner"} element={<AddBanner/>}></Route>
                             <Route path={"/addCategory"} element={<AddCategory/>}></Route>
+                            <Route path={"/viewCategory"} element={<ViewCategory/>}></Route>
+                            
 
                             
 

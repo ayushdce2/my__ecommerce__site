@@ -10,6 +10,7 @@ const AddCategory = () => {
   const [imageFile, setImageFile] = useState(null);
   const [imagePreview, setImagePreview] = useState(null);
   const [errors, setErrors] = useState({});
+  const [catPriority, setCatPriority] = useState("");
 
         // Reset form
   const resetForm = () => {
@@ -19,6 +20,7 @@ const AddCategory = () => {
     setImageFile(null);
     setImagePreview(null);
     setErrors({});
+    setCatPriority("")
   };
 
   // Handle image file change & preview
@@ -59,6 +61,7 @@ const AddCategory = () => {
       description,
       status,
       imageFile,
+      catPriority
     };
 
     console.log("Submitting category:", formData);
@@ -210,9 +213,9 @@ console.log(formData,"actual category")
               </div>
             )}
           </div>
-
+<div className="flex justify-around">
           {/* Status */}
-          <div>
+          <div className="flex items-center gap-2">
             <label
               htmlFor="status"
               className="block mb-1 text-sm font-medium text-slate-700 dark:text-slate-300"
@@ -232,7 +235,34 @@ console.log(formData,"actual category")
               <option>Inactive</option>
             </select>
           </div>
+          <div className="flex items-center gap-2">
+            <label
+              htmlFor="status"
+              className="block mb-1 text-sm font-medium text-slate-700 dark:text-slate-300"
+            >
+              Priority
+            </label>
+            <input
+              id=""
+              type="text"
+              value={catPriority}
+              onChange={(e) => setCatPriority(e.target.value)}
+              placeholder="e.g. 1"
+              className={`w-full rounded-md border px-3 py-2
+                ${
+                  errors.catPriority
+                    ? "border-red-500"
+                    : "border-slate-300 dark:border-slate-700"
+                }
+                bg-white dark:bg-[#0b1220]
+                text-slate-800 dark:text-slate-100
+                placeholder-slate-400 dark:placeholder-slate-500
+                focus:outline-none focus:ring-2 focus:ring-blue-500
+              `}
+            />
 
+          </div>
+</div>
           {/* Buttons */}
           <div className="flex justify-end gap-3 pt-4">
             <button

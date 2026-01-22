@@ -2,7 +2,9 @@
 const {isProductDataValid, isCategoryDataValid} = require("../middleware/EmployeeMiddleware.js")
 const {isUserAuthorize} = require("../middleware/isUserAuthorize");
 const {isUserAuthenticated} = require("../middleware/isUserAuthenticated");
-const {addProductfunction,ViewAllProducts,UpdateProduct ,DeleteProduct,addCategoryfunction,viewCategoryfunction} = require("../controller/EmpController.js")
+const {addProductfunction,ViewAllProducts,UpdateProduct ,DeleteProduct,
+    addCategoryfunction,viewCategoryfunction,viewMainCategoryfunction,
+    updateMainCategoryfunction,deleteMainCategoryfunction} = require("../controller/EmpController.js")
 // const {applyattendancefunction,attendancehistoryfunction, applyleavefunction,getLeaveSummary} = require("../controller/EmpController")
 
 
@@ -17,6 +19,11 @@ router.delete("/product/delete/:id",isUserAuthenticated, isUserAuthorize("employ
 
 router.post("/product/category/add",isUserAuthenticated, isUserAuthorize("employee"), isCategoryDataValid,addCategoryfunction);
 router.get("/product/category/view",isUserAuthenticated, isUserAuthorize("employee"),viewCategoryfunction);
+router.get("/main/category/view",isUserAuthenticated, isUserAuthorize("employee"),viewMainCategoryfunction);
+router.put("/main/category/update/:id",isUserAuthenticated, isUserAuthorize("employee"),updateMainCategoryfunction);
+router.delete("/main/category/delete/:id",isUserAuthenticated, isUserAuthorize("employee"),deleteMainCategoryfunction);
+
+
 
 // addProductfunction
 // router.get("/product/view",isUserAuthenticated, isUserAuthorize("employee"), getProductSummary); 
