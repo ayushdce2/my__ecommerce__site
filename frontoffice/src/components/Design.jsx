@@ -11,6 +11,7 @@ import Footer from "./Footer";
 import OurCategoryBanner from './OurCategoryBanner';
 import AllProducts from './AllProducts';
 import NewArrivals from './NewArrivals';
+import Navbar from './Navbar';
 
 const App = () => {
   return (
@@ -23,36 +24,7 @@ const App = () => {
     <div className=" min-h-screen text-slate-800">
 
       {/* NAVBAR */}
-      <nav className="bg-white shadow-sm sticky top-0 z-50">
-        <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-          <h1 className="text-2xl font-bold text-indigo-600">
-            My Shop
-          </h1>
-
-          <div className="hidden md:flex gap-8 font-medium">
-            <a className="hover:text-indigo-600 transition">Home</a>
-            <a className="hover:text-indigo-600 transition">About</a>
-            <a className="hover:text-indigo-600 transition">Categories</a>
-            <a className="hover:text-indigo-600 transition">Contact</a>
-          </div>
-
-          <div className="flex items-center gap-4">
-            <div className="relative">
-              <FiSearch className="absolute top-3 left-3 text-slate-400" />
-              <input
-                className="pl-10 pr-4 py-2 rounded-full border focus:ring-2 focus:ring-indigo-500 outline-none"
-                placeholder="Search products..."
-              />
-            </div>
-            <button className="relative">
-              <FiShoppingCart size={22} />
-              <span className="absolute -top-2 -right-2 bg-amber-500 text-white text-xs w-5 h-5 flex items-center justify-center rounded-full">
-                3
-              </span>
-            </button>
-          </div>
-        </div>
-      </nav>
+      <Navbar/>
 
       {/* HERO BANNER */}
       <section className="bg-gradient-to-r from-indigo-600 to-blue-500 text-white">

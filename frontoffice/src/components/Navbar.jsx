@@ -1,22 +1,45 @@
 import React from 'react'
 import ThemeDarkLight from "../redux/ThemeDarkLight";
+import {
+  FiSearch,
+  FiShoppingCart,
+  FiHeart,
+  FiChevronRight,
+} from "react-icons/fi";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
   return (
     <>
-    <nav className="  p-4 flex justify-between items-center">
-        <div className="flex space-x-4 text-gray-800 dark:text-gray-100 ">
-          <a href="#home" className=" hover:text-gray-600 ">Home</a>
-          <a href="#about" className="hover:text-gray-600">About Us</a>
-          <a href="#products" className="hover:text-gray-600">Products</a>
+    <nav className="bg-white shadow-sm sticky top-0 z-50">
+        <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+          <Link to="/" className="text-2xl font-bold text-indigo-600">
+            My Shop
+          </Link>
+
+          <div className="hidden md:flex gap-8 font-medium">
+            <a className="hover:text-indigo-600 transition">Home</a>
+            <a className="hover:text-indigo-600 transition">About</a>
+            <a className="hover:text-indigo-600 transition">Categories</a>
+            <a className="hover:text-indigo-600 transition">Contact</a>
+          </div>
+
+          <div className="flex items-center gap-4">
+            <div className="relative">
+              <FiSearch className="absolute top-3 left-3 text-slate-400" />
+              <input
+                className="pl-10 pr-4 py-2 rounded-full border focus:ring-2 focus:ring-indigo-500 outline-none"
+                placeholder="Search products..."
+              />
+            </div>
+            <Link to={"/cart"} className="relative">
+              <FiShoppingCart size={22} />
+              <span className="absolute -top-2 -right-2 bg-amber-500 text-white text-xs w-5 h-5 flex items-center justify-center rounded-full">
+                {JSON.parse(localStorage.getItem("my_cart")) != null ? JSON.parse(localStorage.getItem("my_cart")).length : 0}
+              </span>
+            </Link>
+          </div>
         </div>
-        <div className='flex gap-3 items-center '>
-          <input type='text' placeholder='Product Search . . .' className='border p-2 rounded dark:border-gray-200 dark:text-white'/>
-          <ThemeDarkLight/>
-          <button className='bg-gray-500 p-3 rounded text-white'>Contact Us</button>
-        </div>
-            
-        
       </nav>
     </>
   )

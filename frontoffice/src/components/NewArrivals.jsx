@@ -6,6 +6,7 @@ import {
   FiChevronRight,
 } from "react-icons/fi";
 import {useProductDetails} from "../utility/ProductDetailsContext" ;
+import {Link} from "react-router-dom";
 
 const NewArrivals = () => {
      const {  Loading,latestProduct } = useProductDetails();
@@ -25,7 +26,7 @@ const NewArrivals = () => {
   latestProduct?.length > 0 ?
   latestProduct.filter(item => item.platest === "Yes")
     .map(item => (
-                    <div
+                    <Link to={`/product/${item._id}`}
                       
                       className="bg-white rounded-xl shadow hover:shadow-xl transition hover:-translate-y-1 group"
                     >
@@ -58,7 +59,7 @@ const NewArrivals = () => {
                           </div>
                         </div>
                       </div>
-                    </div>
+                    </Link>
     )) :(
         <p>No Data Found</p>
     )

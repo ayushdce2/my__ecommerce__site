@@ -6,6 +6,8 @@ import {
   FiChevronRight,
 } from "react-icons/fi";
 import {useProductDetails} from "../utility/ProductDetailsContext" ;
+import {Link} from "react-router-dom";
+
 const AllProducts = () => {
     const {  Loading,productDetails } = useProductDetails();
 
@@ -23,7 +25,7 @@ const AllProducts = () => {
                             productDetails && productDetails?.all_product?.map((data,index)=>{
                                 return(
                                     <>
-                                    <div
+                                    <Link to={`/product/${data._id}`}
                       
                       className="bg-white rounded-xl shadow hover:shadow-xl transition hover:-translate-y-1 group"
                     >
@@ -56,7 +58,7 @@ const AllProducts = () => {
                           </div>
                         </div>
                       </div>
-                    </div>                
+                    </Link>                
                                     </>
                                 )
                             })

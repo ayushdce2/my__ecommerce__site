@@ -13,7 +13,9 @@ import {AppThemeProvider} from "./utility/ThemeContext.jsx";
 // import EmployeeHome from './employee/pages/EmpHome.jsx';
 // import Unauthorized from "./utility/Unauthorized.jsx"
 // import Demo from "../src/employee/pages/demo.jsx"
-import Homepage from "./components/Homepage.jsx"
+import Homepage from "./components/Homepage.jsx";
+import ProductDetails from "./components/ProductDetails";
+import CartPage from "./components/CartPage";
 function App() {
 
     // const [isAuthenticated,setisAuthenticated]=useState(false);
@@ -34,7 +36,8 @@ function App() {
           {/* <Route path="/signup" element={<Signup/>}></Route> */}
           {/* <Route path="/unauthorized" element={<Unauthorized/>}></Route> */}
           
-
+<Route path="/product/:id" element={<ProductDetailsProvider><ProductDetails /></ProductDetailsProvider>} />
+<Route path="/cart" element={<CartPage />} />
 
           
           {/* <Route path={"/employee/*"} element={<PrivateRoute element={<UserDetailsProvider><UserRolePermission roles={["employee"]}><AppThemeProvider><EmployeeHome/></AppThemeProvider></UserRolePermission></UserDetailsProvider>}/>}></Route> */}
