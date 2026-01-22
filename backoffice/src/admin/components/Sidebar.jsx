@@ -49,6 +49,9 @@ const Sidebar = (props) => {
             <FaClipboardList /> Add Item
           </Link> */}
           
+          <Link to="/admin/manageusers" onClick={() => { setOpenSidebar(false) }} className={`${pathname=="/admin/manageusers" && "bg-white/20"} flex items-center gap-3 p-3 rounded-lg cursor-pointer transition-all hover:bg-white/20 hover:bg-white/20 hover:translate-x-1 `}>
+            <FaUsers /> Manage Users
+          </Link>
           <Link to="/admin/settings" onClick={() => { setOpenSidebar(false) }} className={`${pathname=="/admin/settings" && "bg-white/20"} flex items-center gap-3 p-3 rounded-lg cursor-pointer transition-all hover:bg-white/20 hover:bg-white/20 hover:translate-x-1 `}>
             <FaCog /> Settings
           </Link>

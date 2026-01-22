@@ -18,6 +18,10 @@ const CategorySchema = new Schema({
   status: {
     type: String,
     
+  },
+  catpriority:{
+    type:Number,
+    default:1
   }
  
 },{

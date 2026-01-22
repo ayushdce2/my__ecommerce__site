@@ -22,9 +22,9 @@ const UserSchema = new Schema({
     },
     
   
-  leaveBalance:{
-    type:Number,
-    default:5
+  userstatus:{
+    type:String,
+    default:"Disable"
 
   }
   

@@ -1,11 +1,11 @@
-// const {UserToUpdateData, UserListFunction, UpdateUserData, Getallusersleave, ManageLeaveFunc} = require("../controllers/HrController.js");
-// const {isUserAuthenticated} = require("../middlewares/isUserAuthenticated.js");
-// const {userDataValidation} = require("../middlewares/isUpdateUserDataValid.js");
+const {getAllUsers, updateusers} = require("../controller/AdminController.js");
+const {isUserAuthenticated} = require("../middleware/isUserAuthenticated.js");
+const {isUserAuthorize} = require("../middleware/isUserAuthorize.js");
 
 const router = require("express").Router();
 
-// router.get("/leave/viewempleave",isUserAuthenticated, Getallusersleave);
-// router.put("/leave/manageempleave",isUserAuthenticated, ManageLeaveFunc);
-// router.get("/attendance/viewallattendance",isUserAuthenticated, getLeaveSummary); 
+router.get("/viewallusers",isUserAuthenticated, isUserAuthorize("admin"), getAllUsers); 
+router.put("/updateusers",isUserAuthenticated, isUserAuthorize("admin"), updateusers);
+
 
 module.exports = router;

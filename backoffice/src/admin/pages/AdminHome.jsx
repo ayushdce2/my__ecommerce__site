@@ -7,7 +7,8 @@ import {useUserDetails} from "../../utility/UserDetailsContext" ;
 import Profile from "./Profile";
 import Settings from "./Settings"
 import AddItem from "./AddItem";
-import AddBanner from "./AddBanner"
+import AddBanner from "./AddBanner";
+import ManageUsers from "./ManageUsers";
 
 
 
@@ -41,6 +42,8 @@ const AdminHome = () => {
                             <Route path={"/settings"} element={<Settings />}></Route>
                             <Route path={"/addItem"} element={<AddItem/>}></Route>
                             <Route path={"/addBanner"} element={<AddBanner/>}></Route>
+                            <Route path={"/manageusers"} element={<ManageUsers/>}></Route>
+                            
 
                             
 

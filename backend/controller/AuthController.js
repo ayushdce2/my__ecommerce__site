@@ -30,6 +30,15 @@ const LoginFunction = async (req,res)=>{
         if (!existingUser) {
             return res.status(403).json({ message: 'User Not Found', success: false });
         }
+
+        // console.log(existingUser.userRole,"<======existingUser")
+        if(existingUser.userstatus=="Disable" || existingUser.userstatus !="Active"){
+            return res.status(403).json({ message: 'No Permission, contact Admin', success: false });
+        }
+
+        // if(existingUser.userRole=="admin"){
+        //     return res.status(403).json({ message: 'Admin accounts are not allowed', success: false });
+        // }
         
         const isPassEqual = await bcrypt.compare(password,existingUser.password);
         if(!isPassEqual){
