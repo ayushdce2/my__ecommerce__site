@@ -9,6 +9,7 @@ import Settings from "./Settings"
 import AddItem from "./AddItem";
 import AddBanner from "./AddBanner";
 import ManageUsers from "./ManageUsers";
+import AllLeads from "./AllLeads";
 
 
 
@@ -43,6 +44,8 @@ const AdminHome = () => {
                             <Route path={"/addItem"} element={<AddItem/>}></Route>
                             <Route path={"/addBanner"} element={<AddBanner/>}></Route>
                             <Route path={"/manageusers"} element={<ManageUsers/>}></Route>
+                            <Route path={"/leads"} element={<AllLeads/>}></Route>
+                            
                             
 
                             

@@ -3,6 +3,7 @@ import axios from "axios";
 import Navbar from "../SubComponent/Navbar";
 import Footer from "../SubComponent/Footer";
 import { useNavigate } from "react-router-dom";
+import API from '../../utility/axios';
 
 
 const CartPage = () => {
@@ -85,6 +86,9 @@ const CartPage = () => {
     return Object.keys(newErrors).length === 0;
   };
 
+
+   
+
   /* ---------------- SUBMIT ORDER ---------------- */
   const submitOrder = async (e) => {
     e.preventDefault();
@@ -92,12 +96,23 @@ const CartPage = () => {
 
     try {
       setSubmitting(true);
-
-      await axios.post("http://localhost:5000/api/orders/place", {
+      const AllClientData = {
         customer: form,
         items: cartItems,
         totalAmount: grandTotal,
-      });
+      }
+     const response = await API.post("/frontoffice/leadform/submit" ,AllClientData);
+                const data = response.data;
+                // handleSuccess(data.message);
+                
+              
+              
+
+   
+                console.log(response,"response");
+                // await refetch();
+                // console.log(finalRefetch,"finalRefetch",refetch)
+                console.log(data.status,"data.status")
 
       localStorage.removeItem("my_cart");
       setCartItems([]);
@@ -105,7 +120,13 @@ const CartPage = () => {
       setShowSuccessModal(true);
       setForm({ name: "", email: "", phone: "", address: "" });
     } catch (error) {
-      // Fallback if backend is down
+      console.log(error, "error", error.status);
+                // error.status=="500" && handleError(error.response.data.error.codeName)
+                // error.status=="400" && handleError(error.response.data.message);
+                // error.status=="403" && handleError(error.response.data.error.details[0].message);
+                // error.status=="422" && handleError(error.response.data.message);
+                // error.status=="409" && handleError(error.response.data.message);
+                // error.status=="400" && handleError(error.response.data.error.details[0].message);
       localStorage.removeItem("my_cart");
       setCartItems([]);
       setShowCheckoutModal(false);
@@ -118,6 +139,8 @@ const CartPage = () => {
      
     }
   };
+
+  
 
   /* ---------------- UI ---------------- */
   return (
