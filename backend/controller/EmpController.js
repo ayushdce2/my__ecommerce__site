@@ -95,8 +95,8 @@ const product = await ProductModel.findByIdAndUpdate(
   );
   res.status(200).json({message: 'Updated Successfully', success: true,product});
 }catch (error) {
-        console.error(error);
-        res.status(500).json({ message: 'Internal Server Error', success: false });
+        // console.error(error.errorResponse.codeName,"<============================error");
+        res.status(500).json({ message: 'Internal Server Error', success: false ,error});
     }
 }
 

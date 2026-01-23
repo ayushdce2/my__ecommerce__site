@@ -114,7 +114,8 @@ const data = res.data;
     }catch(error){
       console.log(error,"error")
       error.status==400 && handleError(error.response.data.error.details[0].message)
-      error.status==409 && handleError(error.response.data.message)
+      error.status==409 && handleError(error.response.data.message);
+      error.status==500 && handleError(error.response.data.error.codeName);
     }
   }
 
