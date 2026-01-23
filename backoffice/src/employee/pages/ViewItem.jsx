@@ -9,9 +9,10 @@ const initialForm = {
   pname: "",
   pprice: "",
   pstock: "",
-  pcategory: "",
+  categoryID: "",
   pdescription:"",
-  platest:""
+  platest:"",
+  pcategory:""
 };
         const headers ={
       headers:{
@@ -88,9 +89,10 @@ const data = res.data;
       pname: product.pname,
       pprice: product.pprice,
       pstock: product.pstock,
-      pcategory: product.pcategory,
+      categoryID: product.category,
       pdescription:product.pdescription,
-      platest:product.platest
+      platest:product.platest,
+      pcategory:product.pcategory
     });
     setShowEdit(true);
   };
@@ -276,20 +278,101 @@ console.log(productDeleteStatus,"productDeleteStatus")
           <div className="bg-slate-900 p-6 rounded-xl w-96">
             <h2 className="text-lg font-semibold mb-4">Edit Product</h2>
 
-            {["pname", "pprice", "pstock", "pcategory","pdescription","platest"].map((field) => (
-              <>
-              <label>{field}</label>
+            {/* {["pname", "pprice", "pstock","pdescription","platest"].map((data,index) => ( */}
+              {/* <> */}
+              <div>
+              <label>Product Name</label>
               <input
-                key={field}
-                placeholder={field}
+                // key={field}
+                placeholder="Product Name"
                 className="w-full bg-slate-800 px-3 py-2 rounded mb-3"
-                value={form[field]}
+                value={form.pname}
                 onChange={(e) =>
-                  setForm({ ...form, [field]: e.target.value })
+                  setForm({ ...form, "pname": e.target.value })
                 }
               />
+              </div>
+         
+              <div>
+              <label>Price</label>
+              <input
+                // key={field}
+                placeholder="Price"
+                className="w-full bg-slate-800 px-3 py-2 rounded mb-3"
+                value={form.pprice}
+                onChange={(e) =>
+                  setForm({ ...form, "pprice": e.target.value })
+                }
+              />
+              </div>
+              <div>
+              <label>Stock</label>
+              <input
+                // key={field}
+                placeholder="Stock"
+                className="w-full bg-slate-800 px-3 py-2 rounded mb-3"
+                value={form.pstock}
+                onChange={(e) =>
+                  setForm({ ...form, "pstock": e.target.value })
+                }
+              />
+              </div>
+              <div>
+              <label>Description</label>
+              <input
+                // key={field}
+                placeholder="Description"
+                className="w-full bg-slate-800 px-3 py-2 rounded mb-3"
+                value={form.pdescription}
+                onChange={(e) =>
+                  setForm({ ...form, "pdescription": e.target.value })
+                }
+              />
+              </div>
+              <div>
+              <label>Latest</label>
+              {console.log(form.platest,"<===============form.platest")}
+            <select value={form.platest} className="w-full bg-slate-800 px-3 py-2 rounded mb-3" onChange={(e) =>
+                  setForm({ ...form, "platest": e.target.value })
+                }>
+                <option value="Yes">Yes</option>
+                <option value="NO">No</option>
+              </select>
+              </div>
+            <input
+                // key={field}
+                type="hidden"
+                placeholder="category ID"
+                className="w-full bg-slate-800 px-3 py-2 rounded mb-3"
+                value={form.categoryID}
+                onChange={(e) =>
+                  setForm({ ...form, "categoryID": e.target.value })
+                }
+              />
+              <div className="flex flex-col mb-4">
+                <label>Category</label>
+              <select
+          className="bg-slate-800 px-4 py-2 rounded"
+          value={form.pcategory}
+          onChange={(e) => {
+            setForm({ ...form, "pcategory": e.target.value });
+
+          }}
+        >
+          <option>Choose</option>
+          {
+            allCategories && allCategories.map((data,index)=>{
+              return <>
+              <option>{data.categoryname}</option>
+                
               </>
-            ))}
+            })
+          }
+        </select>
+        </div>
+              
+              {/* </> */}
+            {/* // ))} */}
 
             <div className="flex justify-end gap-2">
               <button

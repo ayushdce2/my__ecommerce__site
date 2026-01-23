@@ -59,7 +59,7 @@ const AddItem = () => {
               Category
             </label>
             <select
-              name="pcategory"
+              name="categoryID"
               onChange={handleChange}
               className="w-full rounded-lg border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-900 px-4 py-2 text-slate-800 dark:text-white focus:ring-2 focus:ring-blue-500"
             >
@@ -67,13 +67,11 @@ const AddItem = () => {
               {
                 allCategories && allCategories.map((data,index)=>{
                   return <>
-                    <option>{data.categoryname}</option>
+                    <option value={data._id}>{data.categoryname}</option>
                   </>
                 })
               }
-              {/* <option>Shoes</option>
-              <option>Clothing</option>
-              <option>Electronics</option> */}
+            
             </select>
           </div>
 

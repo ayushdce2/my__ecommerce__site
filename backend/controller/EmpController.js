@@ -10,17 +10,30 @@ const addProductfunction = async (req, res) => {
         // console.log(req.body,"req.body");
         // console.log(req.user,"req.user")
         const {email,userRole} = req.user;
-        let { pname, pprice, pcategory, pstock, pdescription, pimage,platest } = req.body;
+        let { pname, pprice, categoryID, pstock, pdescription, pimage,platest,pcategory } = req.body;
         console.log(pimage,"<=========pimage")
         // console.log(name, email, password, userRole,"signup Controller");
+
+        // 🔹 Fetch category
+    const categoryDoc = await CategoryModel.findById(categoryID);
+    if (!categoryDoc) {
+      return res.status(404).json({
+        success: false,
+        message: "Category not found",
+      });
+    }
+    // console.log(categoryDoc,"<========categoryDoc")
+    const {categoryname,status} = categoryDoc;
+
         if(platest == ""){
           platest="NO";
         }   
-        const existingProduct = await ProductModel.findOne({ pname:pname.trim(),pcategory });
+        const existingProduct = await ProductModel.findOne({ pname:pname.trim(),pcategory:categoryname });
         if (existingProduct) {
             return res.status(409).json({ success: false, message: 'Product already exists' });
         }
-        const product = new ProductModel({ pname, pprice, pcategory, pstock, pdescription, pimage,email,platest });
+        console.log(existingProduct,"existingProduct")
+        const product = new ProductModel({ pname, pprice, pcategory:categoryname, category:categoryID, pstock, pdescription, pimage,email,platest });
         // const image = await Image.create(req.body);
         // user.password = await bcrypt.hash(password, 10);
         await product.save();

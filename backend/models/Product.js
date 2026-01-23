@@ -12,9 +12,11 @@ const ProductSchema = new Schema({
         required:true,
     },
   pcategory:{
+    // type: mongoose.Schema.Types.ObjectId,
+    // ref: "Category",
     type: String,
     required: true,
-    trim: true,
+    // trim: true,
   },
   pstock: {
     type: Number,

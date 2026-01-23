@@ -22,7 +22,7 @@ console.log(categoryname,"<============id");
     return (
     <>
        <div >
-                <h3 className="text-xl font-bold mb-6">New Arrivals</h3>
+                <h3 className="text-xl font-bold mb-6">{categoryname}</h3>
 
                 <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6">
       {

@@ -17,7 +17,7 @@ const viewFrontOfficeCategory = async (req,res)=>{
 console.log(req.user,"req.body <==========",req.body);
 // const { page, limit, search, category, sortBy, order } = req.query;
 
-  const all_category = await CategoryModel.find()
+  const all_category = await CategoryModel.find().sort({catpriority:1})
 
 // console.log(products,">===============products")
   res.status(200).json({ all_category, success:true });

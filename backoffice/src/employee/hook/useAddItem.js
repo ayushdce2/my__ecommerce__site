@@ -8,7 +8,7 @@ const useAddItem = () => {
     const [product, setProduct] = useState({
     pname: "",
     pprice: "",
-    pcategory: "",
+    categoryID: "",
     pstock: "",
     pdescription: "",
     pimage: null,
