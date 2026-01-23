@@ -1,6 +1,7 @@
 const ProductModel = require("../models/Product.js");
 const CategoryModel = require("../models/Category.js");
 const CustomerLeadModel = require("../models/CustomerLead.js");
+const BannerModel = require("../models/Banner.js")
 
 const viewFrontOfficeProduct = async (req,res)=>{
   
@@ -46,4 +47,15 @@ res.status(500).json({ error, success:false,message:"Error" });
 
   
 }
-module.exports = {viewFrontOfficeProduct, viewFrontOfficeCategory,addClientLead };
+
+const viewFrontOfficeBanner = async (req,res)=>{
+  
+// console.log(req.user,"req.body <==========",req.body);
+// const { page, limit, search, category, sortBy, order } = req.query;
+
+  const all_banner = await BannerModel.find()
+
+// console.log(products,">===============products")
+  res.status(200).json({ all_banner, success:true });
+}
+module.exports = {viewFrontOfficeProduct, viewFrontOfficeCategory,addClientLead,viewFrontOfficeBanner };

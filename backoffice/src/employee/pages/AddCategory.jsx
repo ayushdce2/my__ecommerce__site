@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import API from '../../utility/axios.jsx';
 import { handleSuccess, handleError } from '../../utility/ToastCustom.jsx';
+import { uploadToCloudinary } from "../../utility/cloudinary.js";
 
 const AddCategory = () => {
   // Form state
@@ -70,10 +71,13 @@ addCategorytoDB(formData)
     
     
   };
+
   const addCategorytoDB =async(formData)=>{
 
 
-
+const cloud = await uploadToCloudinary(formData.imageFile);
+  formData.pimage= cloud.secure_url;
+  formData.imgPublicId= cloud.public_id
 
 
             const headers = {

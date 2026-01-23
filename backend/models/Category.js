@@ -22,7 +22,14 @@ const CategorySchema = new Schema({
   catpriority:{
     type:Number,
     default:1
-  }
+  },
+    pimage: {
+    type: String,
+    default: null,
+  },
+  imgPublicId: {
+    type: String,
+  },
  
 },{
   timestamps:true

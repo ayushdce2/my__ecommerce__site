@@ -16,7 +16,7 @@ console.log(categoryname,"<============id");
   
 
               if(Loading){
-        return (<div className=' h-full bg-gradient-to-b from-blue-400 to-indigo-200 text-gray-200 border-r-gray-950 p-3 flex flex-col gap-5 items-center justify-center'><img src="/images/loading.gif" className='w-[5rem]' /> <p className='font-bold text-3xl text-shadow-2xs'>Loading</p></div>)
+        return (<div className=' h-full bg-gradient-to-b from-blue-400 to-indigo-200 text-gray-200 border-r-gray-950 p-3 flex flex-col gap-5 items-center justify-center'><img src="/images/loading.gif" className='w-[5rem]' loading="lazy"/> <p className='font-bold text-3xl text-shadow-2xs'>Loading</p></div>)
     }
     console.log(productDetails.all_product,"<=productDetails")
     return (
@@ -31,12 +31,12 @@ console.log(categoryname,"<============id");
         .map(item => (
                         <Link to={`/product/${item._id}`}
                           
-                          className="bg-white rounded-xl shadow hover:shadow-xl transition hover:-translate-y-1 group"
+                          className="bg-white rounded-xl shadow hover:shadow-xl transition hover:-translate-y-1 group p-2"
                         >
-                          <div className="h-40 bg-slate-200 rounded-t-xl flex items-center justify-center">
-                            <span className="text-slate-400 text-sm">
-                              Product Image
-                            </span>
+                          <div className="h-40  rounded-t-xl flex items-center justify-center">
+                            <div className="h-full w-full">
+                          <img src={item.pimage} className='object-cover h-full w-full rounded-xl' loading="lazy"/>
+                        </div>
                           </div>
     
                           <div className="p-4">

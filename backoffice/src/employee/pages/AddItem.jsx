@@ -110,7 +110,7 @@ const AddItem = () => {
           
           <input
             type="file"
-            // name="pimage"
+            name="pimage"
             onChange={handleChange}
             className="block w-full text-sm text-slate-600 dark:text-slate-300
               file:mr-4 file:rounded-lg file:border-0

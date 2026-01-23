@@ -1,7 +1,8 @@
 // const UserModel = require("../models/User.js");
 const ProductModel = require("../models/Product.js");
-const cloudinary = require("../config/cloudinary");
+// const cloudinary = require("../config/cloudinary");
 const CategoryModel = require("../models/Category.js")
+const BannerModel = require("../models/Banner.js")
 // const jwt = require("jsonwebtoken");
 // const bcrypt = require("bcrypt");
 
@@ -10,7 +11,7 @@ const addProductfunction = async (req, res) => {
         // console.log(req.body,"req.body");
         // console.log(req.user,"req.user")
         const {email,userRole} = req.user;
-        let { pname, pprice, categoryID, pstock, pdescription, pimage,platest,pcategory } = req.body;
+        let { pname, pprice, categoryID, pstock, pdescription, pimage,platest,pcategory,imgPublicId } = req.body;
         console.log(pimage,"<=========pimage")
         // console.log(name, email, password, userRole,"signup Controller");
 
@@ -33,7 +34,7 @@ const addProductfunction = async (req, res) => {
             return res.status(409).json({ success: false, message: 'Product already exists' });
         }
         console.log(existingProduct,"existingProduct")
-        const product = new ProductModel({ pname, pprice, pcategory:categoryname, category:categoryID, pstock, pdescription, pimage,email,platest });
+        const product = new ProductModel({ pname, pprice, pcategory:categoryname, category:categoryID, pstock, pdescription, pimage,imgPublicId, email,platest });
         // const image = await Image.create(req.body);
         // user.password = await bcrypt.hash(password, 10);
         await product.save();
@@ -116,14 +117,14 @@ const addCategoryfunction = async (req, res) => {
         // console.log(req.body,"req.body");
         // console.log(req.user,"req.user")
         const {email,userRole} = req.user;
-        const { categoryName, description, imageFile, status,catPriority } = req.body;
+        const { categoryName, description, imageFile, status,catPriority,imgPublicId,pimage } = req.body;
         
         // console.log(name, email, password, userRole,"signup Controller");
         const existingCategory = await CategoryModel.findOne({ categoryname:categoryName.trim() });
         if (existingCategory) {
             return res.status(409).json({ success: false, message: 'categoryName already exists' });
         }
-        const category = new CategoryModel({ categoryname:categoryName, description, status,email,catpriority:catPriority });
+        const category = new CategoryModel({ categoryname:categoryName, description, status,email,catpriority:catPriority,imgPublicId,pimage });
         // const image = await Image.create(req.body);
         // user.password = await bcrypt.hash(password, 10);
         await category.save();
@@ -211,4 +212,43 @@ await CategoryModel.findByIdAndDelete(req.params.id);
   }
 }
 
-module.exports = {deleteMainCategoryfunction,updateMainCategoryfunction, addProductfunction, ViewAllProducts,UpdateProduct,DeleteProduct,addCategoryfunction,viewCategoryfunction,viewMainCategoryfunction };
+const AddBannerFunc=async (req,res)=>{
+   try {
+        console.log(req.body,"req.body");
+        // console.log(req.user,"req.user")
+        // const {email,userRole} = req.user;
+        const { title, subtitle, link, status,  pimage, imgPublicId } = req.body;
+        // console.log(pimage,"<=========pimage")
+        // console.log(name, email, password, userRole,"signup Controller");
+
+        // 🔹 Fetch category
+    // const categoryDoc = await CategoryModel.findById(categoryID);
+    // if (!categoryDoc) {
+    //   return res.status(404).json({
+    //     success: false,
+    //     message: "Category not found",
+    //   });
+    // }
+    // console.log(categoryDoc,"<========categoryDoc")
+    // const {categoryname,status} = categoryDoc;
+
+    //     if(platest == ""){
+    //       platest="NO";
+    //     }   
+    //     const existingProduct = await ProductModel.findOne({ pname:pname.trim(),pcategory:categoryname });
+    //     if (existingProduct) {
+    //         return res.status(409).json({ success: false, message: 'Product already exists' });
+    //     }
+    //     console.log(existingProduct,"existingProduct")
+        const Banner = new BannerModel({ title, subtitle, link, status,  pimage, imgPublicId });
+    //     // const image = await Image.create(req.body);
+    //     // user.password = await bcrypt.hash(password, 10);
+        await Banner.save();
+        res.status(201).json({ Banner, success: true, message: "Banner Added" });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Internal Server Error', success: false,error });
+    }
+}
+
+module.exports = {AddBannerFunc, deleteMainCategoryfunction,updateMainCategoryfunction, addProductfunction, ViewAllProducts,UpdateProduct,DeleteProduct,addCategoryfunction,viewCategoryfunction,viewMainCategoryfunction };

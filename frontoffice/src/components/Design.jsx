@@ -30,7 +30,7 @@ const App = () => {
       <Navbar/>
 
       {/* HERO BANNER */}
-      <section className="bg-gradient-to-r from-indigo-600 to-blue-500 text-white">
+      <section className="">
         
         <Banner/>
        

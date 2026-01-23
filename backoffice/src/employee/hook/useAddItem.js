@@ -2,6 +2,7 @@ import React,{ useState } from 'react';
 import API from '../../utility/axios.jsx';
 import { handleSuccess, handleError } from '../../utility/ToastCustom.jsx';
 import { useEffect } from 'react';
+import { uploadToCloudinary } from "../../utility/cloudinary.js";
 
 const useAddItem = () => {
 
@@ -30,37 +31,37 @@ const useAddItem = () => {
 // console.log(product?.pimage,"product?.pimage");
 //   const imagetobeupload = product.pimage?.File ?? null;
 //   console.log(imagetobeupload,"<=====imagetobeupload")
-  const addImagetoCloud = async({imagetobeupload})=>{
-    const validateFile = (imagetobeupload) => {
-    if (!ALLOWED_TYPES.includes(imagetobeupload.type)) {
-      return "Only JPG, PNG, WEBP allowed";
-    }
-    if (imagetobeupload.size > MAX_SIZE) {
-      return "File size must be under 2MB";
-    }
-    return null;
-  };
+  // const addImagetoCloud = async({imagetobeupload})=>{
+  //   const validateFile = (imagetobeupload) => {
+  //   if (!ALLOWED_TYPES.includes(imagetobeupload.type)) {
+  //     return "Only JPG, PNG, WEBP allowed";
+  //   }
+  //   if (imagetobeupload.size > MAX_SIZE) {
+  //     return "File size must be under 2MB";
+  //   }
+  //   return null;
+  // };
 
-  const validationError = validateFile(imagetobeupload);
-    if (validationError) {
-      console.log(validationError);
-      return;
-    }
+  // const validationError = validateFile(imagetobeupload);
+  //   if (validationError) {
+  //     console.log(validationError);
+  //     return;
+  //   }
 
-    const formData = new FormData();
-    formData.append("file", imagetobeupload);
-    formData.append("upload_preset", "mern_unsigned");
+  //   const formData = new FormData();
+  //   formData.append("file", imagetobeupload);
+  //   formData.append("upload_preset", "mern_unsigned");
 
-    const cloudRes = await API.post(
-      "https://api.cloudinary.com/v1_1/YOUR_CLOUD_NAME/image/upload",
-      formData
-    );
+  //   const cloudRes = await API.post(
+  //     "https://api.cloudinary.com/v1_1/YOUR_CLOUD_NAME/image/upload",
+  //     formData
+  //   );
 
-    const cloudData = await cloudRes.data;
-    console.log(cloudData,"<=======cloudData")
+  //   const cloudData = await cloudRes.data;
+  //   console.log(cloudData,"<=======cloudData")
 
 
-  }
+  // }
 
   const headers = {
         headers: {
@@ -69,9 +70,12 @@ const useAddItem = () => {
     }
   
   const addProducttoDB =async()=>{
-            
+    console.log(product,"actual product")
+            console.log(product.pimage,"<=======pimage")
+  const cloud = await uploadToCloudinary(product.pimage);
+  product.pimage= cloud.secure_url;
+  product.imgPublicId= cloud.public_id
 
-console.log(product,"actual product")
             try {
                 const response = await API.post("employee/product/add" ,product, headers);
                 const data = response.data;

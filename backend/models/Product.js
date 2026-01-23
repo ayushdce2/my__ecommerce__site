@@ -30,7 +30,9 @@ const ProductSchema = new Schema({
     type: String,
     default: null,
   },
-  // imgPublicId: String,
+  imgPublicId: {
+    type: String,
+  },
    email:{
         type:String,
         required:true,

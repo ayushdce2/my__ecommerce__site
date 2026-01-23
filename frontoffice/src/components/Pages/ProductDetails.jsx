@@ -17,7 +17,7 @@ const ProductPage = () => {
   if (Loading) {
     return (
       <div className="h-screen flex flex-col items-center justify-center bg-gray-100 dark:bg-gray-900">
-        <img src="/images/loading.gif" className="w-20" alt="loading" />
+        <img src="/images/loading.gif" className="w-20" alt="loading" loading="lazy"/>
         <p className="text-2xl font-bold text-gray-700 dark:text-gray-200">
           Loading...
         </p>
@@ -57,27 +57,29 @@ const ProductPage = () => {
         price: product.pprice,
         quantity: qty,
         total: product.pprice * qty,
+        pimage:product.pimage
       });
     }
 
     localStorage.setItem("my_cart", JSON.stringify(cart));
 
     /* ---------------- SEND TO BACKEND (FRONTEND ONLY) ---------------- */
-    try {
-      setSending(true);
+    // try {
+    //   setSending(true);
 
-      await axios.post("http://localhost:5000/api/cart/add", {
-        productId: product._id,
-        quantity: qty,
-      });
+    //   await axios.post("http://localhost:5000/api/cart/add", {
+    //     productId: product._id,
+    //     quantity: qty,
+    //   });
 
-      // Backend not mandatory – this will silently fail if API not running
-    } catch (error) {
-      console.warn("Backend not connected (safe to ignore)");
-    } finally {
-      setSending(false);
-      navigate("/cart"); // Redirect
-    }
+    //   // Backend not mandatory – this will silently fail if API not running
+    // } catch (error) {
+    //   console.warn("Backend not connected (safe to ignore)");
+    // } finally {
+    //   setSending(false);
+    //   navigate("/cart"); // Redirect
+    // }
+    navigate("/cart");
   };
 
   /* ---------------- UI ---------------- */
@@ -89,8 +91,11 @@ const ProductPage = () => {
         <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-8 bg-white dark:bg-gray-800 p-6 rounded-xl shadow">
           
           {/* Image */}
-          <div className="h-80 bg-gray-200 dark:bg-gray-700 rounded flex items-center justify-center">
-            Product Image
+          <div className="h-80  rounded flex items-center justify-center">
+            <div className="h-full">
+              <img src={product.pimage} className="object-cover h-full" loading="lazy"/>
+            </div>
+            
           </div>
 
           {/* Details */}

@@ -28,12 +28,12 @@ const NewArrivals = () => {
     .map(item => (
                     <Link to={`/product/${item._id}`}
                       
-                      className="bg-white rounded-xl shadow hover:shadow-xl transition hover:-translate-y-1 group"
+                      className="bg-white rounded-xl shadow hover:shadow-xl transition hover:-translate-y-1 group p-2"
                     >
-                      <div className="h-40 bg-slate-200 rounded-t-xl flex items-center justify-center">
-                        <span className="text-slate-400 text-sm">
-                          Product Image
-                        </span>
+                      <div className="h-40  rounded-t-xl flex items-center justify-center">
+                       <div className="h-full w-full">
+                          <img src={item.pimage} className='object-cover h-full w-full rounded-xl' loading="lazy"/>
+                        </div>
                       </div>
 
                       <div className="p-4">

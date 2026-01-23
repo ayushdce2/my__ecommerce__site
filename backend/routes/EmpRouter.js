@@ -4,7 +4,7 @@ const {isUserAuthorize} = require("../middleware/isUserAuthorize");
 const {isUserAuthenticated} = require("../middleware/isUserAuthenticated");
 const {addProductfunction,ViewAllProducts,UpdateProduct ,DeleteProduct,
     addCategoryfunction,viewCategoryfunction,viewMainCategoryfunction,
-    updateMainCategoryfunction,deleteMainCategoryfunction} = require("../controller/EmpController.js")
+    updateMainCategoryfunction,deleteMainCategoryfunction,AddBannerFunc} = require("../controller/EmpController.js")
 // const {applyattendancefunction,attendancehistoryfunction, applyleavefunction,getLeaveSummary} = require("../controller/EmpController")
 
 
@@ -22,6 +22,8 @@ router.get("/product/category/view",isUserAuthenticated, isUserAuthorize("employ
 router.get("/main/category/view",isUserAuthenticated, isUserAuthorize("employee"),viewMainCategoryfunction);
 router.put("/main/category/update/:id",isUserAuthenticated, isUserAuthorize("employee"),updateMainCategoryfunction);
 router.delete("/main/category/delete/:id",isUserAuthenticated, isUserAuthorize("employee"),deleteMainCategoryfunction);
+
+router.post("/banner/add",isUserAuthenticated, isUserAuthorize("employee"),AddBannerFunc);
 
 
 

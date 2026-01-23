@@ -7,11 +7,12 @@ const OurCategoryBanner = () => {
   const{allCategories,loading}=useOurCategoryBanner();
   // console.log(allCategories,"allCategories");
    if(loading){
-        return (<div className=' h-full bg-gradient-to-b from-blue-400 to-indigo-200 text-gray-200 border-r-gray-950 p-3 flex flex-col gap-5 items-center justify-center'><img src="/images/loading.gif" className='w-[5rem]' /> <p className='font-bold text-3xl text-shadow-2xs'>Loading</p></div>)
+        return (<div className=' h-full bg-gradient-to-b from-blue-400 to-indigo-200 text-gray-200 border-r-gray-950 p-3 flex flex-col gap-5 items-center justify-center'><img src="/images/loading.gif" className='w-[5rem]' loading="lazy"/> <p className='font-bold text-3xl text-shadow-2xs'>Loading</p></div>)
     }
     if(allCategories.length <= 0){
       return "No Data Found"
     }
+    // console.log(allCategories,"<===============category allCategories")
   return (<>
   
   <section className=" py-16">
@@ -31,15 +32,15 @@ const OurCategoryBanner = () => {
         <>
  <div
               
-              className="relative flex items-center justify-center  group bg-slate-300 h-52 md:h-60 rounded-lg overflow-hidden border border-slate-400/40 hover:border-indigo-500 transition"
+              className="relative flex items-center justify-center  group  h-52 md:h-60 rounded-lg overflow-hidden border border-slate-400/40 hover:border-indigo-500 transition"
             >
-              <p className='text-3xl text-white relative z-10'>{data.categoryname}</p>
+              <p className='text-3xl text-gray-600 font-bold relative z-10 bg-blue-200 rounded-xl p-2'>{data.categoryname}</p>
               {/* IMAGE PLACEHOLDER */}
-              <div className="absolute inset-0 bg-gradient-to-br from-slate-400 to-slate-500" />
+              <div className="absolute inset-0 bg-cover" style={{ backgroundImage: `url(${data.pimage})` }}/>
 
               {/* HOVER OVERLAY */}
-              <div className="absolute inset-0 bg-indigo-600/0 group-hover:bg-indigo-600/70 transition flex items-center justify-center">
-                <div className="opacity-0 group-hover:opacity-100 text-white text-center transition">
+              <div className="absolute inset-0 bg-indigo-600/0 group-hover:bg-indigo-600/70 transition-all duration-1000  ease-in-out flex items-center justify-center z-20">
+                <div className="opacity-0 group-hover:opacity-100 text-white text-center transition-all  ease-in-out">
                   <h3 className="text-lg font-semibold mb-2">
                     {data.description}
                   </h3>
