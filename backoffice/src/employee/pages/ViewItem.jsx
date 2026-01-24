@@ -15,11 +15,7 @@ const initialForm = {
   platest:"",
   pcategory:""
 };
-        const headers ={
-      headers:{
-        "Authorization":localStorage.getItem("token"),
-      }
-    }
+        
 const ViewItem = () => {
     const { apiloading, setApiLoading } = useAppTheme();
 
@@ -46,6 +42,12 @@ const ViewItem = () => {
   useEffect(() => {
     fetchProducts();
   }, [page, search, category, priceSort, stockSort]);
+
+const headers ={
+      headers:{
+        "Authorization":localStorage.getItem("token"),
+      }
+    }
 
   const fetchProducts = async () => {
       setApiLoading(true)
