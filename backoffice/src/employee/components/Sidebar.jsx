@@ -52,13 +52,16 @@ const Sidebar = (props) => {
           <Link to="/employee/addBanner" onClick={() => { setOpenSidebar(false) }} className={`${pathname=="/employee/addBanner" && "bg-white/20"} flex items-center gap-3 p-3 rounded-lg cursor-pointer transition-all hover:bg-white/20 hover:bg-white/20 hover:translate-x-1 `}>
             <FaMoneyCheckAlt /> Add Banner
           </Link>
+
          <Link to="/employee/viewItem" onClick={() => { setOpenSidebar(false) }} className={`${pathname=="/employee/viewItem" && "bg-white/20"} flex items-center gap-3 p-3 rounded-lg cursor-pointer transition-all hover:bg-white/20 hover:bg-white/20 hover:translate-x-1 `}>
             <FaClipboardList /> View Product
           </Link>
           <Link to="/employee/viewCategory" onClick={() => { setOpenSidebar(false) }} className={`${pathname=="/employee/viewCategory" && "bg-white/20"} flex items-center gap-3 p-3 rounded-lg cursor-pointer transition-all hover:bg-white/20 hover:bg-white/20 hover:translate-x-1 `}>
             <FaClipboardList /> View Category
           </Link>
-          
+          <Link to="/employee/viewBanner" onClick={() => { setOpenSidebar(false) }} className={`${pathname=="/employee/viewBanner" && "bg-white/20"} flex items-center gap-3 p-3 rounded-lg cursor-pointer transition-all hover:bg-white/20 hover:bg-white/20 hover:translate-x-1 `}>
+            <FaClipboardList /> View Banner
+          </Link>          
           
           <Link to="/employee/settings" onClick={() => { setOpenSidebar(false) }} className={`${pathname=="/employee/settings" && "bg-white/20"} flex items-center gap-3 p-3 rounded-lg cursor-pointer transition-all hover:bg-white/20 hover:bg-white/20 hover:translate-x-1 `}>
             <FaCog /> Settings

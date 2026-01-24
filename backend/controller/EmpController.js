@@ -1,6 +1,6 @@
 // const UserModel = require("../models/User.js");
 const ProductModel = require("../models/Product.js");
-// const cloudinary = require("../config/cloudinary");
+const cloudinary = require("../config/cloudinary");
 const CategoryModel = require("../models/Category.js")
 const BannerModel = require("../models/Banner.js")
 // const jwt = require("jsonwebtoken");
@@ -251,4 +251,71 @@ const AddBannerFunc=async (req,res)=>{
     }
 }
 
-module.exports = {AddBannerFunc, deleteMainCategoryfunction,updateMainCategoryfunction, addProductfunction, ViewAllProducts,UpdateProduct,DeleteProduct,addCategoryfunction,viewCategoryfunction,viewMainCategoryfunction };
+const ViewBannerFunc =async (req,res)=>{
+  try{
+  const { search = "", status, page = 1, limit = 5 } = req.query;
+
+  const query = {
+    title: { $regex: search, $options: "i" },
+  };
+
+  if (status) query.status = status;
+
+  const banners = await BannerModel.find(query)
+    .skip((page - 1) * limit)
+    .limit(Number(limit));
+
+  const count = await BannerModel.countDocuments(query);
+
+  res.json({
+    banners,
+    totalPages: Math.ceil(count / limit),
+  });
+}catch(error){
+  console.log(error,"<==view Banner ");
+  res.status(500).json({error,success:false})
+}
+}
+
+const EditBannerFunc =async (req,res)=>{
+try {
+    const { title, status, pimage, imgPublicId, oldImgPublicId } = req.body;
+    const banner = await BannerModel.findById(req.params.id);
+    if (!banner) return res.status(404).json({ message: "Banner not found" });
+
+    // Delete old image from Cloudinary if public_id changed
+    if (oldImgPublicId && oldImgPublicId !== imgPublicId) {
+      await cloudinary.uploader.destroy(oldImgPublicId);
+    }
+
+    banner.title = title || banner.title;
+    banner.status = status || banner.status;
+    banner.pimage = pimage || banner.pimage;
+    banner.imgPublicId = imgPublicId || banner.imgPublicId;
+
+    await banner.save();
+    res.json(banner);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+}
+
+const DeleteBannerFunc =async (req,res)=>{
+try {
+    const banner = await BannerModel.findById(req.params.id);
+    if (!banner) return res.status(404).json({ message: "Banner not found" });
+
+    // Delete image from Cloudinary
+    if (banner.imgPublicId) {
+      await cloudinary.uploader.destroy(banner.imgPublicId);
+    }
+
+    await BannerModel.deleteOne({ _id: req.params.id }); 
+    res.json({ message: "Banner deleted successfully" });
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+}
+module.exports = {EditBannerFunc,DeleteBannerFunc,ViewBannerFunc,AddBannerFunc, deleteMainCategoryfunction,
+  updateMainCategoryfunction, addProductfunction, ViewAllProducts,UpdateProduct,
+  DeleteProduct,addCategoryfunction,viewCategoryfunction,viewMainCategoryfunction }

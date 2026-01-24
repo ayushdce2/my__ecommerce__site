@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import API from '../../utility/axios.jsx';
 import { handleSuccess, handleError } from '../../utility/ToastCustom.jsx';
-import useViewCategory from "../hook/useViewCategory.js"
+import useViewCategory from "../hook/useViewCategory.js";
+import { useAppTheme } from "../../utility/ThemeContext";
 
 const LIMIT = 5;
 
@@ -20,6 +21,8 @@ const initialForm = {
       }
     }
 const ViewItem = () => {
+    const { apiloading, setApiLoading } = useAppTheme();
+
   const {allCategories} = useViewCategory();
 
   const [products, setProducts] = useState([]);
@@ -45,6 +48,7 @@ const ViewItem = () => {
   }, [page, search, category, priceSort, stockSort]);
 
   const fetchProducts = async () => {
+      setApiLoading(true)
     setLoading(true);
 
     let sortBy = "";
@@ -79,6 +83,7 @@ const data = res.data;
     setProducts(data.data);
     setTotal(data.total);
     setLoading(false);
+      setApiLoading(false)
     console.log(products,"<==============products")
   };
 
@@ -98,6 +103,7 @@ const data = res.data;
   };
 
   const updateProduct = async () => {
+      setApiLoading(true)
     try{
   const updateProdStatus = await  API.put(
   `employee/product/update/${editingId}`,form,
@@ -111,18 +117,20 @@ const data = res.data;
 
     setShowEdit(false);
     fetchProducts();
+      setApiLoading(false)
     }catch(error){
       console.log(error,"error")
       error.status==400 && handleError(error.response.data.error.details[0].message)
       error.status==409 && handleError(error.response.data.message);
       error.status==500 && handleError(error.response.data.error.codeName);
+        setApiLoading(false)
     }
   }
 
   /* ---------------- DELETE ---------------- */
   const deleteProduct = async (id) => {
     if (!window.confirm("Are you sure you want to delete this product?")) return;
-
+  setApiLoading(true)
 
 
       const productDeleteStatus = await  API.delete(
@@ -130,7 +138,7 @@ const data = res.data;
   headers
 )
 console.log(productDeleteStatus,"productDeleteStatus")
-
+  setApiLoading(false)
     fetchProducts();
   };
 
@@ -233,7 +241,7 @@ console.log(productDeleteStatus,"productDeleteStatus")
                   <td className="px-6 py-4 text-center">{p.pstock}</td>
                   <td className="px-6 py-4 text-center">{p.pdescription}</td>
                   <td className="px-6 py-4 text-center">{p.platest}</td>
-                  <td className="px-6 py-4 text-center">{p.pimage}</td>
+                  <td className="px-6 py-4 text-center"><img src={p.pimage} className="w-8 h-8 mx-auto" /></td>
                   
                   <td className="px-6 py-4 text-right space-x-2">
                     <button

@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import API from '../../utility/axios';
+import { useAppTheme } from "../../utility/ThemeContext";
 
 const ViewCategory=()=> {
+  const { apiloading, setApiLoading } = useAppTheme();
+
   const [categories, setCategories] = useState([]);
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState("");
@@ -25,6 +28,7 @@ const ViewCategory=()=> {
 
   const fetchCategories = async () => {
     setLoading(true);
+      setApiLoading(true)
     try {
         const params = new URLSearchParams({
   search,
@@ -42,6 +46,7 @@ const ViewCategory=()=> {
       console.error(err);
     } finally {
       setLoading(false);
+        setApiLoading(false)
     }
   };
 
@@ -51,11 +56,14 @@ const ViewCategory=()=> {
 
   const deleteCategory = async (id) => {
     if (!window.confirm("Are you sure to delete this category?")) return;
+      setApiLoading(true)
     try {
       await API.delete(`/employee/main/category/delete/${id}`,headers);
       fetchCategories();
+        setApiLoading(false)
     } catch (err) {
       console.error(err);
+        setApiLoading(false)
     }
   };
 
@@ -70,14 +78,17 @@ const ViewCategory=()=> {
   };
 
   const updateCategory = async () => {
+      setApiLoading(true)
     console.log(form,"<=============form")
     try {
       await API.put(`/employee/main/category/update/${editData._id}`, form,headers);
       
       closeEdit();
       fetchCategories();
+        setApiLoading(false)
     } catch (err) {
       console.error(err);
+        setApiLoading(false)
     }
   };
 
@@ -146,10 +157,12 @@ const ViewCategory=()=> {
                   <th className="border border-slate-600 px-4 py-2 text-left">Status</th>
                   <th className="border border-slate-600 px-4 py-2 text-left">Description</th>
                   <th className="border border-slate-600 px-4 py-2 text-left">Priority</th>
+                  <th className="border border-slate-600 px-4 py-2 text-left">Image</th>
                   <th className="border border-slate-600 px-4 py-2 text-left">Actions</th>
                 </tr>
               </thead>
               <tbody>
+                {/* {console.log(categories,"<========categories")} */}
                 {categories.map((cat) => (
                   <tr key={cat._id} className="odd:bg-slate-800 even:bg-slate-700">
                     <td className="border border-slate-600 px-4 py-2">{cat.categoryname}</td>
@@ -157,6 +170,7 @@ const ViewCategory=()=> {
                     <td className="border border-slate-600 px-4 py-2">{cat.description}</td>
                     
                     <td className="border border-slate-600 px-4 py-2">{cat.catpriority}</td>
+                    <td className="border border-slate-600 px-4 py-2"><img src={cat.pimage} className="w-5 h-5 mx-auto" /></td>
                     <td className="border border-slate-600 px-4 py-2 space-x-2">
                       <button
                         className="bg-blue-600 hover:bg-blue-700 px-3 py-1 rounded"

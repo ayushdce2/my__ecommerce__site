@@ -2,8 +2,11 @@ import { useState } from "react";
 import { uploadToCloudinary } from "../../utility/cloudinary";
 import API from '../../utility/axios.jsx';
 import { handleSuccess, handleError } from '../../utility/ToastCustom.jsx';
+import { useAppTheme } from "../../utility/ThemeContext";
 
 const useAddBanner = () => {
+
+  const { apiloading, setApiLoading } = useAppTheme();
 
     const [banner, setBanner] = useState({
     title: "",
@@ -35,7 +38,7 @@ const headers = {
 
   const sendBannerToDB =async (banner)=>{
 
-    
+    setApiLoading(true)
         console.log(banner,"actual product")
                 console.log(banner.image,"<=======pimage")
       const cloud = await uploadToCloudinary(banner.image);
@@ -43,6 +46,7 @@ const headers = {
       banner.imgPublicId= cloud.public_id
     
                 try {
+                  
                     const response = await API.post("employee/banner/add" ,banner, headers);
                     const data = response.data;
                     handleSuccess(data.message);
@@ -55,7 +59,7 @@ const headers = {
                     // await refetch();
                     // console.log(finalRefetch,"finalRefetch",refetch)
                     console.log(data.status,"data.status")
-           
+           setApiLoading(false)
                 } catch (error) {
                     console.log(error, "error", error.status);
                     // error.status=="500" && handleError(error.response.data.error.codeName)
@@ -64,6 +68,7 @@ const headers = {
                     error.status=="422" && handleError(error.response.data.message);
                     error.status=="409" && handleError(error.response.data.message);
                     error.status=="400" && handleError(error.response.data.error.details[0].message);
+                    setApiLoading(false)
                     
                 }
    

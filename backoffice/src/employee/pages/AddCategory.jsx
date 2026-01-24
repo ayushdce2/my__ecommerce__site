@@ -2,8 +2,10 @@ import React, { useState } from "react";
 import API from '../../utility/axios.jsx';
 import { handleSuccess, handleError } from '../../utility/ToastCustom.jsx';
 import { uploadToCloudinary } from "../../utility/cloudinary.js";
+import { useAppTheme } from "../../utility/ThemeContext";
 
 const AddCategory = () => {
+  const { apiloading, setApiLoading } = useAppTheme();
   // Form state
   const [categoryName, setCategoryName] = useState("");
   const [description, setDescription] = useState("");
@@ -73,7 +75,7 @@ addCategorytoDB(formData)
   };
 
   const addCategorytoDB =async(formData)=>{
-
+setApiLoading(true)
 
 const cloud = await uploadToCloudinary(formData.imageFile);
   formData.pimage= cloud.secure_url;
@@ -102,7 +104,7 @@ console.log(formData,"actual category")
                 // console.log(finalRefetch,"finalRefetch",refetch)
                 console.log(data.status,"data.status");
                 // resetForm();
-       
+         setApiLoading(false)
             } catch (error) {
                 console.log(error, "error", error.status);
                 // error.status=="500" && handleError(error.response.data.error.codeName)
@@ -111,7 +113,7 @@ console.log(formData,"actual category")
                 error.status=="422" && handleError(error.response.data.message);
                 error.status=="409" && handleError(error.response.data.message);
                 error.status=="400" && handleError(error.response.data.error.details[0].message);
-                
+                  setApiLoading(false)
             }
 }
   return (

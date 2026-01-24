@@ -11,6 +11,7 @@ import AddBanner from "./AddBanner"
 import ViewItem from "./ViewItem";
 import AddCategory from "./AddCategory"
 import ViewCategory from "./ViewCategory";
+import ViewBanner from "./ViewBanner";
 
 
 
@@ -48,6 +49,8 @@ const EmpHome = () => {
                             <Route path={"/addBanner"} element={<AddBanner/>}></Route>
                             <Route path={"/addCategory"} element={<AddCategory/>}></Route>
                             <Route path={"/viewCategory"} element={<ViewCategory/>}></Route>
+
+                            <Route path={"/viewBanner"} element={<ViewBanner/>}></Route>
                             
 
                             

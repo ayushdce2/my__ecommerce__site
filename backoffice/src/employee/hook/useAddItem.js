@@ -3,9 +3,10 @@ import API from '../../utility/axios.jsx';
 import { handleSuccess, handleError } from '../../utility/ToastCustom.jsx';
 import { useEffect } from 'react';
 import { uploadToCloudinary } from "../../utility/cloudinary.js";
+import { useAppTheme } from "../../utility/ThemeContext";
 
 const useAddItem = () => {
-
+  const { apiloading, setApiLoading } = useAppTheme();
     const [product, setProduct] = useState({
     pname: "",
     pprice: "",
@@ -70,6 +71,7 @@ const useAddItem = () => {
     }
   
   const addProducttoDB =async()=>{
+      setApiLoading(true)
     console.log(product,"actual product")
             console.log(product.pimage,"<=======pimage")
   const cloud = await uploadToCloudinary(product.pimage);
@@ -89,7 +91,7 @@ const useAddItem = () => {
                 // await refetch();
                 // console.log(finalRefetch,"finalRefetch",refetch)
                 console.log(data.status,"data.status")
-       
+         setApiLoading(false)
             } catch (error) {
                 console.log(error, "error", error.status);
                 // error.status=="500" && handleError(error.response.data.error.codeName)
@@ -98,7 +100,7 @@ const useAddItem = () => {
                 error.status=="422" && handleError(error.response.data.message);
                 error.status=="409" && handleError(error.response.data.message);
                 error.status=="400" && handleError(error.response.data.error.details[0].message);
-                
+                  setApiLoading(false)
             }
 }
 

@@ -2,9 +2,9 @@ import React from 'react';
 import API from '../../utility/axios.jsx';
 import { handleSuccess, handleError } from '../../utility/ToastCustom.jsx';
 import { useEffect,useState } from 'react';
-
+import { useAppTheme } from "../../utility/ThemeContext";
 const useViewCategory = () => {
-
+  const { apiloading, setApiLoading } = useAppTheme();
     const [allCategories,setAllCategories]=useState(null);
     const [loading,setLoading]=useState(true)
 
@@ -15,7 +15,7 @@ const useViewCategory = () => {
     }
     
   const getAllCategories =async ()=>{
-
+  setApiLoading(true)
 
             try {
                 const response = await API.get("employee/product/category/view", headers);
@@ -32,7 +32,7 @@ const useViewCategory = () => {
                 console.log(data.status,"data.status");
                 setAllCategories(response.data.all_category)
                 setLoading(false)
-       
+         setApiLoading(false)
             } catch (error) {
                 console.log(error, "error", error.status);
                 // error.status=="500" && handleError(error.response.data.error.codeName)
@@ -41,7 +41,7 @@ const useViewCategory = () => {
                 error.status=="422" && handleError(error.response.data.message);
                 error.status=="409" && handleError(error.response.data.message);
                 error.status=="400" && handleError(error.response.data.error.details[0].message);
-                
+                  setApiLoading(false)
             }
 }
 
