@@ -96,40 +96,64 @@ const ViewBanner = () => {
     const file = e.target.files[0];
     if (!file) return;
 
-    try {
-      setLoading(true);
-        setApiLoading(true)
+    setEditBannerForm((prev) => ({
+    ...prev,
+    pimage: file, // store File, NOT cloud URL
+  }));
 
-      // Upload using YOUR utility
-      const cloud = await uploadToCloudinary(file);
+    // try {
+    //   setLoading(true);
+    //     setApiLoading(true)
 
-      setEditBannerForm((prev) => ({
-        ...prev,
-        pimage: cloud.secure_url,
-        imgPublicId: cloud.public_id,
-      }));
-    } catch (err) {
-      console.error(err.message);
-    } finally {
-      setLoading(false);
-        setApiLoading(false)
-    }
+    //   // Upload using YOUR utility
+    //   const cloud = await uploadToCloudinary(file);
+
+    //   setEditBannerForm((prev) => ({
+    //     ...prev,
+    //     pimage: cloud.secure_url,
+    //     imgPublicId: cloud.public_id,
+    //   }));
+    // } catch (err) {
+    //   console.error(err.message);
+    // } finally {
+    //   setLoading(false);
+    //     setApiLoading(false)
+    // }
   };
+
+  const uploadImageToCloud = async (file) => {
+  const cloud = await uploadToCloudinary(file);
+
+  return {
+    pimage: cloud.secure_url,
+    imgPublicId: cloud.public_id,
+  };
+};
 
   /* ================= UPDATE ================= */
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       setLoading(true);
-        setApiLoading(true)
+        setApiLoading(true);
+
+        let imageUrl = editBannerForm.pimage;
+    let publicId = editBannerForm.imgPublicId;
+
+    // Upload only if a NEW image was selected
+    if (editBannerForm.pimage instanceof File) {
+      const cloudData = await uploadImageToCloud(editBannerForm.pimage);
+      imageUrl = cloudData.pimage;
+      publicId = cloudData.imgPublicId;
+    }
 
       await API.put(
         `/employee/banner/update/${editId}`,
         {
           title: editBannerForm.title,
           status: editBannerForm.status,
-          pimage: editBannerForm.pimage,
-          imgPublicId: editBannerForm.imgPublicId,
+          pimage: imageUrl,
+          imgPublicId: publicId,
           oldImgPublicId, // backend deletes old image
         },
         { headers }
@@ -272,7 +296,9 @@ const ViewBanner = () => {
               <label className="text-gray-300">Image</label>
               <label className="cursor-pointer flex gap-3">
                 <img
-                  src={editBannerForm.pimage}
+                  src={editBannerForm.pimage instanceof File
+    ? URL.createObjectURL(editBannerForm.pimage)
+    : editBannerForm.pimage}
                   className="h-24 w-24 rounded object-cover border"
                 />
                 <input
