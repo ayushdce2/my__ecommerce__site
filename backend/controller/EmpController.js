@@ -41,12 +41,12 @@ const addProductfunction = async (req, res) => {
         res.status(201).json({ product, success: true, message: "Product Added" });
     } catch (error) {
         console.error(error);
-        res.status(500).json({ message: 'Internal Server Error', success: false });
+        res.status(500).json({ message: 'Internal Server Error', success: false,error });
     }
 }
 
 const ViewAllProducts = async (req, res) => {
-    
+    try{
 console.log(req.query,"req.body <==========",req.body);
 const { page, limit, search, category, sortBy, order } = req.query;
 
@@ -77,18 +77,22 @@ const { page, limit, search, category, sortBy, order } = req.query;
 //         }catch(error){
 //             res.status(500).json({message:error});
 //         }
+} catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Internal Server Error', success: false,error });
+    }
 
 }
 
 const UpdateProduct = async (req, res) => {
   console.log(req.body)
-          const { pname, pprice, pcategory, pstock, pdescription, pimage } = req.body;
+          const { pname, pprice, pcategory, pstock, pdescription, pimage,oldImgPublicId, imgPublicId } = req.body;
   try{
 
-    //  const existingProduct = await ProductModel.findOne({ pname:pname.trim(),pcategory });
-    //     if (existingProduct) {
-    //         return res.status(409).json({ success: false, message: 'Product already exists' });
-    //     }
+if (oldImgPublicId && oldImgPublicId !== imgPublicId) {
+      await cloudinary.uploader.destroy(oldImgPublicId);
+    }
+
 const product = await ProductModel.findByIdAndUpdate(
     req.params.id,
     req.body,
@@ -103,11 +107,18 @@ const product = await ProductModel.findByIdAndUpdate(
 
 const DeleteProduct =async (req,res)=>{
 try{
+      const Prod_Image = await ProductModel.findById(req.params.id);
+    if (!Prod_Image) return res.status(404).json({ message: "Product image not found" });
+    
+    // Delete image from Cloudinary
+    if (Prod_Image.imgPublicId) {
+      await cloudinary.uploader.destroy(Prod_Image.imgPublicId);
+    }
   await ProductModel.findByIdAndDelete(req.params.id);
   res.status(200).json({ message: "Product deleted" });
   } catch (error) {
         console.error(error);
-        res.status(500).json({ message: 'Internal Server Error', success: false });
+        res.status(500).json({ message: 'Internal Server Error', success: false,error });
     }
 }
 
@@ -131,12 +142,12 @@ const addCategoryfunction = async (req, res) => {
         res.status(201).json({ category, success: true, message: "category Added" });
     } catch (error) {
         console.error(error);
-        res.status(500).json({ message: 'Internal Server Error', success: false });
+        res.status(500).json({ message: 'Internal Server Error', success: false,error });
     }
 }
 
 const viewCategoryfunction = async (req,res)=>{
-  
+  try{
 console.log(req.user,"req.body <==========",req.body);
 // const { page, limit, search, category, sortBy, order } = req.query;
 
@@ -144,6 +155,10 @@ console.log(req.user,"req.body <==========",req.body);
 
 // console.log(products,">===============products")
   res.status(200).json({ all_category, success:true });
+  } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Internal Server Error', success: false,error });
+    }
 }
 
 const viewMainCategoryfunction = async (req,res)=>{
@@ -183,33 +198,51 @@ console.log(sortField,"<============================>",sortOrder)
     res.json({ categories, total });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: "Server error" });
+    res.status(500).json({ message: "Server error",error });
   }
 }
 
 const updateMainCategoryfunction =async(req,res)=>{
   // console.log(req.params.id,"<========req.params.id")
   // console.log(req.body,"<==========req.body,")
-  const {name, status, priority, desc}=req.body;
+  const {name, status, priority, desc,imgPublicId, pimage, oldImgPublicId}=req.body;
 try{
+
+  // Delete old image from Cloudinary if public_id changed
+    if (oldImgPublicId && oldImgPublicId !== imgPublicId) {
+      await cloudinary.uploader.destroy(oldImgPublicId);
+    }
+
+
   const updated = await CategoryModel.findByIdAndUpdate(
     req.params.id,
-    {categoryname:name, status:status, catpriority:priority, description:desc},
+    {categoryname:name, status:status, catpriority:priority, description:desc, imgPublicId:imgPublicId,pimage:pimage},
     { new: true }
   );
   res.json(updated);
-}catch(error){
-  console.log(error)
-}
+} catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Internal Server Error', success: false,error });
+    }
 }
 
 const deleteMainCategoryfunction =async (req,res)=>{
+  // console.log(req.body,"<==========req.body");
   try{
+
+        const catImage = await CategoryModel.findById(req.params.id);
+    if (!catImage) return res.status(404).json({ message: "category image not found" });
+    
+    // Delete image from Cloudinary
+    if (catImage.imgPublicId) {
+      await cloudinary.uploader.destroy(catImage.imgPublicId);
+    }
 await CategoryModel.findByIdAndDelete(req.params.id);
   res.json({ message: "Category deleted" });
-  }catch(error){
-    console.log(error)
-  }
+ } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Internal Server Error', success: false,error });
+    }
 }
 
 const AddBannerFunc=async (req,res)=>{
@@ -295,9 +328,10 @@ try {
 
     await banner.save();
     res.json(banner);
-  } catch (err) {
-    res.status(500).json({ message: err.message });
-  }
+  } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Internal Server Error', success: false,error });
+    }
 }
 
 const DeleteBannerFunc =async (req,res)=>{
@@ -312,10 +346,12 @@ try {
 
     await BannerModel.deleteOne({ _id: req.params.id }); 
     res.json({ message: "Banner deleted successfully" });
-  } catch (err) {
-    res.status(500).json({ message: err.message });
-  }
+ } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Internal Server Error', success: false,error });
+    }
 }
-module.exports = {EditBannerFunc,DeleteBannerFunc,ViewBannerFunc,AddBannerFunc, deleteMainCategoryfunction,
-  updateMainCategoryfunction, addProductfunction, ViewAllProducts,UpdateProduct,
-  DeleteProduct,addCategoryfunction,viewCategoryfunction,viewMainCategoryfunction }
+module.exports = {EditBannerFunc,DeleteBannerFunc,ViewBannerFunc,AddBannerFunc, 
+  deleteMainCategoryfunction,updateMainCategoryfunction,viewMainCategoryfunction, 
+  addProductfunction, ViewAllProducts,UpdateProduct,DeleteProduct,
+  addCategoryfunction,viewCategoryfunction, }

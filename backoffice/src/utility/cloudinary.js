@@ -16,9 +16,13 @@ export const uploadToCloudinary = async (file) => {
   } catch (error) {
    
     if (error.response && error.response.data && error.response.data.error) {
-      throw new Error(`Upload failed: ${error.response.data.error.message}`);
+      // throw new Error(`Upload failed: ${error.response.data.error.message}`);
+      return{success:false, error:error.response.data.error.message}
+      
     } else {
-      throw new Error(`Upload failed: ${error.message}`);
+      // throw new Error(`Upload failed: ${error.message}`);
+      return{success:false, error:error.message}
     }
+    
   }
 };

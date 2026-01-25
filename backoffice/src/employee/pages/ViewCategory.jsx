@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import API from '../../utility/axios';
+import { uploadToCloudinary } from "../../utility/cloudinary";
 import { useAppTheme } from "../../utility/ThemeContext";
 
 const ViewCategory=()=> {
@@ -17,6 +18,7 @@ const ViewCategory=()=> {
 
   const [editData, setEditData] = useState(null);
   const [form, setForm] = useState({ name: "", status: "Active", priority: 0 });
+    const [oldImgPublicId, setOldImgPublicId] = useState(null);
 
   const limit = 5;
 
@@ -68,8 +70,16 @@ const ViewCategory=()=> {
   };
 
   const openEdit = (cat) => {
+    // console.log(cat,"<==cat")
     setEditData(cat);
-    setForm({ name: cat.categoryname, status: cat.status, priority: cat.catpriority,desc:cat.description });
+    setOldImgPublicId(cat.imgPublicId)
+    setForm({ 
+      name: cat.categoryname, 
+      status: cat.status, 
+      priority: cat.catpriority,
+      desc:cat.description,
+      imgPublicId:cat.imgPublicId,
+      pimage:cat.pimage }); 
     
   };
 
@@ -77,10 +87,33 @@ const ViewCategory=()=> {
     setEditData(null);
   };
 
+    const uploadImageToCloud = async (file) => {
+    const cloud = await uploadToCloudinary(file);
+  
+    return {
+      pimage: cloud.secure_url,
+      imgPublicId: cloud.public_id,
+    };
+  };
+
   const updateCategory = async () => {
       setApiLoading(true)
-    console.log(form,"<=============form")
+    // console.log(form,"<=============form")
     try {
+      let imageUrl = form.pimage;
+    let publicId = form.imgPublicId;
+
+    // Upload only if a NEW image was selected
+    if (form.pimage instanceof File) {
+      const cloudData = await uploadImageToCloud(form.pimage);
+      imageUrl = cloudData.pimage;
+      publicId = cloudData.imgPublicId;
+    }
+    form.pimage= imageUrl;
+    form.imgPublicId = publicId;
+    form.oldImgPublicId=oldImgPublicId;
+
+    // console.log(form,"<========form")
       await API.put(`/employee/main/category/update/${editData._id}`, form,headers);
       
       closeEdit();
@@ -222,8 +255,8 @@ const ViewCategory=()=> {
                 onChange={(e) => setForm({ ...form, name: e.target.value })}
               />
             </label>
-
-            <label className="block mb-2">
+<div className="flex gap-2 mb-2">
+            <label className="">
               Status
               <select
                 className="w-full mt-1 px-3 py-2 rounded bg-slate-700 text-white"
@@ -235,7 +268,7 @@ const ViewCategory=()=> {
               </select>
             </label>
 
-            <label className="block mb-4">
+            <label className="basis-2/4">
               Priority
               <input
                 type="number"
@@ -246,7 +279,8 @@ const ViewCategory=()=> {
                 }
               />
             </label>
-            <label className="block mb-4">
+            </div>
+            <label className="block mb-2">
               Description
               <textarea 
                 // type="number"
@@ -257,6 +291,29 @@ const ViewCategory=()=> {
                 }
               ></textarea >
             </label>
+             {/* IMAGE EDIT */}
+              <label className="text-gray-300">Image</label>
+              <label className="cursor-pointer flex gap-3 mb-4">
+                <img
+                  src={form.pimage instanceof File
+    ? URL.createObjectURL(form.pimage)
+    : form.pimage}
+                  className="h-24 w-24 rounded object-cover border"
+                />
+                <input
+                  type="file"
+                  accept="image/*"
+                  className="cursor-pointer border text-gray-400"
+                  hidden
+                  onChange={(e) =>
+                  setForm({ ...form, pimage: e.target.files[0] })
+                }
+                />
+                <img
+                  src="/images/uploadimage.jpg"
+                  className="h-24 w-24 rounded object-cover border"
+                />
+              </label>
 
             <div className="flex justify-end space-x-4">
               <button

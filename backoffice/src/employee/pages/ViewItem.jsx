@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import API from '../../utility/axios.jsx';
 import { handleSuccess, handleError } from '../../utility/ToastCustom.jsx';
 import useViewCategory from "../hook/useViewCategory.js";
+import { uploadToCloudinary } from "../../utility/cloudinary";
 import { useAppTheme } from "../../utility/ThemeContext";
 
 const LIMIT = 5;
@@ -36,6 +37,7 @@ const ViewItem = () => {
   const [showEdit, setShowEdit] = useState(false);
   const [editingId, setEditingId] = useState(null);
   const [form, setForm] = useState(initialForm);
+      const [oldImgPublicId, setOldImgPublicId] = useState(null);
 
   const totalPages = Math.ceil(total / LIMIT);
 
@@ -92,6 +94,8 @@ const data = res.data;
   /* ---------------- EDIT ---------------- */
   const openEditModal = (product) => {
     setEditingId(product._id);
+    // console.log(product,"<================edit product line97")
+    setOldImgPublicId(product.imgPublicId)
     setForm({
       pname: product.pname,
       pprice: product.pprice,
@@ -99,14 +103,39 @@ const data = res.data;
       categoryID: product.category,
       pdescription:product.pdescription,
       platest:product.platest,
-      pcategory:product.pcategory
+      pcategory:product.pcategory,
+      imgPublicId:product.imgPublicId,
+      pimage:product.pimage
     });
     setShowEdit(true);
   };
 
+      const uploadImageToCloud = async (file) => {
+      const cloud = await uploadToCloudinary(file);
+    
+      return {
+        pimage: cloud.secure_url,
+        imgPublicId: cloud.public_id,
+      };
+    };
+
   const updateProduct = async () => {
       setApiLoading(true)
     try{
+
+      let imageUrl = form.pimage;
+    let publicId = form.imgPublicId;
+
+    // Upload only if a NEW image was selected
+    if (form.pimage instanceof File) {
+      const cloudData = await uploadImageToCloud(form.pimage);
+      imageUrl = cloudData.pimage;
+      publicId = cloudData.imgPublicId;
+    }
+    form.pimage= imageUrl;
+    form.imgPublicId = publicId;
+    form.oldImgPublicId=oldImgPublicId;
+
   const updateProdStatus = await  API.put(
   `employee/product/update/${editingId}`,form,
   headers
@@ -288,7 +317,7 @@ console.log(productDeleteStatus,"productDeleteStatus")
         <div className="fixed inset-0 bg-black/60 flex items-center justify-center">
           <div className="bg-slate-900 p-6 rounded-xl w-96">
             <h2 className="text-lg font-semibold mb-4">Edit Product</h2>
-
+{/* {console.log(form,"<=======form")} */}
             {/* {["pname", "pprice", "pstock","pdescription","platest"].map((data,index) => ( */}
               {/* <> */}
               <div>
@@ -303,7 +332,7 @@ console.log(productDeleteStatus,"productDeleteStatus")
                 }
               />
               </div>
-         
+         <div className="flex gap-2">
               <div>
               <label>Price</label>
               <input
@@ -328,6 +357,8 @@ console.log(productDeleteStatus,"productDeleteStatus")
                 }
               />
               </div>
+              </div>
+              
               <div>
               <label>Description</label>
               <input
@@ -340,7 +371,9 @@ console.log(productDeleteStatus,"productDeleteStatus")
                 }
               />
               </div>
-              <div>
+
+<div className="flex gap-2">
+              <div className="basis-2/4">
               <label>Latest</label>
               {console.log(form.platest,"<===============form.platest")}
             <select value={form.platest} className="w-full bg-slate-800 px-3 py-2 rounded mb-3" onChange={(e) =>
@@ -350,17 +383,7 @@ console.log(productDeleteStatus,"productDeleteStatus")
                 <option value="NO">No</option>
               </select>
               </div>
-            <input
-                // key={field}
-                type="hidden"
-                placeholder="category ID"
-                className="w-full bg-slate-800 px-3 py-2 rounded mb-3"
-                value={form.categoryID}
-                onChange={(e) =>
-                  setForm({ ...form, "categoryID": e.target.value })
-                }
-              />
-              <div className="flex flex-col mb-4">
+              <div className="flex flex-col mb-4 basis-2/5">
                 <label>Category</label>
               <select
           className="bg-slate-800 px-4 py-2 rounded"
@@ -381,6 +404,42 @@ console.log(productDeleteStatus,"productDeleteStatus")
           }
         </select>
         </div>
+        </div>
+
+        {/* IMAGE EDIT */}
+              <label className="text-gray-300">Image</label>
+              <label className="cursor-pointer flex gap-3 mb-4">
+                <img
+                  src={form.pimage instanceof File
+    ? URL.createObjectURL(form.pimage)
+    : form.pimage}
+                  className="h-24 w-24 rounded object-cover border"
+                />
+                <input
+                  type="file"
+                  accept="image/*"
+                  className="cursor-pointer border text-gray-400"
+                  hidden
+                  onChange={(e) =>
+                  setForm({ ...form, pimage: e.target.files[0] })
+                }
+                />
+                <img
+                  src="/images/uploadimage.jpg"
+                  className="h-24 w-24 rounded object-cover border"
+                />
+              </label>
+            <input
+                // key={field}
+                type="hidden"
+                placeholder="category ID"
+                className="w-full bg-slate-800 px-3 py-2 rounded mb-3"
+                value={form.categoryID}
+                onChange={(e) =>
+                  setForm({ ...form, "categoryID": e.target.value })
+                }
+              />
+              
               
               {/* </> */}
             {/* // ))} */}
