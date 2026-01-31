@@ -24,11 +24,11 @@ const NewArrivals = () => {
     <>
   {
   latestProduct?.length > 0 ?
-  latestProduct.filter(item => item.platest === "Yes")
+  latestProduct.filter(item => item.platest === "Yes").slice(0, 4)
     .map(item => (
                     <Link to={`/product/${item._id}`}
                       
-                      className="bg-white rounded-xl shadow hover:shadow-xl transition hover:-translate-y-1 group p-2"
+                      className="bg-[#0B1F33] rounded-xl shadow hover:shadow-xl transition hover:-translate-y-1 group p-2"
                     >
                       <div className="h-40  rounded-t-xl flex items-center justify-center">
                        <div className="h-full w-full">
@@ -37,7 +37,7 @@ const NewArrivals = () => {
                       </div>
 
                       <div className="p-4">
-                        <h4 className="font-medium mb-1 group-hover:text-indigo-600 transition">
+                        <h4 className="font-medium mb-1 text-gray-300 group-hover:text-gray-400 transition">
                           {item.pname}
                         </h4>
                         <p className="text-sm text-slate-500 mb-3">
@@ -45,16 +45,16 @@ const NewArrivals = () => {
                         </p>
 
                         <div className="flex items-center justify-between">
-                          <span className="font-semibold text-indigo-600">
+                          <span className="font-semibold text-[#fd5900]">
                             Rs. {item.pprice}
                           </span>
 
                           <div className="flex gap-3 opacity-0 group-hover:opacity-100 transition">
-                            <button className="hover:text-red-500">
-                              <FiHeart />
+                            <button className="">
+                              <FiHeart className='group-hover:text-[#fd5900]'/>
                             </button>
-                            <button className="hover:text-indigo-600">
-                              <FiShoppingCart />
+                            <button className="">
+                              <FiShoppingCart className='group-hover:text-[#fd5900]'/>
                             </button>
                           </div>
                         </div>

@@ -4,3 +4,20 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 
+@font-face {
+  font-family: contentfont;
+  src: url("/assets/font/Roboto-Regular.ttf");
+}
+
+@font-face {
+  font-family: headingfont;
+  src: url("/assets/font/Poppins-Regular.ttf");
+}
+
+*{
+  font-family: contentfont;
+}
+
+.headingfont{
+  font-family: headingfont;
+}

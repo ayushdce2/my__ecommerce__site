@@ -24,10 +24,11 @@ const CategorySidebar = () => {
       // console.log(allCategories[0]?._id,"allCategories");
   return (
     <>
-    <h3 className="font-semibold text-lg mb-2">Categories</h3>
+    <h3 className="font-semibold text-lg mb-3 headingfont">All Categories</h3>
+    <div className='overflow-auto max-h-[75vh] pr-2'>
     <Link to="/" 
                 
-                className={`${pathname=="/" ? "bg-indigo-50" : ""} flex items-center justify-between p-3 rounded-lg hover:bg-indigo-50 cursor-pointer transition`} >
+                className={`${pathname=="/" ? "bg-indigo-50 text-[#0B1F33]" : ""} mb-2 flex items-center justify-between p-3 rounded-lg hover:bg-indigo-50 hover:text-[#0B1F33] cursor-pointer transition`} >
                 All Products
                 <FiChevronRight />
               </Link>
@@ -36,7 +37,7 @@ const CategorySidebar = () => {
             (data,index) => (
               <Link to={`/homepageCategory/${data.categoryname}`}
                 key={data._id}
-                className={`${pathname=='/homepageCategory/'+data.categoryname ? "bg-indigo-50" : ""} flex items-center justify-between p-3 rounded-lg hover:bg-indigo-50 cursor-pointer transition`}
+                className={`${pathname=='/homepageCategory/'+data.categoryname ? "bg-indigo-50 text-[#0B1F33]" : ""} flex items-center justify-between p-3 rounded-lg hover:bg-indigo-50 hover:text-[#0B1F33] cursor-pointer transition capitalize mb-2`}
               >
                 {data.categoryname}
                 <FiChevronRight />
@@ -47,7 +48,7 @@ const CategorySidebar = () => {
 
 
 
-         
+         </div>
     </>
     
   )

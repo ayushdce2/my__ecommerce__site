@@ -75,12 +75,12 @@ const CartPage = () => {
     const newErrors = {};
 
     if (!form.name.trim()) newErrors.name = "Name is required";
-    if (!form.email.match(/^\S+@\S+\.\S+$/))
-      newErrors.email = "Valid email required";
+    // if (!form.email.match(/^\S+@\S+\.\S+$/))
+      // newErrors.email = "Valid email required";
     if (!form.phone.match(/^[6-9]\d{9}$/))
       newErrors.phone = "Valid 10-digit phone required";
-    if (form.address.length < 10)
-      newErrors.address = "Address must be at least 10 characters";
+    // if (form.address.length < 10)
+      // newErrors.address = "Address must be at least 10 characters";
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;

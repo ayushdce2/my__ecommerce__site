@@ -24,7 +24,7 @@ const App = () => {
 
 
 
-    <div className=" min-h-screen text-slate-800">
+    <div className=" min-h-screen ">
 
       {/* NAVBAR */}
       <Navbar/>
@@ -43,10 +43,10 @@ const App = () => {
             (item, i) => (
               <div
                 key={i}
-                className="bg-white rounded-xl shadow hover:shadow-lg p-6 text-center transition hover:-translate-y-1"
+                className="bg-[#0B1F33] rounded-xl shadow hover:shadow-lg p-6 text-center transition hover:-translate-y-1"
               >
-                <h3 className="font-semibold text-lg mb-2">{item}</h3>
-                <p className="text-sm text-slate-500">
+                <h3 className="font-semibold text-lg mb-2 text-gray-300">{item}</h3>
+                <p className="text-sm text-gray-100">
                   Lorem ipsum dolor sit amet consectetur.
                 </p>
               </div>
@@ -59,16 +59,17 @@ const App = () => {
         <OurCategoryBanner/>
 
       {/* MAIN CONTENT */}
-      <section className="bg-slate-100">
-        <div className='max-w-7xl mx-auto px-6 py-16 grid grid-cols-12 gap-6 '>
-
+      <section className="">
+        {/* <div className='max-w-7xl mx-auto px-6 py-16 grid grid-cols-12 gap-6 '> */}
+        <div className='max-w-7xl mx-auto px-6 py-16 flex justify-between items-start gap-6 '>
         {/* SIDEBAR */}
-        <aside className="col-span-12 md:col-span-3 bg-white rounded-xl shadow p-6 space-y-4">
+        {/* {col-span-12 md:col-span-3} */}
+        <aside className="w-[22%] bg-[#0B1F33] text-gray-300 rounded-xl shadow p-6 space-y-4">
           
           <CategorySidebar/>
           
 
-          <div className="bg-gradient-to-r from-indigo-500 to-blue-500 text-white rounded-xl p-4 mt-6">
+          {/* <div className="bg-gradient-to-r from-indigo-500 to-blue-500 text-white rounded-xl p-4 mt-6">
             <h4 className="font-semibold mb-1">Summer Sale Banner</h4>
             <p className="text-sm opacity-90">
               Up to 40% off
@@ -86,11 +87,12 @@ const App = () => {
             <p className="text-sm opacity-90">
               Up to 40% off
             </p>
-          </div>
+          </div> */}
         </aside>
 
         {/* PRODUCTS */}
-        <div className="col-span-12 md:col-span-9 space-y-12 ">
+        {/* {col-span-12 md:col-span-9} */}
+        <div className="w-[75%] space-y-12 ">
 
 <HomepageCategoryProducts />
               

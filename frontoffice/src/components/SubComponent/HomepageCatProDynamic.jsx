@@ -22,12 +22,12 @@ console.log(categoryname,"<============id");
     return (
     <>
        <div >
-                <h3 className="text-xl font-bold mb-6">{categoryname}</h3>
+                <h3 className="text-xl font-bold mb-6 capitalize ">{categoryname}</h3>
 
                 <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6">
       {
       productDetails?.all_product?.length > 0 ?
-      productDetails?.all_product?.filter(item => item.pcategory === categoryname)
+      productDetails?.all_product?.filter(item => item.pcategory === categoryname).slice(0, 12)
         .map(item => (
                         <Link to={`/product/${item._id}`}
                           

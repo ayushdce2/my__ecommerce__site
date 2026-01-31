@@ -22,12 +22,12 @@ const AllProducts = () => {
     <>
     
                         {
-                            productDetails && productDetails?.all_product?.map((data,index)=>{
+                            productDetails && productDetails?.all_product?.slice(0, 7).map((data,index)=>{
                                 return(
                                     <>
                                     <Link to={`/product/${data._id}`}
                       
-                      className="bg-white rounded-xl shadow hover:shadow-xl transition hover:-translate-y-1 group p-2"
+                      className="bg-[#0B1F33] rounded-xl shadow hover:shadow-xl transition hover:-translate-y-1 group p-2"
                     >
                                      <div className="h-40  rounded-t-xl flex items-center justify-center">
                         <div className="h-full w-full">
@@ -36,7 +36,7 @@ const AllProducts = () => {
                       </div>
 
                       <div className="p-4">
-                        <h4 className="font-medium mb-1 group-hover:text-indigo-600 transition">
+                        <h4 className="font-medium mb-1 text-gray-300 group-hover:text-gray-400 transition">
                           {data.pname}
                         </h4>
                         <p className="text-sm text-slate-500 mb-3">
@@ -44,21 +44,30 @@ const AllProducts = () => {
                         </p>
 
                         <div className="flex items-center justify-between">
-                          <span className="font-semibold text-indigo-600">
+                          <span className="font-semibold text-[#fd5900]">
                             Rs. {data.pprice}
                           </span>
 
                           <div className="flex gap-3 opacity-0 group-hover:opacity-100 transition">
-                            <button className="hover:text-red-500">
-                              <FiHeart />
+                            <button className="">
+                              <FiHeart className='group-hover:text-[#fd5900]'/>
                             </button>
-                            <button className="hover:text-indigo-600">
-                              <FiShoppingCart />
+                            <button className="">
+                              <FiShoppingCart className='group-hover:text-[#fd5900]'/>
                             </button>
                           </div>
                         </div>
                       </div>
-                    </Link>                
+                    </Link>       
+                    {(index === 6) && (
+                      <div className=" bg-[#0B1F33] rounded-xl shadow hover:shadow-xl transition hover:-translate-y-1 group p-2">
+                      <Link to={`/product/`} className='flex items-center justify-center h-full text-[#fd5900] hover:text-[#fd5900]/90 text-lg' >
+                                     
+                                     
+                      View All
+                    </Link>
+                    </div>
+                  )}              
                                     </>
                                 )
                             })
