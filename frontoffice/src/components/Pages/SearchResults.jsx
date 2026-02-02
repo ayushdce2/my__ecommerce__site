@@ -1,8 +1,8 @@
 import { useSearchParams, useNavigate,Link } from "react-router-dom";
 import { useState } from "react";
 import useSearchResults from "../hook/useSearchResults";
-import Navbar from "../SubComponent/Navbar";
-import Footer from "../SubComponent/Footer";
+import useOurCategoryBanner from "../hook/useOurCategoryBanner";
+
 import {
   FiSearch,
   FiShoppingCart,
@@ -11,6 +11,7 @@ import {
 } from "react-icons/fi";
 
 function SearchResultPage() {
+   const{allCategories,loading}=useOurCategoryBanner();
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
   const query = searchParams.get("q") || "";
@@ -20,7 +21,7 @@ function SearchResultPage() {
   const [sort, setSort] = useState(""); // "price_asc" or "price_desc"
   const [category, setCategory] = useState("");
 
-  const { products, totalProducts, loading, error } = useSearchResults(
+  const { products, totalProducts, Loading, error } = useSearchResults(
     query,
     page,
     pageSize,
@@ -30,13 +31,13 @@ function SearchResultPage() {
 
   const totalPages = Math.ceil(totalProducts / pageSize);
 
-  if (loading) return <p className="text-center mt-20 text-gray-400">Loading...</p>;
+  if (Loading || loading) return <p className="text-center mt-20 text-gray-400">Loading...</p>;
   if (error) return <p className="text-center mt-20 text-red-500">{error}</p>;
 //   if (!products.length) return ;
-
+// console.log(allCategories,"<=====allCategories")
   return (<>
 
-    <Navbar/>
+
   
     <div className="  text-white px-6 py-12 overflow-auto">
       {/* Filters */}
@@ -57,10 +58,18 @@ function SearchResultPage() {
             value={category}
             className="bg-[#071a2f] border border-[#0b223a] rounded px-4 py-2 text-sm font-medium text-white focus:outline-none focus:ring-2 focus:ring-orange-500 transition"
           >
-            <option value="">All Categories</option>
-            <option value="electronics">Electronics</option>
-            <option value="fashion">Fashion</option>
-            <option value="books">Books</option>
+            {/* <option value="">All Categories</option>
+            <option value="latest">Latest</option> */}
+            <option value="select">Select</option>
+            {allCategories?.length != 0 ? allCategories?.map((data,index)=>{
+              return(
+                <>
+                <option value={data?.categoryname}>{data?.categoryname}</option>
+                </>
+              )
+            }) : <option value={null}>No category Found</option>}
+            
+            
           </select>
         </div>
 
@@ -171,7 +180,7 @@ function SearchResultPage() {
 
    
     </div>
-    <Footer/>
+   
 
     </>
   );

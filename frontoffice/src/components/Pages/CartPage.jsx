@@ -145,7 +145,7 @@ const CartPage = () => {
   /* ---------------- UI ---------------- */
   return (
     <div className="flex flex-col min-h-screen">
-      <Navbar />
+ 
 
       <div className="grow bg-gray-100 px-4 py-8">
         <div className="max-w-5xl mx-auto bg-white p-6 rounded shadow">
@@ -155,14 +155,15 @@ const CartPage = () => {
             <p>Your cart is empty</p>
           ) : (
             <>
+              <div className="w-full overflow-auto">
               <table className="w-full border-collapse mb-6" >
                 <thead>
                   <tr className="border-b-2">
                     <th className="p-2 text-left">Product</th>
-                    <th>Price</th>
-                    <th>Qty</th>
-                    <th>Total</th>
-                    <th>Action</th>
+                    <th className="p-2">Price</th>
+                    <th className="p-2">Qty</th>
+                    <th className="p-2">Total</th>
+                    <th className="p-2">Action</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -209,7 +210,7 @@ const CartPage = () => {
                   ))}
                 </tbody>
               </table>
-
+</div>
               <div className="flex justify-between items-center">
                 <h2 className="text-xl font-semibold">
                   Grand Total: ₹{grandTotal}
@@ -296,7 +297,7 @@ const CartPage = () => {
         </div>
       )}
 
-      <Footer />
+ 
     </div>
   );
 };

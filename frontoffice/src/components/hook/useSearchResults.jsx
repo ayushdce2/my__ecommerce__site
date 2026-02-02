@@ -4,7 +4,7 @@ import API from '../../utility/axios.jsx';
 const useSearchResults = (searchQuery, page = 1, pageSize = 10, sort = "", category = "") => {
   const [products, setProducts] = useState([]);
   const [totalProducts, setTotalProducts] = useState(0);
-  const [loading, setLoading] = useState(false);
+  const [Loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
   useEffect(() => {
@@ -39,7 +39,7 @@ console.log(response.data,"response.data")
     fetchProducts();
   }, [searchQuery, page, pageSize, sort, category]);
 
-  return { products, totalProducts, loading, error };
+  return { products, totalProducts, Loading, error };
 };
 
 export default useSearchResults;

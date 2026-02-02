@@ -2,13 +2,15 @@ import { useState } from "react";
 import ThemeDarkLight from "../../redux/ThemeDarkLight";
 import {
   FiSearch,
-  FiShoppingCart,
-  FiHeart,
-  FiChevronRight,
+  FiShoppingCart
 } from "react-icons/fi";
+import { IoMenu } from "react-icons/io5";
+import CategorySidebar from "./CategorySidebar"
+
 import { Link,useNavigate  } from "react-router-dom";
 
-const Navbar = () => {
+const Navbar = (props) => {
+  let {handleSidebar,sidebar,setSidebar} = props.sidebar;
   const [query, setQuery] = useState("");
   const navigate = useNavigate();
 
@@ -22,7 +24,7 @@ console.log(query,"<=========query")
   return (
     <>
     <nav className=" shadow-sm sticky top-0 z-50 bg-[#0B1F33]">
-        <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+        <div className="md:max-w-7xl mx-auto px-6 py-4 flex items-center justify-between flex-wrap gap-5 ">
           <Link to="/" className="text-2xl font-bold text-indigo-600 headingfont">
             {/* My Shop */}
             <div className='w-24'>
@@ -30,14 +32,18 @@ console.log(query,"<=========query")
             </div>
           </Link>
 
-          <div className="hidden md:flex gap-8 font-medium ">
+          <div className="flex gap-8 font-medium ">
             <Link to="/" className="hover:text-[#f75002] transition headingfont text-gray-300 font-bold">Home</Link>
             {/* <Link to="/category" className="hover:text-indigo-600 transition">Category</a> */}
             <Link to="/about" className="hover:text-[#f75002] transition headingfont text-gray-300 font-bold">About</Link>
             <Link to="/contact" className="hover:text-[#f75002] transition headingfont text-gray-300 font-bold">Contact</Link>
           </div>
 
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-4 mx-auto md:m-0">
+            <div className={`${sidebar== true ? "block" : "hidden"} absolute h-screen bottom-0 top-0 left-0 z-50  md:w-[22%] bg-[#0B1F33] text-gray-300 rounded-xl shadow p-6 space-y-4`}>
+              <CategorySidebar sidebar={props.sidebar}/>
+            </div>
+            <IoMenu className="text-4xl text-gray-200 md:hidden " onClick={handleSidebar}/>
             <form className="relative" onSubmit={handleSearch}>
               
               <input

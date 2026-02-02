@@ -60,7 +60,7 @@ else {
 
   return (
     <div className="flex flex-col min-h-screen bg-slate-50">
-      <Navbar />
+    
 
       {/* Banner */}
       <div className="bg-[#0B1F33]/90 h-48 flex items-center justify-center text-white text-2xl font-semibold">
@@ -215,7 +215,7 @@ else {
         {/* </section> */}
       {/* </div> */}
 
-      <Footer />
+   
     </div>
   );
 };

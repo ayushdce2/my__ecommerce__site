@@ -127,8 +127,8 @@ const similar_prod_category = product?.pcategory;
 
   /* ---------------- UI ---------------- */
   return (
-    <div className="flex flex-col h-screen">
-      <Navbar />
+    <div className="">
+      
 
       <div className="grow bg-gray-100 dark:bg-gray-900 px-4 py-8 text-gray-900 dark:text-gray-100">
         <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-8 bg-white dark:bg-gray-800 p-6 rounded-xl shadow">
@@ -247,7 +247,7 @@ const similar_prod_category = product?.pcategory;
                         }
                         </div>
                         </div>
-      <Footer />
+   
     </div>
   );
 };

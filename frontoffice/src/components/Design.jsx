@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useState} from 'react';
 import {
   FiSearch,
   FiShoppingCart,
@@ -7,16 +7,18 @@ import {
 } from "react-icons/fi";
 
 import Banner from './SubComponent/Banner';
-import Footer from "./SubComponent/Footer";
+
 import OurCategoryBanner from './SubComponent/OurCategoryBanner';
 import AllProducts from './SubComponent/AllProducts';
 import NewArrivals from './SubComponent/NewArrivals';
-import Navbar from './SubComponent/Navbar';
+
 import CategorySidebar from "./SubComponent/CategorySidebar";
 import HomepageCategoryProducts from "./SubComponent/HomepageCategoryProducts";
 
 
-const App = () => {
+const App = (props) => {
+   let {handleSidebar,sidebar,setSidebar} = props.sidebar;
+
   return (
     
     <>
@@ -24,10 +26,6 @@ const App = () => {
 
 
 
-    <div className=" min-h-screen ">
-
-      {/* NAVBAR */}
-      <Navbar/>
 
       {/* HERO BANNER */}
       <section className="max-w-7xl mx-auto w-full h-72 sm:h-96 lg:h-[450px] mt-6 overflow-hidden rounded-2xl">
@@ -61,12 +59,12 @@ const App = () => {
       {/* MAIN CONTENT */}
       <section className="">
         {/* <div className='max-w-7xl mx-auto px-6 py-16 grid grid-cols-12 gap-6 '> */}
-        <div className='max-w-7xl mx-auto px-6 py-16 flex justify-between items-start gap-6 '>
+        <div className='md:max-w-7xl mx-auto px-6 py-16 flex justify-between items-start gap-6 '>
         {/* SIDEBAR */}
         {/* {col-span-12 md:col-span-3} */}
-        <aside className="w-[22%] bg-[#0B1F33] text-gray-300 rounded-xl shadow p-6 space-y-4">
+        <aside className={`hidden md:z-0 md:block md:relative  md:w-[22%] bg-[#0B1F33] text-gray-300 rounded-xl shadow p-6 space-y-4`}>
           
-          <CategorySidebar/>
+          <CategorySidebar sidebar={props.sidebar}/>
           
 
           {/* <div className="bg-gradient-to-r from-indigo-500 to-blue-500 text-white rounded-xl p-4 mt-6">
@@ -92,7 +90,7 @@ const App = () => {
 
         {/* PRODUCTS */}
         {/* {col-span-12 md:col-span-9} */}
-        <div className="w-[75%] space-y-12 ">
+        <div className="md:w-[75%] space-y-12 ">
 
 <HomepageCategoryProducts />
               
@@ -101,8 +99,7 @@ const App = () => {
         </div>
       </section>
 
-      <Footer/>
-    </div>
+
 
     </>
   );
