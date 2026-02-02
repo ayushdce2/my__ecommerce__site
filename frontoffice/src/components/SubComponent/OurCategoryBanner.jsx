@@ -65,9 +65,9 @@ const OurCategoryBanner = () => {
         </div>
         {allCategories?.length > 6 && (<>
           <div className='flex justify-center mt-5'>
-            <button type="button" class="cursor-pointer text-gray-300 bg-[#0B1F33] hover:bg-[#0B1F33]/90 focus:ring-4 focus:ring-[#0B1F33]/50  border border-transparent focus:outline-none font-medium leading-5 rounded-xl text-sm px-4 py-2.5 text-center dark:focus:ring-[#2557D6]/50 hover:scale-105 transition">
+            <Link to="/all_categories" class="cursor-pointer text-gray-300 bg-[#0B1F33] hover:bg-[#0B1F33]/90 focus:ring-4 focus:ring-[#0B1F33]/50  border border-transparent focus:outline-none font-medium leading-5 rounded-xl text-sm px-4 py-2.5 text-center dark:focus:ring-[#2557D6]/50 hover:scale-105 transition">
 Explore More
-</button>
+</Link>
           </div>
           </>)}
       </div>

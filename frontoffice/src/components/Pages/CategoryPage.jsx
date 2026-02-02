@@ -30,10 +30,26 @@ const CategoryPage = () => {
     );
   }
 
-  const filteredProducts =
+  let filteredProducts = [];
+
+if (categoryname === "latest_product") {
+  filteredProducts =
+    productDetails?.all_product?.filter(
+      (item) => item.platest === "Yes"
+    ) || [];
+} 
+else if (categoryname === "all_product") {
+  filteredProducts = productDetails?.all_product || [];
+} 
+else {
+  filteredProducts =
     productDetails?.all_product?.filter(
       (item) => item.pcategory === categoryname
     ) || [];
+}
+
+
+    
 
   const totalPages = Math.ceil(filteredProducts.length / ITEMS_PER_PAGE);
   const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
@@ -47,8 +63,12 @@ const CategoryPage = () => {
       <Navbar />
 
       {/* Banner */}
-      <div className="bg-blue-500 h-48 flex items-center justify-center text-white text-2xl font-semibold">
-        {categoryname}
+      <div className="bg-[#0B1F33]/90 h-48 flex items-center justify-center text-white text-2xl font-semibold">
+        {categoryname && 
+        categoryname==="all_product" ? "All Products"
+        : categoryname==="latest_product" ? "Latest Products"
+        : categoryname
+        }
       </div>
 
       {/* Main Content */}
@@ -93,42 +113,76 @@ const CategoryPage = () => {
           {paginatedProducts.length > 0 ? (
             <>
               <div className="grid grid-cols-2 sm:grid-cols-5 lg:grid-cols-5 gap-6 px-3 md:max-w-4/5 mx-auto">
-                {paginatedProducts.map((item) => (
-                  <Link
-                    to={`/product/${item._id}`}
-                    key={item._id}
-                    className="bg-white rounded-xl shadow hover:shadow-xl transition hover:-translate-y-1 group "
-                  >
-                    <div className="h-40 bg-slate-200 rounded-t-xl flex items-center justify-center">
-                      <span className="text-slate-400 text-sm">
-                        Product Image
-                      </span>
-                    </div>
+                {paginatedProducts.map((data,index) => (
+                  // <Link
+                  //   to={`/product/${item._id}`}
+                  //   key={item._id}
+                  //   className="bg-white rounded-xl shadow hover:shadow-xl transition hover:-translate-y-1 group "
+                  // >
+                  //   <div className="h-40 bg-slate-200 rounded-t-xl flex items-center justify-center">
+                  //     <span className="text-slate-400 text-sm">
+                  //       Product Image
+                  //     </span>
+                  //   </div>
 
-                    <div className="p-4">
-                      <h4 className="font-medium mb-1 group-hover:text-indigo-600 transition">
-                        {item.pname}
-                      </h4>
-                      <p className="text-sm text-slate-500 mb-3">
-                        {item.pcategory}
-                      </p>
+                  //   <div className="p-4">
+                  //     <h4 className="font-medium mb-1 group-hover:text-indigo-600 transition">
+                  //       {item.pname}
+                  //     </h4>
+                  //     <p className="text-sm text-slate-500 mb-3">
+                  //       {item.pcategory}
+                  //     </p>
 
-                      <div className="flex items-center justify-between">
-                        <span className="font-semibold text-indigo-600">
-                          Rs. {item.pprice}
-                        </span>
+                  //     <div className="flex items-center justify-between">
+                  //       <span className="font-semibold text-indigo-600">
+                  //         Rs. {item.pprice}
+                  //       </span>
 
-                        <div className="flex gap-3 opacity-0 group-hover:opacity-100 transition">
-                          <button className="hover:text-red-500">
-                            <FiHeart />
-                          </button>
-                          <button className="hover:text-indigo-600">
-                            <FiShoppingCart />
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                  </Link>
+                  //       <div className="flex gap-3 opacity-0 group-hover:opacity-100 transition">
+                  //         <button className="hover:text-red-500">
+                  //           <FiHeart />
+                  //         </button>
+                  //         <button className="hover:text-indigo-600">
+                  //           <FiShoppingCart />
+                  //         </button>
+                  //       </div>
+                  //     </div>
+                  //   </div>
+                  // </Link>
+                   <Link to={`/product/${data._id}`}
+                                        
+                                        className="bg-[#0B1F33] rounded-xl shadow hover:shadow-xl transition hover:-translate-y-1 group p-2"
+                                      >
+                                                       <div className="h-40  rounded-t-xl flex items-center justify-center">
+                                          <div className="h-full w-full">
+                                            <img src={data.pimage} className='object-cover h-full w-full rounded-xl' loading="lazy"/>
+                                          </div>
+                                        </div>
+                  
+                                        <div className="p-4">
+                                          <h4 className="font-medium mb-1 text-gray-300 group-hover:text-gray-400 transition">
+                                            {data.pname}
+                                          </h4>
+                                          <p className="text-sm text-slate-500 mb-3">
+                                            {data.pcategory}
+                                          </p>
+                  
+                                          <div className="flex items-center justify-between">
+                                            <span className="font-semibold text-[#fd5900]">
+                                              Rs. {data.pprice}
+                                            </span>
+                  
+                                            <div className="flex gap-3 opacity-0 group-hover:opacity-100 transition">
+                                              <button className="">
+                                                <FiHeart className='group-hover:text-[#fd5900]'/>
+                                              </button>
+                                              <button className="">
+                                                <FiShoppingCart className='group-hover:text-[#fd5900]'/>
+                                              </button>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </Link>    
                 ))}
               </div>
 
@@ -143,7 +197,7 @@ const CategoryPage = () => {
                         onClick={() => setCurrentPage(page)}
                         className={`px-4 py-2 rounded-lg text-sm font-medium ${
                           currentPage === page
-                            ? "bg-blue-500 text-white"
+                            ? "bg-[#0B1F33] text-white"
                             : "bg-white border hover:bg-blue-50"
                         }`}
                       >

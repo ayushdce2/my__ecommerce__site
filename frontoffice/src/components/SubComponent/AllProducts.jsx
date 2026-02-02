@@ -61,7 +61,7 @@ const AllProducts = () => {
                     </Link>       
                     {(index === 6) && (
                       <div className=" bg-[#0B1F33] rounded-xl shadow hover:shadow-xl transition hover:-translate-y-1 group p-2">
-                      <Link to={`/product/`} className='flex items-center justify-center h-full text-[#fd5900] hover:text-[#fd5900]/90 text-lg' >
+                      <Link to={"/mainCategory/all_product"} className='flex items-center justify-center h-full text-[#fd5900] hover:text-[#fd5900]/90 text-lg' >
                                      
                                      
                       View All

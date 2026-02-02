@@ -27,9 +27,10 @@ console.log(categoryname,"<============id");
                 <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6">
       {
       productDetails?.all_product?.length > 0 ?
-      productDetails?.all_product?.filter(item => item.pcategory === categoryname).slice(0, 12)
-        .map(item => (
-                        <Link to={`/product/${item._id}`}
+      productDetails?.all_product?.filter(item => item.pcategory === categoryname).length > 0 ?
+      productDetails?.all_product?.filter(item => item.pcategory === categoryname).slice(0, 11)
+        .map((data,index) => (<>
+                        {/* <Link to={`/product/${item._id}`}
                           
                           className="bg-white rounded-xl shadow hover:shadow-xl transition hover:-translate-y-1 group p-2"
                         >
@@ -62,9 +63,56 @@ console.log(categoryname,"<============id");
                               </div>
                             </div>
                           </div>
-                        </Link>
-        )) :(
-            <p>No Data Found</p>
+                        </Link> */}
+                        <Link to={`/product/${data._id}`}
+                                              
+                                              className="bg-[#0B1F33] rounded-xl shadow hover:shadow-xl transition hover:-translate-y-1 group p-2"
+                                            >
+                                                             <div className="h-40  rounded-t-xl flex items-center justify-center">
+                                                <div className="h-full w-full">
+                                                  <img src={data.pimage} className='object-cover h-full w-full rounded-xl' loading="lazy"/>
+                                                </div>
+                                              </div>
+                        
+                                              <div className="p-4">
+                                                <h4 className="font-medium mb-1 text-gray-300 group-hover:text-gray-400 transition">
+                                                  {data.pname}
+                                                </h4>
+                                                <p className="text-sm text-slate-500 mb-3">
+                                                  {data.pcategory}
+                                                </p>
+                        
+                                                <div className="flex items-center justify-between">
+                                                  <span className="font-semibold text-[#fd5900]">
+                                                    Rs. {data.pprice}
+                                                  </span>
+                        
+                                                  <div className="flex gap-3 opacity-0 group-hover:opacity-100 transition">
+                                                    <button className="">
+                                                      <FiHeart className='group-hover:text-[#fd5900]'/>
+                                                    </button>
+                                                    <button className="">
+                                                      <FiShoppingCart className='group-hover:text-[#fd5900]'/>
+                                                    </button>
+                                                  </div>
+                                                </div>
+                                              </div>
+                                            </Link> 
+                        
+{(index === 10) && (
+                      <div className=" bg-[#0B1F33] rounded-xl shadow hover:shadow-xl transition hover:-translate-y-1 group p-2">
+                      <Link to={"/mainCategory/"+data.pcategory} className='flex items-center justify-center h-full text-[#fd5900] hover:text-[#fd5900]/90 text-lg' >
+                                     
+                                     
+                      View All
+                    </Link>
+                    </div>
+                  )}  
+                        </>
+                        
+        )) : (<p className='text-2xl text-gray-600'>No Data Found</p>)
+           :(
+            <p className='text-2xl text-gray-600'>No Data Found</p>
         )
     }
     </div>

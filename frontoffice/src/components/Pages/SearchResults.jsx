@@ -3,6 +3,12 @@ import { useState } from "react";
 import useSearchResults from "../hook/useSearchResults";
 import Navbar from "../SubComponent/Navbar";
 import Footer from "../SubComponent/Footer";
+import {
+  FiSearch,
+  FiShoppingCart,
+  FiHeart,
+  FiChevronRight,
+} from "react-icons/fi";
 
 function SearchResultPage() {
   const [searchParams] = useSearchParams();
@@ -10,7 +16,7 @@ function SearchResultPage() {
   const query = searchParams.get("q") || "";
 
   const [page, setPage] = useState(1);
-  const [pageSize] = useState(8);
+  const [pageSize] = useState(10);
   const [sort, setSort] = useState(""); // "price_asc" or "price_desc"
   const [category, setCategory] = useState("");
 
@@ -72,33 +78,67 @@ function SearchResultPage() {
       {/* Product Grid */}
       {
         !products.length ? <p className="text-center my-20 text-gray-400 text-3xl font-bold h-[22vh]">No products found</p> : (
-<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-        {products.map((item) => (
-          <Link
-            key={item.id}
-            to={`/product/${item._id}`}
-            className="cursor-pointer rounded-xl p-4 bg-gradient-to-b from-[#071a2f] to-[#041321] dark:from-[#0b223a] dark:to-[#020b17] hover:-translate-y-1 hover:shadow-xl transition-transform duration-300 ease-out"
-          >
-            {/* Image placeholder */}
-            <div
-              className="h-40 sm:h-44 bg-[#0b223a] rounded-lg mb-4 group-hover:scale-[1.02] transition-transform duration-300"
-              style={{
-                backgroundImage: `url(${item.image || "/placeholder.png"})`,
-                backgroundSize: "cover",
-                backgroundPosition: "center",
-              }}
-              aria-label={item.name}
-            />
+<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 md:max-w-4/5 mx-auto">
+        {products.map((data,index) => (
+          // <Link
+          //   key={item.id}
+          //   to={`/product/${item._id}`}
+          //   className="cursor-pointer rounded-xl p-4 bg-gradient-to-b from-[#071a2f] to-[#041321] dark:from-[#0b223a] dark:to-[#020b17] hover:-translate-y-1 hover:shadow-xl transition-transform duration-300 ease-out"
+          // >
+          //   {/* Image placeholder */}
+          //   <div
+          //     className="h-40 sm:h-44 bg-[#0b223a] rounded-lg mb-4 group-hover:scale-[1.02] transition-transform duration-300"
+          //     style={{
+          //       backgroundImage: `url(${item.pimage || "/placeholder.png"})`,
+          //       backgroundSize: "cover",
+          //       backgroundPosition: "center",
+          //     }}
+          //     aria-label={item.name}
+          //   />
 
-            {/* Info */}
-            <h4 className="text-sm font-medium truncate text-gray-100 group-hover:text-orange-400 transition-colors duration-300">
-              {item.name}
-            </h4>
+          //   {/* Info */}
+          //   <h4 className="text-sm font-medium truncate text-gray-100 group-hover:text-orange-400 transition-colors duration-300">
+          //     {item.name}
+          //   </h4>
 
-            <p className="text-xs text-gray-400 mt-0.5 capitalize">{item.category}</p>
+          //   <p className="text-xs text-gray-400 mt-0.5 capitalize">{item.category}</p>
 
-            <p className="text-orange-500 font-semibold mt-1">Rs. {item.price}</p>
-          </Link>
+          //   <p className="text-orange-500 font-semibold mt-1">Rs. {item.price}</p>
+          // </Link>
+           <Link to={`/product/${data._id}`}
+                                
+                                className="bg-[#0B1F33] rounded-xl shadow hover:shadow-xl transition hover:-translate-y-1 group p-2"
+                              >
+                                               <div className="h-40  rounded-t-xl flex items-center justify-center">
+                                  <div className="h-full w-full">
+                                    <img src={data.pimage} className='object-cover h-full w-full rounded-xl' loading="lazy"/>
+                                  </div>
+                                </div>
+          
+                                <div className="p-4">
+                                  <h4 className="font-medium mb-1 text-gray-300 group-hover:text-gray-400 transition">
+                                    {data.pname}
+                                  </h4>
+                                  <p className="text-sm text-slate-500 mb-3">
+                                    {data.pcategory}
+                                  </p>
+          
+                                  <div className="flex items-center justify-between">
+                                    <span className="font-semibold text-[#fd5900]">
+                                      Rs. {data.pprice}
+                                    </span>
+          
+                                    <div className="flex gap-3 opacity-0 group-hover:opacity-100 transition">
+                                      <button className="">
+                                        <FiHeart className='group-hover:text-[#fd5900]'/>
+                                      </button>
+                                      <button className="">
+                                        <FiShoppingCart className='group-hover:text-[#fd5900]'/>
+                                      </button>
+                                    </div>
+                                  </div>
+                                </div>
+                              </Link>
         ))}
       </div>
         )

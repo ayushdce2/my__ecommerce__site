@@ -1,6 +1,7 @@
 import React from 'react'
 import AllProducts from './AllProducts';
 import NewArrivals from './NewArrivals';
+import {Link} from "react-router-dom"
 
 const HomepageCategoryProductsLatestALL = () => {
   return (
@@ -9,7 +10,7 @@ const HomepageCategoryProductsLatestALL = () => {
     <div >
                 <h3 className="text-xl font-bold mb-6 flex justify-between items-center text-[#0B1F33]">New Arrivals
                   <span>
-                    <a href='#' className='text-sm bg-[#0B1F33] hover:bg-[#0B1F33]/90 text-gray-300 p-2 rounded-sm'>View All</a>
+                    <Link to={"/mainCategory/latest_product"} href='#' className='text-sm bg-[#0B1F33] hover:bg-[#0B1F33]/90 text-gray-300 p-2 rounded-sm'>View All</Link>
                   </span>
                 </h3>
 
