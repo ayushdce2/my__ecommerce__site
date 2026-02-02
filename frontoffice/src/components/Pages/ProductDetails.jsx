@@ -1,9 +1,15 @@
-import { useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useParams, useNavigate,Link } from "react-router-dom";
 import axios from "axios";
 import { useProductDetails } from "../../utility/ProductDetailsContext";
 import Navbar from "../SubComponent/Navbar";
 import Footer from "../SubComponent/Footer";
+import {
+  FiSearch,
+  FiShoppingCart,
+  FiHeart,
+  FiChevronRight,
+} from "react-icons/fi";
 
 const ProductPage = () => {
   const navigate = useNavigate();
@@ -26,9 +32,17 @@ const ProductPage = () => {
   }
 
   /* ---------------- PRODUCT ---------------- */
-  const product = productDetails?.all_product?.find(
+
+
+
+
+  const findProductById = (productDetails, id) => {
+  return productDetails?.all_product?.find(
     (item) => item._id === id
   );
+};
+
+const product = findProductById(productDetails, id);
 
   if (!product) {
     return (
@@ -37,7 +51,36 @@ const ProductPage = () => {
       </p>
     );
   }
+  
 
+  // const product = productDetails?.all_product?.find(
+  //   (item) => item._id === id
+  // );
+
+  // if (!product) {
+  //   return (
+  //     <p className="text-center mt-10 text-lg font-semibold">
+  //       Product not found
+  //     </p>
+  //   );
+  // }
+
+/* ---------------- PRODUCT ---------------- */
+
+const similar_prod_category = product?.pcategory;
+// console.log(similar_prod_category,"<=====similar_prod_category",product?.pcategory)
+  const similar_product = productDetails?.all_product?.filter(
+    (item) => item.pcategory === similar_prod_category
+  );
+
+  // if (!similar_product) {
+  //   return (
+  //     <p className="text-center mt-10 text-lg font-semibold">
+  //       similar products not found
+  //     </p>
+  //   );
+  // }
+// console.log(similar_product.similar_product,"<=====product")
   /* ---------------- ADD TO CART ---------------- */
   const addToCart = async () => {
     const cart = JSON.parse(localStorage.getItem("my_cart")) || [];
@@ -97,7 +140,7 @@ const ProductPage = () => {
             </div>
             
           </div>
-
+{/* {console.log(product,"<========product")} */}
           {/* Details */}
           <div>
             <h1 className="text-2xl font-bold">{product.pname}</h1>
@@ -144,6 +187,66 @@ const ProductPage = () => {
         </div>
       </div>
 
+                                  <div className="p-6">
+                <h3 className="text-xl font-bold mb-6 text-[#0B1F33]">Similar Products</h3>
+
+                <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-6 gap-6 p-6">
+  {/* {console.log(similar_product,"<========render similar_product")} */}
+{/* Similar Products */}
+{
+
+                            similar_product && similar_product?.slice(0, 6).map((data,index)=>{
+                                return(
+                                    <>
+                                    <Link to={`/product/${data._id}`} 
+                      
+                      className="bg-[#0B1F33] rounded-xl shadow hover:shadow-xl transition hover:-translate-y-1 group p-2"
+                    >
+                                     <div className="h-40  rounded-t-xl flex items-center justify-center">
+                        <div className="h-full w-full">
+                          <img src={data.pimage} className='object-cover h-full w-full rounded-xl' loading="lazy"/>
+                        </div>
+                      </div>
+
+                      <div className="p-4">
+                        <h4 className="font-medium mb-1 text-gray-300 group-hover:text-gray-400 transition">
+                          {data.pname}
+                        </h4>
+                        <p className="text-sm text-slate-500 mb-3">
+                          {data.pcategory}
+                        </p>
+
+                        <div className="flex items-center justify-between">
+                          <span className="font-semibold text-[#fd5900]">
+                            Rs. {data.pprice}
+                          </span>
+
+                          <div className="flex gap-3 opacity-0 group-hover:opacity-100 transition">
+                            <button className="">
+                              <FiHeart className='group-hover:text-[#fd5900]'/>
+                            </button>
+                            <button className="">
+                              <FiShoppingCart className='group-hover:text-[#fd5900]'/>
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </Link>       
+                    {(index === 6) && (
+                      <div className=" bg-[#0B1F33] rounded-xl shadow hover:shadow-xl transition hover:-translate-y-1 group p-2">
+                      <Link to={`/product/`} className='flex items-center justify-center h-full text-[#fd5900] hover:text-[#fd5900]/90 text-lg' >
+                                     
+                                     
+                      View All
+                    </Link>
+                    </div>
+                  )}              
+                                    </>
+                                )
+                            })
+                        }
+                        </div>
+                        </div>
       <Footer />
     </div>
   );

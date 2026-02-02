@@ -34,13 +34,13 @@ const isCategoryDataValid = (req, res, next) => {
 
   const schema = Joi.object({
     categoryName: Joi.string().trim().min(1).required(),
-    description: Joi.string().trim().min(1).required(),
+    // description: Joi.string().trim().min(1).required(),
     catPriority: Joi.number().required(),
 
             
   });
 
-  const { error, value } = schema.validate({categoryName,description,catPriority}, {
+  const { error, value } = schema.validate({categoryName,catPriority}, {
   abortEarly: false,
 });
 

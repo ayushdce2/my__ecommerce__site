@@ -30,7 +30,7 @@ const App = () => {
       <Navbar/>
 
       {/* HERO BANNER */}
-      <section className="">
+      <section className="max-w-7xl mx-auto w-full h-72 sm:h-96 lg:h-[450px] mt-6 overflow-hidden rounded-2xl">
         
         <Banner/>
        

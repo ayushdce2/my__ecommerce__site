@@ -58,4 +58,46 @@ const viewFrontOfficeBanner = async (req,res)=>{
 // console.log(products,">===============products")
   res.status(200).json({ all_banner, success:true });
 }
-module.exports = {viewFrontOfficeProduct, viewFrontOfficeCategory,addClientLead,viewFrontOfficeBanner };
+
+const searchFrontOfficeProducts = async (req,res)=>{
+  
+console.log(req.user,"req.body <==========",req.body,"<=========>",req.query);
+const { searchedFor } = req.query;
+try {
+    const { searchedFor = "", page = 1, pageSize = 10, sort = "", category = "" } = req.query;
+
+    const query = {};
+
+    // Search by name (case-insensitive)
+    if (searchedFor) {
+      query.pname = { $regex: searchedFor, $options: "i" };
+    }
+
+    // Filter by category
+    if (category) {
+      query.pcategory = category;
+    }
+
+    let sortOption = {};
+    if (sort === "price_asc") sortOption.pprice = 1;
+    else if (sort === "price_desc") sortOption.pprice = -1;
+
+    const skip = (Number(page) - 1) * Number(pageSize);
+    const limit = Number(pageSize);
+
+    const total = await ProductModel.countDocuments(query);
+    const products = await ProductModel.find(query).sort(sortOption).skip(skip).limit(limit);
+
+    res.json({ products, total });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Server Error" });
+  }
+  // const all_product = await ProductModel.find()
+
+// console.log(products,">===============products")
+  // res.status(200).json({ all_product, success:true });
+}
+module.exports = {viewFrontOfficeProduct, viewFrontOfficeCategory,addClientLead,viewFrontOfficeBanner,
+  searchFrontOfficeProducts
+ };

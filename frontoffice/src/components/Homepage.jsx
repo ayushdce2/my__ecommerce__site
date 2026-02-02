@@ -5,6 +5,7 @@ import Design from "./Design"
 import ProductDetails from "./Pages/ProductDetails";
 import CartPage from "./Pages/CartPage";
 import CategoryPage from "./Pages/CategoryPage"
+import SearchResults from "./Pages/SearchResults";
 
 
 const Homepage = () => {
@@ -28,6 +29,7 @@ const Homepage = () => {
       <Route path="/product/:id" element={<ProductDetails />} />
       <Route path="/cart" element={<CartPage />} />
       <Route path="/mainCategory/:categoryname" element={<CategoryPage/>}/>
+      <Route path="/search" element={<SearchResults/>} />
       
       
 

@@ -20,6 +20,7 @@ import CategoryPage from "./components/Pages/CategoryPage.jsx";
 import About from "./components/Pages/About.jsx";
 import Contact from "./components/Pages/Contact.jsx"
 import HomepageCatProDynamic from "./components/SubComponent/HomepageCatProDynamic.jsx"
+import Demo from "./components/Demo.jsx";
 function App() {
 
     // const [isAuthenticated,setisAuthenticated]=useState(false);
@@ -37,7 +38,7 @@ function App() {
 
           {/* <Route path="*" element={<NotFound />} /> */}
           <Route path="/*" element={<ProductDetailsProvider><Homepage/></ProductDetailsProvider>}></Route>
-          {/* <Route path="/signup" element={<Signup/>}></Route> */}
+          <Route path="/demo" element={<Demo/>}></Route>
           {/* <Route path="/unauthorized" element={<Unauthorized/>}></Route> */}
           
 

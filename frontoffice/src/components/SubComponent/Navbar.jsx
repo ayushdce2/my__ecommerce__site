@@ -1,4 +1,4 @@
-import React from 'react'
+import { useState } from "react";
 import ThemeDarkLight from "../../redux/ThemeDarkLight";
 import {
   FiSearch,
@@ -6,9 +6,19 @@ import {
   FiHeart,
   FiChevronRight,
 } from "react-icons/fi";
-import { Link } from "react-router-dom";
+import { Link,useNavigate  } from "react-router-dom";
 
 const Navbar = () => {
+  const [query, setQuery] = useState("");
+  const navigate = useNavigate();
+
+    const handleSearch = (e) => {
+    e.preventDefault();
+    if (!query.trim()) return;
+console.log(query,"<=========query")
+    navigate(`/search?q=${encodeURIComponent(query)}`);
+  };
+
   return (
     <>
     <nav className=" shadow-sm sticky top-0 z-50 bg-[#0B1F33]">
@@ -28,13 +38,16 @@ const Navbar = () => {
           </div>
 
           <div className="flex items-center gap-4">
-            <div className="relative">
-              <FiSearch className="absolute top-3 left-3 text-slate-400" />
+            <form className="relative" onSubmit={handleSearch}>
+              
               <input
-                className="pl-10 pr-4 py-2 rounded-full border-2 border-gray-300 focus:ring-1 text-gray-300 focus:ring-indigo-500 outline-none"
+                className="pr-10 pl-4 py-2 rounded-full border-2 border-gray-300 focus:ring-1 text-gray-300 focus:ring-indigo-500 outline-none"
                 placeholder="Search products..."
+                value={query}
+        onChange={(e) => setQuery(e.target.value)}
               />
-            </div>
+              <FiSearch className="absolute top-3 right-3 text-slate-400 cursor-pointer" onClick={handleSearch} />
+            </form>
             <Link to={"/cart"} className="relative">
               <FiShoppingCart size={22} color='#fff' />
               <span className="absolute -top-2 -right-2 bg-[#f64905] text-white text-xs w-5 h-5 flex items-center justify-center rounded-full">
