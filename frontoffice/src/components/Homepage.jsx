@@ -9,6 +9,10 @@ import SearchResults from "./Pages/SearchResults";
 import AllCategories from "./Pages/AllCategories"
 import Navbar from './SubComponent/Navbar';
 import Footer from "./SubComponent/Footer";
+import About from "./Pages/About";
+import OrderGuide from "./Pages/OrderGuide";
+import PrivacyPolicy from "./Pages/PrivacyPolicy";
+import FAQ from "./Pages/Faq";
 
 const Homepage = () => {
 
@@ -42,6 +46,10 @@ const Homepage = () => {
       <Route path="/mainCategory/:categoryname" element={<CategoryPage/>}/>
       <Route path="/search" element={<SearchResults/>} />
       <Route path="/all_categories" element={<AllCategories/>} />
+      <Route path="/about" element={<About/>} />
+      <Route path="/orderguide" element={<OrderGuide/>} />
+      <Route path="/privacypolicy" element={<PrivacyPolicy/>} />
+      <Route path="/faq" element={<FAQ/>} />
       
       
 

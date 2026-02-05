@@ -7,12 +7,13 @@ import {
 import { IoMenu } from "react-icons/io5";
 import CategorySidebar from "./CategorySidebar"
 
-import { Link,useNavigate  } from "react-router-dom";
+import { Link,useNavigate,useLocation  } from "react-router-dom";
 
 const Navbar = (props) => {
   let {handleSidebar,sidebar,setSidebar} = props.sidebar;
   const [query, setQuery] = useState("");
   const navigate = useNavigate();
+  const { pathname } = useLocation();
 
     const handleSearch = (e) => {
     e.preventDefault();
@@ -33,10 +34,11 @@ console.log(query,"<=========query")
           </Link>
 
           <div className="flex gap-8 font-medium ">
-            <Link to="/" className="hover:text-[#f75002] transition headingfont text-gray-300 font-bold">Home</Link>
+            <Link to="/" className={` p-2 rounded-lg  transition headingfont  font-bold ${pathname=="/" ? "bg-[#f75002] text-[#0B1F33] hover:text-gray-300 " : "text-gray-300 hover:text-[#f75002] "}`}>Home</Link>
             {/* <Link to="/category" className="hover:text-indigo-600 transition">Category</a> */}
-            <Link to="/about" className="hover:text-[#f75002] transition headingfont text-gray-300 font-bold">About</Link>
-            <Link to="/contact" className="hover:text-[#f75002] transition headingfont text-gray-300 font-bold">Contact</Link>
+            <Link to="/about" className={` p-2 rounded-lg  transition headingfont  font-bold ${pathname=="/about" ? "bg-[#f75002] text-[#0B1F33] hover:text-gray-300 " : "text-gray-300 hover:text-[#f75002] "}`}>About</Link>
+            <Link to="/orderguide" className={` p-2 rounded-lg  transition headingfont  font-bold ${pathname=="/orderguide" ? "bg-[#f75002] text-[#0B1F33] hover:text-gray-300 " : "text-gray-300 hover:text-[#f75002] "}`}>Order Guide</Link>
+            
           </div>
 
           <div className="flex items-center gap-4 mx-auto md:m-0">
