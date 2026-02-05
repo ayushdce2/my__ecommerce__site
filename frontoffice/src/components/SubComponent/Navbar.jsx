@@ -25,7 +25,7 @@ console.log(query,"<=========query")
   return (
     <>
     <nav className=" shadow-sm sticky top-0 z-50 bg-[#0B1F33]">
-        <div className="md:max-w-7xl mx-auto px-6 py-4 flex items-center justify-between flex-wrap gap-5 ">
+        <div className="md:max-w-7xl mx-auto px-6 py-4 flex items-center justify-center md:justify-between flex-wrap gap-5 ">
           <Link to="/" className="text-2xl font-bold text-indigo-600 headingfont">
             {/* My Shop */}
             <div className='w-24'>
