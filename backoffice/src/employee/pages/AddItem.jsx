@@ -45,6 +45,8 @@ const AddItem = () => {
             </label>
             <input
               type="number"
+              step="0.01"
+              min="0"
               name="pprice"
               onChange={handleChange}
               className="w-full rounded-lg border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-900 px-4 py-2 text-slate-800 dark:text-white focus:ring-2 focus:ring-blue-500"

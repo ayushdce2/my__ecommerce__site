@@ -179,7 +179,7 @@ const CartPage = () => {
                             <p>{item.productName}</p>
                         </div>
                         </div></td>
-                      <td>₹{item.price}</td>
+                      <td>RMB {item.price}</td>
                       <td>
                         <div className="flex justify-center gap-2">
                           <button
@@ -197,7 +197,7 @@ const CartPage = () => {
                           </button>
                         </div>
                       </td>
-                      <td>₹{item.total}</td>
+                      <td>RMB {item.total}</td>
                       <td>
                         <button
                           onClick={() => removeItem(index)}
@@ -213,7 +213,7 @@ const CartPage = () => {
 </div>
               <div className="flex justify-between items-center">
                 <h2 className="text-xl font-semibold">
-                  Grand Total: ₹{grandTotal}
+                  Grand Total: RMB {grandTotal}
                 </h2>
 
                 <button

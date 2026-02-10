@@ -1,7 +1,16 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useLocation  } from "react-router-dom";
+import useOurCategoryBanner from "../hook/useOurCategoryBanner";
 
 const Footer = () => {
+  const { pathname } = useLocation();
+  const{allCategories,loading}=useOurCategoryBanner();
+   if(loading){
+        return (<div className='  bg-gradient-to-b from-blue-400 to-indigo-200 text-gray-200 border-r-gray-950 p-3 flex flex-col gap-5 items-center justify-center'><img src="/images/loading.gif" className='w-[1rem]' loading="lazy"/> <p className='font-bold text-lg text-black text-shadow-2xs'>Loading</p></div>)
+    }
+    // if(allCategories.length <= 0){
+    //   return "No Category Found"
+    // }
   return (
     <>
     
@@ -15,7 +24,7 @@ const Footer = () => {
         {/* Company Info */}
         <div>
           
-           <div className='w-20 mb-1'>
+           <div className='w-20 mb-1 bg-white p-[0.3rem] rounded'>
               <img src='/assets/logo.png' className='w-full h-full object-contain' />
             </div>
           <p className="text-sm leading-relaxed mb-4">
@@ -47,26 +56,39 @@ const Footer = () => {
                 FAQs
               </Link>
             </li>
+               <li>
+              <Link to="/orderguide" className="hover:text-orange-500 transition">
+                Order Guide
+              </Link>
+            </li>
+             <li>
+              <Link to="/privacypolicy" className="hover:text-orange-500 transition">
+                Privacy Policy
+              </Link>
+            </li>
           </ul>
         </div>
 
         {/* Support Links */}
         <div>
           <h4 className="text-white font-semibold mb-4">
-            Support
+            Categories
           </h4>
           <ul className="space-y-2 text-sm">
            
-            <li>
-              <Link to="/privacypolicy" className="hover:text-orange-500 transition">
-                Privacy Policy
-              </Link>
-            </li>
-            <li>
-              <Link to="/orderguide" className="hover:text-orange-500 transition">
-                Order Guide
-              </Link>
-            </li>
+            
+         {allCategories?.slice(0,5)?.map(
+                     (data,index) => (
+                         <li>
+                       <Link to={`/mainCategory/${data.categoryname}`}
+                         key={data._id}
+                         className={`${pathname=='/mainCategory/'+data.categoryname ? "text-[#f75002] text-[#0B1F33]" : ""} flex items-center justify-between  rounded-lg hover:text-[#f75002] hover:text-[#0B1F33] cursor-pointer transition capitalize mb-2`}
+                       >
+                         {data.categoryname}
+                       </Link>
+                       </li>
+                     )
+                   )}
           
           </ul>
         </div>

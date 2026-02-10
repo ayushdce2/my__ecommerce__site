@@ -25,7 +25,11 @@ const Sidebar = (props) => {
         <div className="p-6 text-4xl font-bold flex items-center gap-2 justify-between ">
           <div className="flex">
             {/* <FaUserTie /> */}
-            <span className="text-2xl">My Shop</span>
+            {/* <span className="text-2xl">My Shop</span> */}
+            <div className='w-24 p-[0.3rem] bg-white rounded'>
+              <img src='/assets/logo.png' className='w-full h-full object-contain' />
+            </div>
+            
           </div>
           <div className="bg-gray-800  rounded-full p-1 md:hidden ">
             <FaTimes className="text-2xl " onClick={() => { setOpenSidebar(!openSidebar) }} />
@@ -36,9 +40,9 @@ const Sidebar = (props) => {
         </div>
 
         <nav className="flex-1 px-4 space-y-2">
-          <Link to="/employee" onClick={() => { setOpenSidebar(false) }} className={`${pathname=="/employee" && "bg-white/20"} flex items-center gap-3 p-3 rounded-lg cursor-pointer transition-all  hover:bg-white/20 hover:bg-white/20 hover:translate-x-1 `}>
+          {/* <Link to="/employee" onClick={() => { setOpenSidebar(false) }} className={`${pathname=="/employee" && "bg-white/20"} flex items-center gap-3 p-3 rounded-lg cursor-pointer transition-all  hover:bg-white/20 hover:bg-white/20 hover:translate-x-1 `}>
             <FaTachometerAlt /> Dashboard
-          </Link>
+          </Link> */}
           {/* <Link to="" className={`flex items-center gap-3 p-3 rounded-lg cursor-pointer transition-all hover:bg-white/20 hover:bg-white/20 hover:translate-x-1 `}>
             <FaUsers /> Add Banner
           </Link> */}
@@ -63,9 +67,9 @@ const Sidebar = (props) => {
             <FaClipboardList /> View Banner
           </Link>          
           
-          <Link to="/employee/settings" onClick={() => { setOpenSidebar(false) }} className={`${pathname=="/employee/settings" && "bg-white/20"} flex items-center gap-3 p-3 rounded-lg cursor-pointer transition-all hover:bg-white/20 hover:bg-white/20 hover:translate-x-1 `}>
+          {/* <Link to="/employee/settings" onClick={() => { setOpenSidebar(false) }} className={`${pathname=="/employee/settings" && "bg-white/20"} flex items-center gap-3 p-3 rounded-lg cursor-pointer transition-all hover:bg-white/20 hover:bg-white/20 hover:translate-x-1 `}>
             <FaCog /> Settings
-          </Link>
+          </Link> */}
                     <Link to="/employee/profile" onClick={() => { setOpenSidebar(false) }} className={`${pathname=="/employee/profile" && "bg-white/20"} flex items-center gap-3 p-3 rounded-lg cursor-pointer transition-all hover:bg-white/20 hover:bg-white/20 hover:translate-x-1 `}>
             <FaUser /> Profile
           </Link>

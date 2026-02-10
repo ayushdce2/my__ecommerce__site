@@ -28,14 +28,14 @@ const App = (props) => {
 
 
       {/* HERO BANNER */}
-      <section className="max-w-7xl mx-auto w-full h-72 sm:h-96 lg:h-[450px] mt-6 overflow-hidden rounded-2xl">
+      <section className="max-w-7xl mx-auto w-full h-72 sm:h-96 lg:h-[75vh] mt-6 overflow-hidden rounded-2xl">
         
         <Banner/>
        
       </section>
 
       {/* FEATURE SLIDER */}
-      <section className="max-w-7xl mx-auto px-6 -mt-12 relative z-1 ">
+      {/* <section className="max-w-7xl mx-auto px-6 -mt-12 relative z-1 ">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {["Fast Delivery", "Premium Quality", "Secure Payment"].map(
             (item, i) => (
@@ -51,10 +51,10 @@ const App = (props) => {
             )
           )}
         </div>
-      </section>
+      </section> */}
 
    <div className='mb-5'></div>
-        <OurCategoryBanner/>
+       
 
       {/* MAIN CONTENT */}
       <section className="">
@@ -99,7 +99,7 @@ const App = (props) => {
         </div>
       </section>
 
-
+ <OurCategoryBanner/>
 
     </>
   );

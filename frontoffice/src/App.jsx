@@ -18,9 +18,10 @@ import ProductDetails from "./components/Pages/ProductDetails.jsx";
 import CartPage from "./components/Pages/CartPage.jsx";
 import CategoryPage from "./components/Pages/CategoryPage.jsx";
 import About from "./components/Pages/About.jsx";
-import Contact from "./components/Pages/Contact.jsx"
+import Contact from "./components/Pages/ContactUs.jsx"
 import HomepageCatProDynamic from "./components/SubComponent/HomepageCatProDynamic.jsx"
 import Demo from "./components/Demo.jsx";
+import ScrollToTop from "./utility/ScrollToTop.js";
 function App() {
 
     // const [isAuthenticated,setisAuthenticated]=useState(false);
@@ -34,6 +35,7 @@ function App() {
       
       <BrowserRouter>
       {/* <RefreshHandler setisAuthenticated={setisAuthenticated}/> */}
+      <ScrollToTop/>
         <Routes>
 
           {/* <Route path="*" element={<NotFound />} /> */}

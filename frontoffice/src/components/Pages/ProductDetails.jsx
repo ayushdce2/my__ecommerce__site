@@ -150,7 +150,7 @@ const similar_prod_category = product?.pcategory;
             </p>
 
             <p className="text-xl font-semibold mt-4">
-              ₹{product.pprice}
+              RMB {product.pprice}
             </p>
 
             {/* Quantity */}
@@ -218,7 +218,7 @@ const similar_prod_category = product?.pcategory;
 
                         <div className="flex items-center justify-between">
                           <span className="font-semibold text-[#fd5900]">
-                            Rs. {data.pprice}
+                            RMB {data.pprice}
                           </span>
 
                           <div className="flex gap-3 opacity-0 group-hover:opacity-100 transition">

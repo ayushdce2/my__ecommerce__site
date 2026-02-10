@@ -98,6 +98,28 @@ try {
 // console.log(products,">===============products")
   // res.status(200).json({ all_product, success:true });
 }
+const ContactFormLead = async(req,res)=>{
+  
+  // console.log(customer,items,"<===========req.body");
+
+  try{
+  
+const{customer}=req.body;
+const{name,email, phone, message}=customer;
+  // const {productId,productName,price, quantity,total}=items[0];
+  
+    const pushedData = new CustomerLeadModel({name,email, phone, productName:message});
+await pushedData.save();
+
+  res.status(201).json({ success: true, message: "We will contact Soon" });
+}catch(error){
+  console.log(error);
+res.status(500).json({ error, success:false,message:"Error" });
+}
+
+
+  
+}
 module.exports = {viewFrontOfficeProduct, viewFrontOfficeCategory,addClientLead,viewFrontOfficeBanner,
-  searchFrontOfficeProducts
+  searchFrontOfficeProducts, ContactFormLead
  };

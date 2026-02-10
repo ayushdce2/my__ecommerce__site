@@ -84,7 +84,7 @@ console.log(categoryname,"<============id");
                         
                                                 <div className="flex items-center justify-between">
                                                   <span className="font-semibold text-[#fd5900]">
-                                                    Rs. {data.pprice}
+                                                    RMB {data.pprice}
                                                   </span>
                         
                                                   <div className="flex gap-3 opacity-0 group-hover:opacity-100 transition">

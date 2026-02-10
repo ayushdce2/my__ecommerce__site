@@ -24,8 +24,10 @@ const NewArrivals = () => {
     <>
   {
   latestProduct?.length > 0 ?
-  latestProduct.filter(item => item.platest === "Yes").slice(0, 4)
-    .map(item => (
+  latestProduct.filter(item => item.platest === "Yes").slice(0, 7)
+    .map((item,index) =>{
+
+    return (<>
                     <Link to={`/product/${item._id}`}
                       
                       className="bg-[#0B1F33] rounded-xl shadow hover:shadow-xl transition hover:-translate-y-1 group p-2"
@@ -46,7 +48,7 @@ const NewArrivals = () => {
 
                         <div className="flex items-center justify-between">
                           <span className="font-semibold text-[#fd5900]">
-                            Rs. {item.pprice}
+                            RMB {item.pprice}
                           </span>
 
                           <div className="flex gap-3 opacity-0 group-hover:opacity-100 transition">
@@ -60,7 +62,17 @@ const NewArrivals = () => {
                         </div>
                       </div>
                     </Link>
-    )) :(
+                    {(index === 6) && (
+                                          <div className=" bg-[#0B1F33] rounded-xl shadow hover:shadow-xl transition hover:-translate-y-1 group p-2">
+                                          <Link to={"/mainCategory/latest_product"} className='flex items-center justify-center h-full text-[#fd5900] hover:text-[#fd5900]/90 text-lg' >
+                                                         
+                                                         
+                                          View All
+                                        </Link>
+                                        </div>
+                                      )} 
+    </>)} 
+  ) :(
         <p>No Data Found</p>
     )
 }

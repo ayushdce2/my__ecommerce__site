@@ -15,7 +15,7 @@ const OurCategoryBanner = () => {
     // console.log(allCategories,"<===============category allCategories")
   return (<>
   
-  <section className=" py-16 ">
+  <section className=" pt-5 pb-16 ">
       <div className="max-w-7xl mx-auto px-6">
 
         {/* SECTION TITLE */}
@@ -39,7 +39,7 @@ const OurCategoryBanner = () => {
               </div>
               <p className='text-3xl text-gray-100 font-bold relative z-20  rounded-xl p-2 headingfont'>{data.categoryname}</p>
               {/* IMAGE PLACEHOLDER */}
-              <div className="absolute z-0 inset-0 bg-cover" style={{ backgroundImage: `url(${data.pimage})` }}/>
+              <div className="absolute z-0 inset-0 bg-[length:100%_100%] bg-no-repeat bg-center" style={{ backgroundImage: `url(${data.pimage})` }}/>
 
               {/* HOVER OVERLAY */}
               <div className="absolute inset-0 bg-[#0B1F33]/0 group-hover:bg-[#0B1F33]/50 transition-all duration-1000  ease-in-out flex items-center justify-center z-30">

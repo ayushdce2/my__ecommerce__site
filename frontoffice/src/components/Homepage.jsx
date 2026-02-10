@@ -13,6 +13,7 @@ import About from "./Pages/About";
 import OrderGuide from "./Pages/OrderGuide";
 import PrivacyPolicy from "./Pages/PrivacyPolicy";
 import FAQ from "./Pages/Faq";
+import ContactUs from "./Pages/ContactUs";
 
 const Homepage = () => {
 
@@ -50,6 +51,9 @@ const Homepage = () => {
       <Route path="/orderguide" element={<OrderGuide/>} />
       <Route path="/privacypolicy" element={<PrivacyPolicy/>} />
       <Route path="/faq" element={<FAQ/>} />
+      <Route path="/contact" element={<ContactUs/>} />
+
+      
       
       
 

@@ -28,7 +28,7 @@ if(loading){
         loading ? <p>Loading</p> :
         allBanner.length == 0 ? <p>No Banner Found</p> : allBanner?.map((data,index)=>{
         return(<SwiperSlide>
-        <div className="h-[70vh]  flex items-center justify-center ">
+        <div className="h-[75vh]  flex items-center justify-center ">
           <img src={data.pimage} className='object-cover w-full h-full' loading="lazy"/>
         </div>
       </SwiperSlide>)

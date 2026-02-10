@@ -137,7 +137,7 @@ console.log(res.data,"<================res.data")
                   <td className="px-4 py-3">{lead.quantity}</td>
 
                   <td className="px-4 py-3">
-                    Rs. {lead.price}
+                    RMB {lead.price}
                   </td>
 
                   <td className="px-4 py-3 text-gray-400">

@@ -22,7 +22,7 @@ const AllProducts = () => {
     <>
     
                         {
-                            productDetails && productDetails?.all_product?.slice(0, 7).map((data,index)=>{
+                            productDetails && productDetails?.all_product?.slice(0, 15).map((data,index)=>{
                                 return(
                                     <>
                                     <Link to={`/product/${data._id}`}
@@ -45,7 +45,7 @@ const AllProducts = () => {
 
                         <div className="flex items-center justify-between">
                           <span className="font-semibold text-[#fd5900]">
-                            Rs. {data.pprice}
+                            RMB {data.pprice}
                           </span>
 
                           <div className="flex gap-3 opacity-0 group-hover:opacity-100 transition">
@@ -59,7 +59,7 @@ const AllProducts = () => {
                         </div>
                       </div>
                     </Link>       
-                    {(index === 6) && (
+                    {(index === 14) && (
                       <div className=" bg-[#0B1F33] rounded-xl shadow hover:shadow-xl transition hover:-translate-y-1 group p-2">
                       <Link to={"/mainCategory/all_product"} className='flex items-center justify-center h-full text-[#fd5900] hover:text-[#fd5900]/90 text-lg' >
                                      

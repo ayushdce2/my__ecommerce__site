@@ -38,7 +38,7 @@ const AdminHome = () => {
               {/* Content */}
               <div className={`${openSidebar==true ? "opacity-30 pointer-events-none":"pointer-events-auto"} p-6 space-y-6  h-[calc(100vh-4.5rem)] overflow-auto `}>
     <Routes>
-                            <Route path={"/"} element={<Dashboard />}></Route>
+                            <Route path={"/"} element={<Profile />}></Route>
                             <Route path={"/profile"} element={<Profile />}></Route>
                             <Route path={"/settings"} element={<Settings />}></Route>
                             <Route path={"/addItem"} element={<AddItem/>}></Route>
