@@ -14,6 +14,8 @@ import NewArrivals from './SubComponent/NewArrivals';
 
 import CategorySidebar from "./SubComponent/CategorySidebar";
 import HomepageCategoryProducts from "./SubComponent/HomepageCategoryProducts";
+import FormHomepage from './SubComponent/FormHomepage';
+import AskQuotation from './SubComponent/AskQuotation';
 
 
 const App = (props) => {
@@ -62,10 +64,11 @@ const App = (props) => {
         <div className='md:max-w-7xl mx-auto px-6 py-16 flex justify-between items-start gap-6 '>
         {/* SIDEBAR */}
         {/* {col-span-12 md:col-span-3} */}
-        <aside className={`hidden md:z-0 md:block md:relative  md:w-[22%] bg-[#0B1F33] text-gray-300 rounded-xl shadow p-6 space-y-4`}>
+        <aside className={`hidden md:z-0 md:block md:relative  md:w-[22%]  space-y-4`}>
           
           <CategorySidebar sidebar={props.sidebar}/>
-          
+          <FormHomepage/>
+          <AskQuotation/>
 
           {/* <div className="bg-gradient-to-r from-indigo-500 to-blue-500 text-white rounded-xl p-4 mt-6">
             <h4 className="font-semibold mb-1">Summer Sale Banner</h4>

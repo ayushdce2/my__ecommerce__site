@@ -26,7 +26,7 @@ const CategorySidebar = (props) => {
     }
       // console.log(allCategories[0]?._id,"allCategories");
   return (
-    <>
+    <><div className='bg-[#0B1F33] text-gray-300 rounded-xl shadow p-6'>
     <h3 className="font-semibold text-lg mb-3 headingfont relative">
       <span>All Categories</span>
 <IoCloseSharp  className="text-3xl text-gray-800 rounded absolute top-0 right-[-2.7rem]  md:hidden bg-gray-300" onClick={handleSidebar}/>
@@ -54,6 +54,7 @@ const CategorySidebar = (props) => {
 
 
 
+         </div>
          </div>
     </>
     
