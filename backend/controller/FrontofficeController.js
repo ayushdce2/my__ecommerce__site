@@ -105,10 +105,10 @@ const ContactFormLead = async(req,res)=>{
   try{
   
 const{customer}=req.body;
-const{name,email, phone, message}=customer;
+const{name,email, phone, message,address}=customer;
   // const {productId,productName,price, quantity,total}=items[0];
   
-    const pushedData = new CustomerLeadModel({name,email, phone, productName:message});
+    const pushedData = new CustomerLeadModel({name,email, phone, productName:message,address});
 await pushedData.save();
 
   res.status(201).json({ success: true, message: "We will contact Soon" });

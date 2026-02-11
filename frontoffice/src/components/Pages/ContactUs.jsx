@@ -7,6 +7,7 @@ const ContactUs = () => {
     email: "",
     phone: "",
     message: "",
+    address:"via ContactUs "
   });
 
   const [loading, setLoading] = useState(false);

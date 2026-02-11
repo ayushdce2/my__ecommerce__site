@@ -23,7 +23,7 @@ const AskQuotation = () => {
           </p>
 
           <span
-            className="mt-2 inline-block bg-orange-500 
+            className="mt-2 inline-block bg-[#f75002] 
                        group-hover:bg-orange-600 
                        text-white px-5 py-2 rounded-lg 
                        font-medium transition duration-300"
