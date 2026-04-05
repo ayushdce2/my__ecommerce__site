@@ -37,7 +37,8 @@ const useLogin = () => {
                 
                 setTimeout(() => {
                     userRole==="employee" && navigate("/employee");
-                    userRole==="admin" && navigate("/admin");                                        
+                    userRole==="admin" && navigate("/admin");
+                    userRole==="vendor" && navigate("/vendor");                                        
                 }, 1000);
             }
 

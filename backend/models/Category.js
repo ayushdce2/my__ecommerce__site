@@ -30,6 +30,9 @@ const CategorySchema = new Schema({
   imgPublicId: {
     type: String,
   },
+    userID: {
+    type: String,
+  }
  
 },{
   timestamps:true

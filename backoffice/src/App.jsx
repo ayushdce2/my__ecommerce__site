@@ -6,7 +6,7 @@ import {BrowserRouter, Routes, Route, Navigate, Router} from "react-router-dom";
 import RefreshHandler from './utility/RefreshHandler.jsx';
 import {UserRolePermission} from "./utility/UserRolePermission.js";
 import NotFound from "./utility/NotFound"
-// import HrHome from "./hr/HrHome.jsx";
+import VendorHome from "./vendor/pages/VendorHome.jsx";
 import AdminHome from "./admin/pages/AdminHome.jsx";
 import {UserDetailsProvider} from "./utility/UserDetailsContext.jsx";
 import {AppThemeProvider} from "./utility/ThemeContext.jsx";
@@ -38,6 +38,7 @@ function App() {
           
           <Route path={"/employee/*"} element={<PrivateRoute element={<UserDetailsProvider><UserRolePermission roles={["employee"]}><AppThemeProvider><EmployeeHome/></AppThemeProvider></UserRolePermission></UserDetailsProvider>}/>}></Route>
           <Route path={"/admin/*"} element={<PrivateRoute element={<UserDetailsProvider><UserRolePermission roles={["admin"]}><AppThemeProvider><AdminHome/></AppThemeProvider></UserRolePermission></UserDetailsProvider>}/>}></Route>
+          <Route path={"/vendor/*"} element={<PrivateRoute element={<UserDetailsProvider><UserRolePermission roles={["vendor"]}><AppThemeProvider><VendorHome/></AppThemeProvider></UserRolePermission></UserDetailsProvider>}/>}></Route>
     
   
         </Routes>

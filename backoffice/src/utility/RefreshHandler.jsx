@@ -20,7 +20,8 @@ function RefreshHandler({setisAuthenticated}) {
                 location.pathname === "/signup" 
             ){
                 userRole==="employee" && navigate("/employee",{replace:false});
-                userRole==="admin" && navigate("/admin",{replace:false});                
+                userRole==="admin" && navigate("/admin",{replace:false});
+                userRole==="vendor" && navigate("/vendor",{replace:false});                
             }
            
         }else{

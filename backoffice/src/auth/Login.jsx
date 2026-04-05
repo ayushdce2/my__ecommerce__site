@@ -24,9 +24,9 @@ if(loadingserver){
           <div className="bg-blue-400 text-white p-4 rounded-full mb-3">
             <FaUserTie size={28} />
           </div>
-          <h1 className="text-2xl font-bold text-gray-800 headingfont">My Shop SignIn</h1>
+          <h1 className="text-2xl font-bold text-gray-800 headingfont">WholeSalio <span className='font-normal'>SignIn</span></h1>
           <p className="text-sm text-gray-500">
-            Welcome! Login Here
+            Welcome! 
           </p>
         </div>
 

@@ -17,6 +17,8 @@ const AuthRouter = require("./routes/AuthRouter.js");
 app.use("/api/auth",AuthRouter);
 const EmpRouter = require("./routes/EmpRouter.js");
 app.use("/api/employee",EmpRouter);
+const VendorRouter = require("./routes/VendorRouter.js");
+app.use("/api/vendor",VendorRouter);
 const AdminRouter = require("./routes/AdminRouter.js");
 app.use("/api/admin",AdminRouter);
 // frontoffice
