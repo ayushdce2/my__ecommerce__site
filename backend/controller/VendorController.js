@@ -10,7 +10,7 @@ const addProductfunction = async (req, res) => {
     try {
         // console.log(req.body,"req.body");
         // console.log(req.user,"req.user")
-        const {email,userRole} = req.user;
+        const {email,userRole,_id} = req.user;
         let { pname, pprice, categoryID, pstock, pdescription, pimage,platest,pcategory,imgPublicId } = req.body;
         console.log(pimage,"<=========pimage")
         // console.log(name, email, password, userRole,"signup Controller");
@@ -33,8 +33,30 @@ const addProductfunction = async (req, res) => {
         if (existingProduct) {
             return res.status(409).json({ success: false, message: 'Product already exists' });
         }
-        console.log(existingProduct,"existingProduct")
-        const product = new ProductModel({ pname, pprice, pcategory:categoryname, category:categoryID, pstock, pdescription, pimage,imgPublicId, email,platest });
+        console.log(existingProduct,"existingProduct");
+
+        // category limit 4 starts
+          const total_categories_used = await ProductModel.distinct("category", {
+  userID: req.user._id
+});
+
+number_of_categories_used = total_categories_used.length;
+
+
+// check if category already exists
+const alreadyExists = total_categories_used.some(
+  (cat) => cat.toString() === categoryID
+);
+
+console.log(number_of_categories_used,"<======total_categories_used",total_categories_used,"categoryID=======>",categoryID,"alreadyExists====>",alreadyExists);
+
+if (number_of_categories_used >= 4 && !alreadyExists) {
+  return res.status(409).json({ message: "Cannot add more than 4 categories", success: false  });
+}
+
+// category limits 4 end
+
+        const product = new ProductModel({ pname, pprice, pcategory:categoryname, category:categoryID, pstock, pdescription, pimage,imgPublicId, email,platest,userID:_id });
         // const image = await Image.create(req.body);
         // user.password = await bcrypt.hash(password, 10);
         await product.save();
@@ -47,12 +69,14 @@ const addProductfunction = async (req, res) => {
 
 const ViewAllProducts = async (req, res) => {
     try{
+      const {_id} =req.user;
 console.log(req.query,"req.body <==========",req.body);
 const { page, limit, search, category, sortBy, order } = req.query;
 
   const filter = {};
   if (search) filter.pname = { $regex: search, $options: "i" };
   if (category && category !== "All") filter.pcategory = category;
+  filter.userID = _id;
 
   const sort = {};
   if (sortBy){ sort[sortBy] = order === "desc" ? -1 : 1;}else {
@@ -65,8 +89,14 @@ const { page, limit, search, category, sortBy, order } = req.query;
     .sort(sort)
     .skip((page - 1) * limit)
     .limit(Number(limit));
-// console.log(products,">===============products")
-  res.json({ data: products, total });
+console.log(_id,">===============_id")
+const total_categories_used = await ProductModel.distinct("category", {
+  userID: req.user._id
+});
+
+number_of_categories_used = total_categories_used.length;
+// console.log(number_of_categories_used,"<======total_categories_used")
+  res.json({ data: products, total, number_of_categories_used:number_of_categories_used });
 // const {email,_id}= req.user;
 //     try{
        
@@ -86,18 +116,39 @@ const { page, limit, search, category, sortBy, order } = req.query;
 
 const UpdateProduct = async (req, res) => {
   console.log(req.body)
-          const { pname, pprice, pcategory, pstock, pdescription, pimage,oldImgPublicId, imgPublicId } = req.body;
+          const { pname, pprice, pcategory, pstock, pdescription, pimage,oldImgPublicId, imgPublicId , category} = req.body;
   try{
 
 if (oldImgPublicId && oldImgPublicId !== imgPublicId) {
       await cloudinary.uploader.destroy(oldImgPublicId);
     }
 
+const updateData = {pname, pprice, pcategory, pstock, pdescription, pimage,oldImgPublicId, imgPublicId , category:category };
+
+  const total_categories_used = await ProductModel.distinct("category", {
+  userID: req.user._id
+});
+
+number_of_categories_used = total_categories_used.length;
+console.log(number_of_categories_used,"<======total_categories_used",total_categories_used,"categoryID=======>",category);
+
+// check if category already exists
+const alreadyExists = total_categories_used.some(
+  (cat) => cat.toString() === category
+);
+
+if (number_of_categories_used >= 4 && !alreadyExists) {
+  return res.status(403).json({ message: "Cannot add more than 4 categories", success: false  });
+}
+
 const product = await ProductModel.findByIdAndUpdate(
     req.params.id,
-    req.body,
+    // req.body,
+    updateData,
     { new: true }
   );
+
+
   res.status(200).json({message: 'Updated Successfully', success: true,product});
 }catch (error) {
         // console.error(error.errorResponse.codeName,"<============================error");
@@ -148,6 +199,7 @@ const addCategoryfunction = async (req, res) => {
 
 const viewCategoryfunction = async (req,res)=>{
   try{
+    const {_id} = req.user;
 console.log(req.user,"req.body <==========",req.body);
 // const { page, limit, search, category, sortBy, order } = req.query;
 
@@ -163,6 +215,7 @@ console.log(req.user,"req.body <==========",req.body);
 
 const viewMainCategoryfunction = async (req,res)=>{
 // console.log(req.body,"<===req.body");
+const {_id} = req.user;
 try {
     const {
       search = "",
@@ -176,6 +229,7 @@ try {
     // Build filter query
     const filter = {
       categoryname: { $regex: search, $options: "i" },
+      userID: _id
     };
     if (status) filter.status = status;
 
@@ -205,7 +259,7 @@ console.log(sortField,"<============================>",sortOrder)
 const updateMainCategoryfunction =async(req,res)=>{
   // console.log(req.params.id,"<========req.params.id")
   // console.log(req.body,"<==========req.body,")
-  const {name, status, priority, desc,imgPublicId, pimage, oldImgPublicId}=req.body;
+  const {name,oldCatName, status, priority, desc,imgPublicId, pimage, oldImgPublicId}=req.body;
 try{
 
   // Delete old image from Cloudinary if public_id changed
@@ -219,11 +273,21 @@ try{
     {categoryname:name, status:status, catpriority:priority, description:desc, imgPublicId:imgPublicId,pimage:pimage},
     { new: true }
   );
+
+  if(oldCatName != name){
+    console.log("category name changed");
+    const product = await ProductModel.updateMany(
+  { pcategory: oldCatName },        // filter
+  { $set: { pcategory: name } } // update
+);
+
+  }
   res.json(updated);
 } catch (error) {
         console.error(error);
         res.status(500).json({ message: 'Internal Server Error', success: false,error });
     }
+      console.log(oldCatName,"hi AYUSHSHSHHSHSHS",name)
 }
 
 const deleteMainCategoryfunction =async (req,res)=>{

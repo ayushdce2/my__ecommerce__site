@@ -18,7 +18,7 @@ const useViewCategory = () => {
   setApiLoading(true)
 
             try {
-                const response = await API.get("employee/product/category/view", headers);
+                const response = await API.get("vendor/product/category/view", headers);
                 const data = response.data;
                 handleSuccess(data.message);
                 

@@ -120,7 +120,7 @@ const Footer = () => {
             © 2026 WholeSalio. All rights reserved.
           </p>
           <p className="text-slate-500 mt-2 md:mt-0">
-            Designed with ❤️ by Advik Techbeat
+            Developed with ❤️ by <Link to={"https://www.linkedin.com/in/ayushdce2/"} target='_blank' className='text-gray-300'>Ayush</Link>
           </p>
         </div>
       </div>

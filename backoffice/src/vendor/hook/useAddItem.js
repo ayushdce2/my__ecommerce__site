@@ -79,7 +79,7 @@ const useAddItem = () => {
   product.imgPublicId= cloud.public_id
 
             try {
-                const response = await API.post("employee/product/add" ,product, headers);
+                const response = await API.post("vendor/product/add" ,product, headers);
                 const data = response.data;
                 handleSuccess(data.message);
                 

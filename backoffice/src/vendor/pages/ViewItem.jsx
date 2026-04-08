@@ -41,6 +41,8 @@ const ViewItem = () => {
 
   const totalPages = Math.ceil(total / LIMIT);
 
+  const [no_of_category, setNo_of_category] = useState(0);
+
   useEffect(() => {
     fetchProducts();
   }, [page, search, category, priceSort, stockSort]);
@@ -77,7 +79,7 @@ const headers ={
 
 
 const res = await API.get(
-  `employee/product/view?${params}`,
+  `vendor/product/view?${params}`,
   headers
 );
 const data = res.data;
@@ -87,8 +89,9 @@ const data = res.data;
     setProducts(data.data);
     setTotal(data.total);
     setLoading(false);
-      setApiLoading(false)
-    console.log(products,"<==============products")
+      setApiLoading(false);
+      setNo_of_category(data.number_of_categories_used)
+    // console.log(products,"<==============products",data.number_of_categories_used)
   };
 
   /* ---------------- EDIT ---------------- */
@@ -137,7 +140,7 @@ const data = res.data;
     form.oldImgPublicId=oldImgPublicId;
 
   const updateProdStatus = await  API.put(
-  `employee/product/update/${editingId}`,form,
+  `vendor/product/update/${editingId}`,form,
   headers
 );
 
@@ -151,10 +154,14 @@ const data = res.data;
       setApiLoading(false)
     }catch(error){
       console.log(error,"error")
-      error.status==400 && handleError(error.response.data.error.details[0].message)
+      error.status==400 && handleError(error.response.data.error.details[0].message) 
+      error.status==403 && handleError(error.response.data.message)
       error.status==409 && handleError(error.response.data.message);
       error.status==500 && handleError(error.response.data.error.codeName);
         setApiLoading(false)
+    }
+    finally{
+      setApiLoading(false)
     }
   }
 
@@ -165,7 +172,7 @@ const data = res.data;
 
 
       const productDeleteStatus = await  API.delete(
-  `employee/product/delete/${id}`,
+  `vendor/product/delete/${id}`,
   headers
 )
 console.log(productDeleteStatus,"productDeleteStatus")
@@ -175,7 +182,7 @@ console.log(productDeleteStatus,"productDeleteStatus")
 
   return (
     <div className="p-6 text-white">
-      <h1 className="text-2xl font-semibold mb-4">View Products</h1>
+      <h1 className="text-2xl font-semibold mb-4">View Products | Category Used : {no_of_category}</h1>
 
       {/* Filters */}
       <div className="grid grid-cols-1 md:grid-cols-6 gap-4 mb-6">
@@ -386,18 +393,27 @@ console.log(productDeleteStatus,"productDeleteStatus")
               <div className="flex flex-col mb-4 basis-2/5">
                 <label>Category</label>
               <select
-          className="bg-slate-800 px-4 py-2 rounded"
-          value={form.pcategory}
+          className="bg-slate-800 px-4 py-2 rounded "
+          value={form.category ? form.category : form.categoryID}
+
           onChange={(e) => {
-            setForm({ ...form, "pcategory": e.target.value });
+            const selected = allCategories.find(
+              (cat) => cat._id === e.target.value
+            );
+            console.log(form.category,"<====form.category")
+            setForm({ ...form, pcategory: selected.categoryname , "category": selected._id });
+
+            // setForm({ ...form, "pcategory": e.target.value, "category": e.target.category__id });
 
           }}
-        >
+        >          
+        {/* {console.log(form,"<===========form")} */}
           <option>Choose</option>
+          {/* {console.log(allCategories,"<======allCategories")} */}
           {
             allCategories && allCategories.map((data,index)=>{
               return <>
-              <option>{data.categoryname}</option>
+              <option value={data._id}>{data.categoryname}</option>
                 
               </>
             })

@@ -40,7 +40,7 @@ const ViewCategory=()=> {
   page,
   limit,
 }).toString();
-      const { data } = await API.get(`/employee/main/category/view?${params}`, headers);
+      const { data } = await API.get(`/vendor/main/category/view?${params}`, headers);
     //   console.log(data,"<==========data")
       setCategories(data.categories);
       setTotal(data.total);
@@ -60,7 +60,7 @@ const ViewCategory=()=> {
     if (!window.confirm("Are you sure to delete this category?")) return;
       setApiLoading(true)
     try {
-      await API.delete(`/employee/main/category/delete/${id}`,headers);
+      await API.delete(`/vendor/main/category/delete/${id}`,headers);
       fetchCategories();
         setApiLoading(false)
     } catch (err) {
@@ -74,12 +74,14 @@ const ViewCategory=()=> {
     setEditData(cat);
     setOldImgPublicId(cat.imgPublicId)
     setForm({ 
-      name: cat.categoryname, 
+      name: cat.categoryname,
+      oldCatName:cat.categoryname, 
       status: cat.status, 
       priority: cat.catpriority,
       desc:cat.description,
       imgPublicId:cat.imgPublicId,
       pimage:cat.pimage }); 
+      
     
   };
 
@@ -114,7 +116,7 @@ const ViewCategory=()=> {
     form.oldImgPublicId=oldImgPublicId;
 
     // console.log(form,"<========form")
-      await API.put(`/employee/main/category/update/${editData._id}`, form,headers);
+      await API.put(`/vendor/main/category/update/${editData._id}`, form,headers);
       
       closeEdit();
       fetchCategories();
@@ -191,7 +193,7 @@ const ViewCategory=()=> {
                   <th className="border border-slate-600 px-4 py-2 text-left">Description</th>
                   <th className="border border-slate-600 px-4 py-2 text-left">Priority</th>
                   <th className="border border-slate-600 px-4 py-2 text-left">Image</th>
-                  <th className="border border-slate-600 px-4 py-2 text-left">Actions</th>
+                  {/* <th className="border border-slate-600 px-4 py-2 text-left">Actions</th> */}
                 </tr>
               </thead>
               <tbody>
@@ -204,7 +206,7 @@ const ViewCategory=()=> {
                     
                     <td className="border border-slate-600 px-4 py-2">{cat.catpriority}</td>
                     <td className="border border-slate-600 px-4 py-2"><img src={cat.pimage} className="w-5 h-5 mx-auto" /></td>
-                    <td className="border border-slate-600 px-4 py-2 space-x-2">
+                    {/* <td className="border border-slate-600 px-4 py-2 space-x-2">
                       <button
                         className="bg-blue-600 hover:bg-blue-700 px-3 py-1 rounded"
                         onClick={() => openEdit(cat)}
@@ -217,7 +219,7 @@ const ViewCategory=()=> {
                       >
                         Delete
                       </button>
-                    </td>
+                    </td> */}
                   </tr>
                 ))}
               </tbody>

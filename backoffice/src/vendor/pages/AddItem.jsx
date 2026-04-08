@@ -8,7 +8,7 @@ const AddItem = () => {
     if(loading){
       return "Categories are loading"
     }
-    console.log(allCategories,"<===========allCategories")
+    // console.log(allCategories,"<===========allCategories")
 
   return (
     <>

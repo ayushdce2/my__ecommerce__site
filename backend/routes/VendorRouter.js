@@ -11,29 +11,31 @@ const {addProductfunction,ViewAllProducts,UpdateProduct ,DeleteProduct,
 
 const router = require("express").Router();
 
-router.post("/product/category/add",isUserAuthenticated, isUserAuthorize("vendor"), isCategoryDataValid,addCategoryfunction);
-
+router.post("/product/category/add",isUserAuthenticated, isUserAuthorize("vendor"), isCategoryDataValid,addCategoryfunction);//category on vendor dashboards
+router.get("/main/category/view",isUserAuthenticated, isUserAuthorize("vendor"),viewMainCategoryfunction);//category on vendor dashboards
+router.put("/main/category/update/:id",isUserAuthenticated, isUserAuthorize("vendor"),updateMainCategoryfunction);//category on vendor dashboards
+router.delete("/main/category/delete/:id",isUserAuthenticated, isUserAuthorize("vendor"),deleteMainCategoryfunction);//view category on vendor dashboards
+router.get("/product/category/view",isUserAuthenticated, isUserAuthorize("vendor"),viewCategoryfunction);//add product on vendor dashboards
+router.post("/product/add",isUserAuthenticated, isUserAuthorize("vendor"), isProductDataValid,addProductfunction);//add product on vend dashboard
+router.get("/product/view",isUserAuthenticated, isUserAuthorize("vendor"),ViewAllProducts);//view product
+router.put("/product/update/:id",isUserAuthenticated, isUserAuthorize("vendor"),isProductDataValid,UpdateProduct);//update product
+router.delete("/product/delete/:id",isUserAuthenticated, isUserAuthorize("vendor"),DeleteProduct);//delete product
 // Done this point
 
 
 
-router.post("/product/add",isUserAuthenticated, isUserAuthorize("vendor"), isProductDataValid,addProductfunction);
-router.get("/product/view",isUserAuthenticated, isUserAuthorize("vendor"),ViewAllProducts);
-router.put("/product/update/:id",isUserAuthenticated, isUserAuthorize("vendor"),isProductDataValid,UpdateProduct);
-router.delete("/product/delete/:id",isUserAuthenticated, isUserAuthorize("vendor"),DeleteProduct);
+
 
 //
 
 
-router.get("/product/category/view",isUserAuthenticated, isUserAuthorize("vendor"),viewCategoryfunction);
-router.get("/main/category/view",isUserAuthenticated, isUserAuthorize("vendor"),viewMainCategoryfunction);
-router.put("/main/category/update/:id",isUserAuthenticated, isUserAuthorize("vendor"),updateMainCategoryfunction);
-router.delete("/main/category/delete/:id",isUserAuthenticated, isUserAuthorize("vendor"),deleteMainCategoryfunction);
 
-router.post("/banner/add",isUserAuthenticated, isUserAuthorize("vendor"),AddBannerFunc);
-router.get("/banner/view",isUserAuthenticated, isUserAuthorize("vendor"),ViewBannerFunc);
-router.put("/banner/update/:id",isUserAuthenticated, isUserAuthorize("vendor"),EditBannerFunc);
-router.delete("/banner/delete/:id",isUserAuthenticated, isUserAuthorize("vendor"),DeleteBannerFunc);
+
+
+// router.post("/banner/add",isUserAuthenticated, isUserAuthorize("vendor"),AddBannerFunc);
+// router.get("/banner/view",isUserAuthenticated, isUserAuthorize("vendor"),ViewBannerFunc);
+// router.put("/banner/update/:id",isUserAuthenticated, isUserAuthorize("vendor"),EditBannerFunc);
+// router.delete("/banner/delete/:id",isUserAuthenticated, isUserAuthorize("vendor"),DeleteBannerFunc);
 
 
 // addProductfunction
