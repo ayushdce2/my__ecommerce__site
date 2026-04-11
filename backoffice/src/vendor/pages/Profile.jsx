@@ -6,6 +6,7 @@ const Profile = () => {
     const { userProfileDetails } = useUserDetails();
     console.log(userProfileDetails,"userProfileDetails")
     const {handleChange, handleSubmit, profile} = useProfile({userProfileDetails});
+    // console.log(profile,"<===profile",profile.name,userProfileDetails);
   return (
     <>
     <div className='p-1 rounded bg-gradient-to-r from-blue-400 to-indigo-200 text-white dark:from-blue-600 dark:to-indigo-400'>
@@ -97,6 +98,7 @@ const Profile = () => {
                 type="tel"
                 name="phone"
                 onChange={handleChange}
+                value={profile.phone_number}
                 placeholder="+1 234 567 890"
                 className="w-full rounded-lg border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-900 px-4 py-2 text-slate-800 dark:text-white focus:ring-2 focus:ring-blue-500"
               />

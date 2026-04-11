@@ -7,7 +7,7 @@ const useSignup = () => {
 
     const navigate = useNavigate();
 
-    const [signupAllData, setSignupAllData]=useState({email:"",password:""});
+    const [signupAllData, setSignupAllData]=useState({email:"",password:"",userRole:"vendor"});
 
     const signupFormData = (e)=>{
         setSignupAllData((prev)=>({...prev,[e.target.name]:e.target.value}));
@@ -16,7 +16,7 @@ const useSignup = () => {
 
     const signupSubmit = async (e)=>{
         e.preventDefault();
-        if(signupAllData.name==="" || signupAllData.email==="" || signupAllData.password==="" ){
+        if(signupAllData.name==="" || signupAllData.email==="" || signupAllData.password==="" || signupAllData.phone_number==="" ){
             return handleError("All fields required")
          }
         // console.log(signupAllData);
@@ -40,7 +40,7 @@ const useSignup = () => {
         
     }
     
-    return {signupFormData,signupSubmit}
+    return {signupFormData,signupSubmit, signupAllData}
 }
 
 export default useSignup

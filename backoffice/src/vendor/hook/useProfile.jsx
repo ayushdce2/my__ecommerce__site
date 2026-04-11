@@ -6,7 +6,7 @@ const useProfile = ({userProfileDetails}) => {
     name: userProfileDetails[0].name,
     email: userProfileDetails[0].email,
     role: userProfileDetails[0].userRole,
-    phone: "",
+    phone_number: userProfileDetails[0].phone_number,
     address: "",
     avatar: null,
   });

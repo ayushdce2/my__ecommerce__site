@@ -5,7 +5,7 @@ import useSignUp from "./hook/useSignUp.jsx";
 
 const Signup = () => {
 
-        const {signupFormData,signupSubmit} = useSignUp();
+        const {signupFormData,signupSubmit,signupAllData} = useSignUp();
 
   return (
     <>
@@ -61,6 +61,22 @@ const Signup = () => {
                       />
                     </div>
                   </div>
+                  {/* Phone no */}
+                  <div>
+                    <label className="block text-sm font-bold text-gray-700 mb-1">
+                      Phone No.
+                    </label>
+                    <div className="flex items-center border border-gray-400 rounded-lg px-3 focus-within:ring-2 focus-within:ring-blue-300">
+                      <FaEnvelope className="text-gray-400" />
+                      <input
+                        type="tel"
+                        placeholder="123-456-7890"
+                        className="w-full px-3 py-2 focus:outline-none text-gray-500 "
+                        onChange={signupFormData}
+                        name='phone_number'
+                      />
+                    </div>
+                  </div>
         
                   {/* Password */}
                   <div>
@@ -90,6 +106,7 @@ const Signup = () => {
                         className="w-full px-3 py-2 focus:outline-none"
                         onChange={signupFormData}
                         name="userRole"
+                        value={signupAllData.userRole}
                       >
                         <option value="">Choose role here </option>
                       <option value="employee">Employee</option>

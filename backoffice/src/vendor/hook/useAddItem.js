@@ -7,6 +7,7 @@ import { useAppTheme } from "../../utility/ThemeContext";
 
 const useAddItem = () => {
   const { apiloading, setApiLoading } = useAppTheme();
+  const [CategoryInfoPopup, SetCategoryInfoPopup]=useState(false);
     const [product, setProduct] = useState({
     pname: "",
     pprice: "",
@@ -91,6 +92,15 @@ const useAddItem = () => {
                 // await refetch();
                 // console.log(finalRefetch,"finalRefetch",refetch)
                 console.log(data.status,"data.status")
+                    setProduct({
+    pname: "",
+    pprice: "",
+    categoryID: "",
+    pstock: "",
+    pdescription: "",
+    pimage: null,
+    platest:""
+  });
          setApiLoading(false)
             } catch (error) {
                 console.log(error, "error", error.status);
@@ -98,15 +108,21 @@ const useAddItem = () => {
                 error.status=="400" && handleError(error.response.data.message);
                 error.status=="403" && handleError(error.response.data.error.details[0].message);
                 error.status=="422" && handleError(error.response.data.message);
-                error.status=="409" && handleError(error.response.data.message);
+                // error.status=="409" && handleError(error.response.data.message);
                 error.status=="400" && handleError(error.response.data.error.details[0].message);
+                if(error.status=="409" & error.response.data.message === "Cannot add more than 4 categories"){
+                  handleError(error.response.data.message);
+                  SetCategoryInfoPopup(true)
+                }else if(error.status=="409" & error.response.data.message === "Product already exists"){
+                  handleError(error.response.data.message);
+                }
                   setApiLoading(false)
             }
 }
 
 
 
-  return {handleChange, handleSubmit}
+  return {handleChange, handleSubmit,product, CategoryInfoPopup, SetCategoryInfoPopup}
 }
 
 export default useAddItem
