@@ -137,7 +137,7 @@ const AddItem = () => {
         </div>
 
         {/* Description */}
-        <div className="mt-6">
+        {/* <div className="mt-6">
           <label className="block mb-1 text-sm font-medium text-slate-700 dark:text-slate-300">
             Description
           </label>
@@ -149,7 +149,51 @@ const AddItem = () => {
             className="w-full rounded-lg border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-900 px-4 py-2 text-slate-800 dark:text-white focus:ring-2 focus:ring-blue-500"
             placeholder="Product details..."
           />
-        </div>
+        </div> */}
+<div className='flex justify-between items-center mt-6'>
+        {/* Size */}
+          <div>
+            <label className="block mb-1 text-sm font-medium text-slate-700 dark:text-slate-300">
+              Size
+            </label>
+            <input
+              type="text"
+              name="psize"
+              onChange={handleChange}
+              value={product.psize}
+              className="w-full rounded-lg border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-900 px-4 py-2 text-slate-800 dark:text-white focus:ring-2 focus:ring-blue-500"
+              placeholder="e.g., Small, Large, XLarge"
+            />
+          </div>
+        {/* Color */}
+          <div>
+            <label className="block mb-1 text-sm font-medium text-slate-700 dark:text-slate-300">
+              Color
+            </label>
+            <input
+              type="text"
+              name="pcolor"
+              onChange={handleChange}
+              value={product.pcolor}
+              className="w-full rounded-lg border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-900 px-4 py-2 text-slate-800 dark:text-white focus:ring-2 focus:ring-blue-500"
+              placeholder="e.g., red, green, yellow"
+            />
+          </div>
+          {/* Size */}
+          <div>
+            <label className="block mb-1 text-sm font-medium text-slate-700 dark:text-slate-300">
+              Model No.
+            </label>
+            <input
+              type="text"
+              name="pmodel_number"
+              onChange={handleChange}
+              value={product.pmodel_number}
+              className="w-full rounded-lg border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-900 px-4 py-2 text-slate-800 dark:text-white focus:ring-2 focus:ring-blue-500"
+              placeholder="e.g., SSTG001"
+            />
+          </div>
+          </div>
 <div className='flex justify-between items-center'>
 
   {/* Image Upload */}

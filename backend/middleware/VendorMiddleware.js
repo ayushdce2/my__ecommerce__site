@@ -10,11 +10,11 @@ const isProductDataValid = (req, res, next) => {
     pprice: Joi.number().positive().precision(2).required(),
     categoryID: Joi.string().trim().required(),
     pstock: Joi.number().integer().min(0).required(),
-    pdescription: Joi.string().trim().min(1).required(),
+    // pdescription: Joi.string().trim().min(1).required(),
             
   });
 
-  const { error, value } = schema.validate({pname,pprice, categoryID, pstock, pdescription}, {
+  const { error, value } = schema.validate({pname,pprice, categoryID, pstock}, {
   abortEarly: false,
 });
 

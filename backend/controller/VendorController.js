@@ -11,7 +11,7 @@ const addProductfunction = async (req, res) => {
         // console.log(req.body,"req.body");
         // console.log(req.user,"req.user")
         const {email,userRole,_id} = req.user;
-        let { pname, pprice, categoryID, pstock, pdescription, pimage,platest,pcategory,imgPublicId } = req.body;
+        let { pname, pprice, categoryID, pstock,  pimage,platest,pcategory,imgPublicId, psize, pcolor, pmodel_number } = req.body;
         console.log(pimage,"<=========pimage")
         // console.log(name, email, password, userRole,"signup Controller");
 
@@ -56,7 +56,7 @@ if (number_of_categories_used >= 4 && !alreadyExists) {
 
 // category limits 4 end
 
-        const product = new ProductModel({ pname, pprice, pcategory:categoryname, category:categoryID, pstock, pdescription, pimage,imgPublicId, email,platest,userID:_id });
+        const product = new ProductModel({ pname, pprice, pcategory:categoryname, category:categoryID, pstock,  pimage,imgPublicId, email,platest,userID:_id, pmodel_number, pcolor, psize });
         // const image = await Image.create(req.body);
         // user.password = await bcrypt.hash(password, 10);
         await product.save();
@@ -116,14 +116,14 @@ number_of_categories_used = total_categories_used.length;
 
 const UpdateProduct = async (req, res) => {
   console.log(req.body)
-          const { pname, pprice, pcategory, pstock, pdescription, pimage,oldImgPublicId, imgPublicId , category} = req.body;
+          const { pname, pprice, pcategory, pstock, pmodel_number,pcolor,psize, pimage,oldImgPublicId, imgPublicId , category} = req.body;
   try{
 
 if (oldImgPublicId && oldImgPublicId !== imgPublicId) {
       await cloudinary.uploader.destroy(oldImgPublicId);
     }
 
-const updateData = {pname, pprice, pcategory, pstock, pdescription, pimage,oldImgPublicId, imgPublicId , category:category };
+const updateData = {pname, pprice, pcategory, pstock, pmodel_number,pcolor,psize, pimage,oldImgPublicId, imgPublicId , category:category };
 
   const total_categories_used = await ProductModel.distinct("category", {
   userID: req.user._id
@@ -136,7 +136,7 @@ console.log(number_of_categories_used,"<======total_categories_used",total_categ
 const alreadyExists = total_categories_used.some(
   (cat) => cat.toString() === category
 );
-
+console.log(number_of_categories_used, "<===number_of_categories_used",alreadyExists,"<===alreadyExists")
 if (number_of_categories_used >= 4 && !alreadyExists) {
   return res.status(403).json({ message: "Cannot add more than 4 categories", success: false  });
 }

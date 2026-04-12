@@ -73,8 +73,8 @@ const useAddItem = () => {
   
   const addProducttoDB =async()=>{
       setApiLoading(true)
-    console.log(product,"actual product")
-            console.log(product.pimage,"<=======pimage")
+    // console.log(product,"actual product")
+            // console.log(product.pimage,"<=======pimage")
   const cloud = await uploadToCloudinary(product.pimage);
   product.pimage= cloud.secure_url;
   product.imgPublicId= cloud.public_id
@@ -99,7 +99,10 @@ const useAddItem = () => {
     pstock: "",
     pdescription: "",
     pimage: null,
-    platest:""
+    platest:"",
+    pmodel_number:"",
+    pcolor:"",
+    psize: ""
   });
          setApiLoading(false)
             } catch (error) {

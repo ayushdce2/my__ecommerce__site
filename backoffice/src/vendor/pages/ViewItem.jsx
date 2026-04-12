@@ -104,11 +104,16 @@ const data = res.data;
       pprice: product.pprice,
       pstock: product.pstock,
       categoryID: product.category,
+      category: product.category,
       pdescription:product.pdescription,
       platest:product.platest,
       pcategory:product.pcategory,
       imgPublicId:product.imgPublicId,
-      pimage:product.pimage
+      pimage:product.pimage,
+      pmodel_number:product.pmodel_number ,
+      pcolor: product.pcolor,
+      psize: product.psize
+
     });
     setShowEdit(true);
   };
@@ -138,7 +143,7 @@ const data = res.data;
     form.pimage= imageUrl;
     form.imgPublicId = publicId;
     form.oldImgPublicId=oldImgPublicId;
-
+// console.log("form==============>>", form)
   const updateProdStatus = await  API.put(
   `vendor/product/update/${editingId}`,form,
   headers
@@ -252,8 +257,11 @@ console.log(productDeleteStatus,"productDeleteStatus")
               <th className="px-6 py-4 text-left">Name</th>
               <th className="px-6 py-4">Category</th>
               <th className="px-6 py-4">Price</th>
+              <th className="px-6 py-4">Model Number</th>
+              <th className="px-6 py-4">Color</th>
+              <th className="px-6 py-4">Size</th>
               <th className="px-6 py-4">Stock</th>
-              <th className="px-6 py-4">Desc</th>
+              {/* <th className="px-6 py-4">Desc</th> */}
               <th className="px-6 py-4">Latest</th>
               <th className="px-6 py-4">Image</th>
               <th className="px-6 py-4 text-right">Actions</th>
@@ -276,8 +284,11 @@ console.log(productDeleteStatus,"productDeleteStatus")
                   <td className="px-6 py-4">{p.pname}</td>
                   <td className="px-6 py-4 text-center">{p.pcategory}</td>
                   <td className="px-6 py-4 text-center">Rs. {p.pprice}</td>
+                  <td className="px-6 py-4 text-center"> {p.pmodel_number}</td>
+                  <td className="px-6 py-4 text-center"> {p.pcolor}</td>
+                  <td className="px-6 py-4 text-center"> {p.psize}</td>                                                      
                   <td className="px-6 py-4 text-center">{p.pstock}</td>
-                  <td className="px-6 py-4 text-center">{p.pdescription}</td>
+                  {/* <td className="px-6 py-4 text-center">{p.pdescription}</td> */}
                   <td className="px-6 py-4 text-center">{p.platest}</td>
                   <td className="px-6 py-4 text-center"><img src={p.pimage} className="w-8 h-8 mx-auto" /></td>
                   
@@ -366,7 +377,7 @@ console.log(productDeleteStatus,"productDeleteStatus")
               </div>
               </div>
               
-              <div>
+              {/* <div>
               <label>Description</label>
               <input
                 // key={field}
@@ -377,10 +388,37 @@ console.log(productDeleteStatus,"productDeleteStatus")
                   setForm({ ...form, "pdescription": e.target.value })
                 }
               />
+              </div> */}
+  <div>
+              <label>model number</label>
+              <input
+                // key={field}
+                placeholder="pmodel_number"
+                className="w-full bg-slate-800 px-3 py-2 rounded mb-3"
+                value={form.pmodel_number}
+                onChange={(e) =>
+                  setForm({ ...form, "pmodel_number": e.target.value })
+                }
+              />
               </div>
 
+              <div>
+              <label>color</label>
+              <input
+                // key={field}
+                placeholder="pcolor"
+                className="w-full bg-slate-800 px-3 py-2 rounded mb-3"
+                value={form.pcolor}
+                onChange={(e) =>
+                  setForm({ ...form, "pcolor": e.target.value })
+                }
+              />
+              </div>
+
+              
+
 <div className="flex gap-2">
-              <div className="basis-2/4">
+              {/* <div className="basis-2/4">
               <label>Latest</label>
               {console.log(form.platest,"<===============form.platest")}
             <select value={form.platest} className="w-full bg-slate-800 px-3 py-2 rounded mb-3" onChange={(e) =>
@@ -389,11 +427,23 @@ console.log(productDeleteStatus,"productDeleteStatus")
                 <option value="Yes">Yes</option>
                 <option value="NO">No</option>
               </select>
+              </div> */}
+              <div className="basis-2/4">
+              <label>size</label>
+              <input
+                // key={field}
+                placeholder="psize"
+                className="w-full bg-slate-800 px-4 py-[0.4rem] rounded mb-3"
+                value={form.psize}
+                onChange={(e) =>
+                  setForm({ ...form, "psize": e.target.value })
+                }
+              />
               </div>
               <div className="flex flex-col mb-4 basis-2/5">
                 <label>Category</label>
               <select
-          className="bg-slate-800 px-4 py-2 rounded "
+          className="w-full bg-slate-800 px-4 py-2 rounded mb-3"
           value={form.category ? form.category : form.categoryID}
 
           onChange={(e) => {

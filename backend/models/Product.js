@@ -22,10 +22,10 @@ const ProductSchema = new Schema({
     type: Number,
     required: true
   },
-  pdescription: {
-    type: String,
-    default: null,
-  },
+  // pdescription: {
+  //   type: String,
+  //   default: null,
+  // },
   pimage: {
     type: String,
     default: null,
@@ -49,7 +49,22 @@ const ProductSchema = new Schema({
   },
    userID: {
     type: String,
-  }
+  },
+  pmodel_number:{
+      type:String,
+
+
+    },
+    pcolor:{
+      type:String,
+
+
+    },
+    psize:{
+      type:String,
+
+
+    },
 },{
   timestamps:true
 });

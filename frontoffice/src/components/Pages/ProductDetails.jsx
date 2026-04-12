@@ -144,11 +144,28 @@ const similar_prod_category = product?.pcategory;
           {/* Details */}
           <div>
             <h1 className="text-2xl font-bold">{product.pname}</h1>
-
-            <p className="text-gray-600 dark:text-gray-300 mt-2">
-              {product.pdescription}
+<p className="text-gray-600 dark:text-gray-300 mt-2 capitalize">
+              Category: {product.pcategory}<br/>
+              {/* pstock - {product.pstock}<br/> */}
+              {/* pmodel_number - {product.pmodel_number}<br/> */}
+              {/* seller - {product.userID} */}
             </p>
-
+<div className="flex gap-2">
+            
+           {product.pcolor && (
+<p className="text-gray-600 dark:text-gray-300 mt-2 capitalize">
+                Color: {product.pcolor} ,
+            </p>
+           )}
+           {
+            product.psize && (
+<p className="text-gray-600 dark:text-gray-300 mt-2 capitalize">
+                Size: {product.psize}
+            </p>
+            )
+           } 
+            
+</div>
             <p className="text-xl font-semibold mt-4">
               RMB {product.pprice}
             </p>
