@@ -100,10 +100,11 @@ const similar_prod_category = product?.pcategory;
         price: product.pprice,
         quantity: qty,
         total: product.pprice * qty,
-        pimage:product.pimage
+        pimage:product.pimage,
+        vendor_email:product.vendor_email,
       });
     }
-
+// console.log(product,"<===productproductproduct")
     localStorage.setItem("my_cart", JSON.stringify(cart));
 
     /* ---------------- SEND TO BACKEND (FRONTEND ONLY) ---------------- */
@@ -166,10 +167,17 @@ const similar_prod_category = product?.pcategory;
            } 
             
 </div>
+ 
             <p className="text-xl font-semibold mt-4">
               RMB {product.pprice}
             </p>
-
+{
+            product.pdescription && (
+<p className="text-gray-600 dark:text-gray-300 mt-2 capitalize italic">
+                {product.pdescription}
+            </p>
+            )
+           } 
             {/* Quantity */}
             <div className="flex items-center gap-4 mt-6">
               <button

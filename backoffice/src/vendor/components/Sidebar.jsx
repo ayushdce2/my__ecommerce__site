@@ -46,9 +46,9 @@ const Sidebar = (props) => {
           {/* <Link to="" className={`flex items-center gap-3 p-3 rounded-lg cursor-pointer transition-all hover:bg-white/20 hover:bg-white/20 hover:translate-x-1 `}>
             <FaUsers /> Add Banner
           </Link> */}
-          <Link to="/vendor/addCategory" onClick={() => { setOpenSidebar(false) }} className={`${pathname=="/vendor/addCategory" && "bg-white/20"} flex items-center gap-3 p-3 rounded-lg cursor-pointer transition-all hover:bg-white/20 hover:bg-white/20 hover:translate-x-1 `}>
+          {/* <Link to="/vendor/addCategory" onClick={() => { setOpenSidebar(false) }} className={`${pathname=="/vendor/addCategory" && "bg-white/20"} flex items-center gap-3 p-3 rounded-lg cursor-pointer transition-all hover:bg-white/20 hover:bg-white/20 hover:translate-x-1 `}>
             <FaMoneyCheckAlt /> Add Category
-          </Link>
+          </Link> */}
            <Link to="/vendor/addItem" onClick={() => { setOpenSidebar(false) }} className={`${pathname=="/vendor/addItem" && "bg-white/20"} flex items-center gap-3 p-3 rounded-lg cursor-pointer transition-all hover:bg-white/20 hover:bg-white/20 hover:translate-x-1 `}>
             <FaClipboardList /> Add Product
           </Link>

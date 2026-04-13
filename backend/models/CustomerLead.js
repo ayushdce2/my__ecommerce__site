@@ -26,6 +26,12 @@ const CustomerLeadSchema = new Schema(
     price: {
       type: String,
     },
+    productId:{
+      type: String,
+    },
+    vendor_email:{
+      type: String,
+    }
   },
   {
     timestamps: true,

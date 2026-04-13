@@ -20,7 +20,7 @@ const ViewCategory=()=> {
   const [form, setForm] = useState({ name: "", status: "Active", priority: 0 });
     const [oldImgPublicId, setOldImgPublicId] = useState(null);
 
-  const limit = 5;
+  const limit = 8;
 
   const headers = {
         headers: {
@@ -128,7 +128,7 @@ const ViewCategory=()=> {
   const totalPages = Math.ceil(total / limit);
 
   return (
-    <div className="min-h-screen bg-slate-900 text-white p-6 dark">
+    <div className=" bg-slate-900 text-white  dark">
       <div className="max-w-5xl mx-auto bg-slate-800 rounded-lg p-6 shadow-lg">
         <h1 className="text-3xl font-bold mb-6">View Categories</h1>
 

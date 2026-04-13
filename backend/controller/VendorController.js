@@ -11,8 +11,9 @@ const addProductfunction = async (req, res) => {
         // console.log(req.body,"req.body");
         // console.log(req.user,"req.user")
         const {email,userRole,_id} = req.user;
-        let { pname, pprice, categoryID, pstock,  pimage,platest,pcategory,imgPublicId, psize, pcolor, pmodel_number } = req.body;
-        console.log(pimage,"<=========pimage")
+        // console.log(req.user,"<============req.user")
+        let { pname, pprice, categoryID, pstock,  pimage,platest,pcategory,imgPublicId, psize, pcolor, pmodel_number,pdescription } = req.body;
+        // console.log(pimage,"<=========pimage")
         // console.log(name, email, password, userRole,"signup Controller");
 
         // 🔹 Fetch category
@@ -56,7 +57,7 @@ if (number_of_categories_used >= 4 && !alreadyExists) {
 
 // category limits 4 end
 
-        const product = new ProductModel({ pname, pprice, pcategory:categoryname, category:categoryID, pstock,  pimage,imgPublicId, email,platest,userID:_id, pmodel_number, pcolor, psize });
+        const product = new ProductModel({ pname, pprice, pcategory:categoryname, category:categoryID, pstock,  pimage,imgPublicId, email,platest,userID:_id,vendor_email:email, pmodel_number, pcolor, psize,pdescription });
         // const image = await Image.create(req.body);
         // user.password = await bcrypt.hash(password, 10);
         await product.save();
@@ -116,14 +117,14 @@ number_of_categories_used = total_categories_used.length;
 
 const UpdateProduct = async (req, res) => {
   console.log(req.body)
-          const { pname, pprice, pcategory, pstock, pmodel_number,pcolor,psize, pimage,oldImgPublicId, imgPublicId , category} = req.body;
+          const { pname, pprice, pcategory, pstock, pmodel_number,pcolor,psize, pimage,oldImgPublicId, imgPublicId , category, pdescription} = req.body;
   try{
 
 if (oldImgPublicId && oldImgPublicId !== imgPublicId) {
       await cloudinary.uploader.destroy(oldImgPublicId);
     }
 
-const updateData = {pname, pprice, pcategory, pstock, pmodel_number,pcolor,psize, pimage,oldImgPublicId, imgPublicId , category:category };
+const updateData = {pname, pprice, pcategory, pstock, pmodel_number,pcolor,psize, pimage,oldImgPublicId, imgPublicId , category:category,pdescription };
 
   const total_categories_used = await ProductModel.distinct("category", {
   userID: req.user._id
@@ -216,6 +217,13 @@ console.log(req.user,"req.body <==========",req.body);
 const viewMainCategoryfunction = async (req,res)=>{
 // console.log(req.body,"<===req.body");
 const {_id} = req.user;
+
+ const total_categories_used = await ProductModel.distinct("category", {
+  userID: req.user._id});
+//   const used_categories_details = await CategoryModel.find({
+//   _id: { $in: total_categories_used }
+// });
+
 try {
     const {
       search = "",
@@ -229,7 +237,8 @@ try {
     // Build filter query
     const filter = {
       categoryname: { $regex: search, $options: "i" },
-      userID: _id
+      // userID: _id
+      _id: { $in: total_categories_used }
     };
     if (status) filter.status = status;
 
@@ -237,7 +246,7 @@ try {
     const sortField = sortBy === "status" ? "status" : "catpriority";
     const sortOrder = order === "desc" ? -1 : 1;
     const sortObj = { [sortField]: sortOrder };
-console.log(sortField,"<============================>",sortOrder)
+// console.log(sortField,"<============================>",sortOrder)
     const pageNum = parseInt(page);
     const limitNum = parseInt(limit);
 

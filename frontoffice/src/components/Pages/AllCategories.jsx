@@ -5,22 +5,23 @@ import { FiArrowUpRight } from "react-icons/fi";
 import Navbar from "../SubComponent/Navbar";
 import Footer from "../SubComponent/Footer";
 
-const ITEMS_PER_PAGE = 9;
+const ITEMS_PER_PAGE = 15;
 
 const AllCategories = () => {
 
   const [currentPage, setCurrentPage] = useState(1);
  const{allCategories,loading}=useOurCategoryBanner();
   console.log(allCategories,"allCategories");
+  const allCategoriesActive = allCategories?.filter(data=>data.status=="Active");
    if(loading){
         return (<div className=' h-full bg-gradient-to-b from-blue-400 to-indigo-200 text-gray-200 border-r-gray-950 p-3 flex flex-col gap-5 items-center justify-center'><img src="/images/loading.gif" className='w-[5rem]' loading="lazy"/> <p className='font-bold text-3xl text-shadow-2xs'>Loading</p></div>)
     }
-    if(allCategories.length <= 0){
+    if(allCategoriesActive.length <= 0){
       return "No Data Found"
     }
-  const totalPages = Math.ceil(allCategories.length / ITEMS_PER_PAGE);
+  const totalPages = Math.ceil(allCategoriesActive.length / ITEMS_PER_PAGE);
   const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
-  const currentCategories = allCategories.slice(
+  const currentCategories = allCategoriesActive.slice(
     startIndex,
     startIndex + ITEMS_PER_PAGE
   );

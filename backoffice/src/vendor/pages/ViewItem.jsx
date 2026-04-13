@@ -23,6 +23,7 @@ const ViewItem = () => {
   const {allCategories} = useViewCategory();
 
   const [products, setProducts] = useState([]);
+    const [viewProductsCategories, setviewProductsCategories] = useState([]);
   const [total, setTotal] = useState(0);
   const [loading, setLoading] = useState(false);
 
@@ -87,6 +88,7 @@ const data = res.data;
    
 
     setProducts(data.data);
+    viewProductsCategories.length==0 && setviewProductsCategories(data.data);
     setTotal(data.total);
     setLoading(false);
       setApiLoading(false);
@@ -210,14 +212,26 @@ console.log(productDeleteStatus,"productDeleteStatus")
           }}
         >
           <option>All</option>
-          {
+          {/* {
             allCategories && allCategories.map((data,index)=>{
               return <>
               <option>{data.categoryname}</option>
                 
               </>
             })
-          }
+          } */}
+          {/* {
+            products?.map((data,index)=>{
+              return(
+                <option>{data.pcategory}</option>
+              )
+            })
+          } */}
+          {
+  [...new Set(viewProductsCategories.map(item => item.pcategory))].map(category => (
+    <option key={category}>{category}</option>
+  ))
+}
         </select>
 
         <select
@@ -261,7 +275,7 @@ console.log(productDeleteStatus,"productDeleteStatus")
               <th className="px-6 py-4">Color</th>
               <th className="px-6 py-4">Size</th>
               <th className="px-6 py-4">Stock</th>
-              {/* <th className="px-6 py-4">Desc</th> */}
+              <th className="px-6 py-4">Desc</th>
               <th className="px-6 py-4">Latest</th>
               <th className="px-6 py-4">Image</th>
               <th className="px-6 py-4 text-right">Actions</th>
@@ -288,7 +302,7 @@ console.log(productDeleteStatus,"productDeleteStatus")
                   <td className="px-6 py-4 text-center"> {p.pcolor}</td>
                   <td className="px-6 py-4 text-center"> {p.psize}</td>                                                      
                   <td className="px-6 py-4 text-center">{p.pstock}</td>
-                  {/* <td className="px-6 py-4 text-center">{p.pdescription}</td> */}
+                  <td className="px-6 py-4 text-center">{p.pdescription}</td>
                   <td className="px-6 py-4 text-center">{p.platest}</td>
                   <td className="px-6 py-4 text-center"><img src={p.pimage} className="w-8 h-8 mx-auto" /></td>
                   
@@ -377,7 +391,7 @@ console.log(productDeleteStatus,"productDeleteStatus")
               </div>
               </div>
               
-              {/* <div>
+              <div>
               <label>Description</label>
               <input
                 // key={field}
@@ -388,7 +402,7 @@ console.log(productDeleteStatus,"productDeleteStatus")
                   setForm({ ...form, "pdescription": e.target.value })
                 }
               />
-              </div> */}
+              </div>
   <div>
               <label>model number</label>
               <input

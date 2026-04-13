@@ -7,8 +7,11 @@ const viewFrontOfficeProduct = async (req,res)=>{
   
 // console.log(req.user,"req.body <==========",req.body);
 // const { page, limit, search, category, sortBy, order } = req.query;
-
-  const all_product = await ProductModel.find()
+const activeCategories = await CategoryModel.find({ status: "Active" }).select("_id");
+  // const all_product = await ProductModel.find();
+  const all_product = await ProductModel.find({
+  category: { $in: activeCategories.map(c => c._id) }
+});
 
 // console.log(products,">===============products")
   res.status(200).json({ all_product, success:true });
@@ -19,7 +22,7 @@ const viewFrontOfficeCategory = async (req,res)=>{
 // console.log(req.user,"req.body <==========",req.body);
 // const { page, limit, search, category, sortBy, order } = req.query;
 
-  const all_category = await CategoryModel.find().sort({catpriority:1})
+  const all_category = await CategoryModel.find({ status: "Active" }).sort({catpriority:1})
 
 // console.log(products,">===============products")
   res.status(200).json({ all_category, success:true });
@@ -33,9 +36,9 @@ const addClientLead = async(req,res)=>{
   
 const{customer,items}=req.body;
 const{name,email, phone, address}=customer;
-  const {productId,productName,price, quantity,total}=items[0];
-  
-    const pushedData = new CustomerLeadModel({name, email, phone, address, productName, quantity, price});
+  const {productId,productName,price, quantity,total,vendor_email}=items[0];
+  // console.log(vendor_email,"<=========vendor_email")
+    const pushedData = new CustomerLeadModel({name, email, phone, address, productName, quantity, price,productId,vendor_email});
 await pushedData.save();
 
   res.status(201).json({ success: true, message: "We will contact Soon" });

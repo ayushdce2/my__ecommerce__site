@@ -90,10 +90,11 @@ console.log(res.data,"<================res.data")
               <th className="px-4 py-3 text-left">Product</th>
               <th className="px-4 py-3 text-left">Qty</th>
               <th className="px-4 py-3 text-left">Price</th>
+              <th className="px-4 py-3 text-left">Vendor</th>
               <th className="px-4 py-3 text-left">Date</th>
             </tr>
           </thead>
-
+{/* {console.log(leads,"<======leads")} */}
           <tbody>
             {loading ? (
               <tr>
@@ -139,7 +140,10 @@ console.log(res.data,"<================res.data")
                   <td className="px-4 py-3">
                     RMB {lead.price}
                   </td>
-
+                  
+                  <td className="px-4 py-3">
+                     {lead.vendor_email}
+                  </td>
                   <td className="px-4 py-3 text-gray-400">
                     {new Date(lead.createdAt).toLocaleDateString()}
                   </td>

@@ -22,10 +22,10 @@ const ProductSchema = new Schema({
     type: Number,
     required: true
   },
-  // pdescription: {
-  //   type: String,
-  //   default: null,
-  // },
+  pdescription: {
+    type: String,
+    default: null,
+  },
   pimage: {
     type: String,
     default: null,
@@ -48,6 +48,9 @@ const ProductSchema = new Schema({
     ref: "Category"
   },
    userID: {
+    type: String,
+  },
+  vendor_email:{
     type: String,
   },
   pmodel_number:{

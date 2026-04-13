@@ -102,7 +102,7 @@ try {
       .sort(sortOption)
       .skip(skip)
       .limit(limit);
-
+// console.log(leads,leads[0].productId,"<========leads")
     res.status(200).json({
       leads,
       totalPages: Math.ceil(total / limit),

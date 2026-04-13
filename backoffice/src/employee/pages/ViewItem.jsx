@@ -5,7 +5,7 @@ import useViewCategory from "../hook/useViewCategory.js";
 import { uploadToCloudinary } from "../../utility/cloudinary";
 import { useAppTheme } from "../../utility/ThemeContext";
 
-const LIMIT = 5;
+const LIMIT = 7;
 
 const initialForm = {
   pname: "",
@@ -174,7 +174,7 @@ console.log(productDeleteStatus,"productDeleteStatus")
   };
 
   return (
-    <div className="p-6 text-white">
+    <div className="p-1 text-white">
       <h1 className="text-2xl font-semibold mb-4">View Products</h1>
 
       {/* Filters */}
@@ -249,6 +249,8 @@ console.log(productDeleteStatus,"productDeleteStatus")
               <th className="px-6 py-4">Desc</th>
               <th className="px-6 py-4">Latest</th>
               <th className="px-6 py-4">Image</th>
+              <th className="px-6 py-4">Vendor</th>
+              
               <th className="px-6 py-4 text-right">Actions</th>
             </tr>
           </thead>
@@ -273,7 +275,7 @@ console.log(productDeleteStatus,"productDeleteStatus")
                   <td className="px-6 py-4 text-center">{p.pdescription}</td>
                   <td className="px-6 py-4 text-center">{p.platest}</td>
                   <td className="px-6 py-4 text-center"><img src={p.pimage} className="w-8 h-8 mx-auto" /></td>
-                  
+                  <td className="px-6 py-4 text-center">{p.vendor_email}</td>
                   <td className="px-6 py-4 text-right space-x-2">
                     <button
                       onClick={() => openEditModal(p)}
