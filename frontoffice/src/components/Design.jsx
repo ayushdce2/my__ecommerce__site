@@ -30,7 +30,7 @@ const App = (props) => {
 
 
       {/* HERO BANNER */}
-      <section className="max-w-7xl mx-auto w-full h-72 sm:h-96 lg:h-[75vh] mt-6 overflow-hidden rounded-2xl">
+      <section className="max-w-7xl mx-auto w-full h-[30vh] lg:h-[80vh] mt-6 overflow-hidden rounded-2xl">
         
         <Banner/>
        
