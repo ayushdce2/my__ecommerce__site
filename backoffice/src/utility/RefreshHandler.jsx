@@ -17,11 +17,11 @@ function RefreshHandler({setisAuthenticated}) {
             setisAuthenticated(true);
             if(
                 location.pathname === "/" ||
-                location.pathname === "/admin/login" ||
-                location.pathname === "/admin/signup" 
+                location.pathname === "/login" ||
+                location.pathname === "/signup" 
             ){
                 userRole==="employee" && navigate("/employee",{replace:false});
-                userRole==="admin" && navigate("/admin",{replace:false});
+                userRole==="admin" && navigate("/",{replace:false});
                 userRole==="vendor" && navigate("/vendor",{replace:false});                
             }
            
