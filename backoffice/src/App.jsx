@@ -24,7 +24,7 @@ function App() {
     <>
 
       
-      <BrowserRouter basename="/admin">
+      <BrowserRouter basename="/admin/">
       <RefreshHandler setisAuthenticated={setisAuthenticated}/>
         <Routes>
 
