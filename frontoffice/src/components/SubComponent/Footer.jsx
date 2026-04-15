@@ -72,9 +72,9 @@ const Footer = () => {
               </Link>
             </li>
             <li>
-              <Link to="/user/" className="hover:text-orange-500 transition">
+              <a href="/user/" className="hover:text-orange-500 transition">
                 Vendor Login
-              </Link>
+              </a>
             </li>
           </ul>
         </div>
