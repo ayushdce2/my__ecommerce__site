@@ -49,6 +49,7 @@ const ManageUsers=()=> {
               <th className="p-3 text-left">Role</th>
               <th className="p-3 text-left">Status</th>
               <th className="p-3 text-left">Joined</th>
+              <th className="p-3 text-left">Company Name</th>              
               <th className="p-3 text-left">Action</th>
             </tr>
           </thead>
@@ -66,6 +67,7 @@ const ManageUsers=()=> {
                 <td className="p-3">
                   {new Date(u.createdAt).toLocaleDateString()}
                 </td>
+                <td className="p-3 text-slate-400">{u.company_name}</td>
                 <td className="p-3">
                     <select value={u.userstatus} onChange={(e)=>{changeUserStatus(e,u._id)}}>
                         <option className="text-green-600">Active</option>

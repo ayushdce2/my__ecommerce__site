@@ -9,6 +9,7 @@ const useProfile = ({userProfileDetails}) => {
     phone_number: userProfileDetails[0].phone_number,
     address: "",
     avatar: null,
+    company_name: userProfileDetails[0].company_name
   });
 
   const handleChange = (e) => {

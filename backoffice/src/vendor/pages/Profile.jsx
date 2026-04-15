@@ -103,9 +103,23 @@ const Profile = () => {
                 className="w-full rounded-lg border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-900 px-4 py-2 text-slate-800 dark:text-white focus:ring-2 focus:ring-blue-500"
               />
             </div>
+            <div>
+              <label className="block mb-1 text-sm font-medium text-slate-700 dark:text-slate-300">
+                Company Name
+              </label>
+              <input
+                type="tel"
+                name="phone"
+                onChange={handleChange}
+                
+                value={profile.company_name}
+                placeholder="+1 234 567 890"
+                className="w-full rounded-lg border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-900 px-4 py-2 text-slate-800 dark:text-white focus:ring-2 focus:ring-blue-500"
+              />
+            </div>
           </div>
         </div>
-
+{/* {console.log(profile,"<=====profile")} */}
         {/* Address */}
         <div className="mt-6">
           <label className="block mb-1 text-sm font-medium text-slate-700 dark:text-slate-300">

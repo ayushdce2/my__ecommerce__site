@@ -94,6 +94,23 @@ const Signup = () => {
                       />
                     </div>
                   </div>
+
+                  {/* company name */}
+                  <div>
+                    <label className="block text-sm font-bold text-gray-700 mb-1 ">
+                      Company Name
+                    </label>
+                    <div className="flex items-center border border-gray-400 rounded-lg text-gray-500 px-3 focus-within:ring-2 focus-within:ring-blue-300">
+                      <FaUserTie className="text-gray-400" />
+                      <input
+                        type="text"
+                        placeholder="company name"
+                        className="w-full px-3 py-2 focus:outline-none"
+                        onChange={signupFormData}
+                        name="company_name"
+                      />
+                    </div>
+                  </div>
         
         {/* userRole */}
                   <div>

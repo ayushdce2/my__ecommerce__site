@@ -16,14 +16,14 @@ const useSignup = () => {
 
     const signupSubmit = async (e)=>{
         e.preventDefault();
-        if(signupAllData.name==="" || signupAllData.email==="" || signupAllData.password==="" || signupAllData.phone_number==="" ){
+        if(signupAllData.name==="" || signupAllData.email==="" || signupAllData.password==="" || signupAllData.phone_number==="" || signupAllData.company_name===""  ){
             return handleError("All fields required")
          }
         // console.log(signupAllData);
         try{
             const res = await API.post("/auth/signup",signupAllData);
             const resJson = await res.data;
-            console.log(resJson,"<----------------resposne LOCAL");
+            // console.log(resJson,"<----------------resposne LOCAL");
 
             resJson.success == true && handleSuccess(resJson.message);
 

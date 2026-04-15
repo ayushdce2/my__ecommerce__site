@@ -23,6 +23,9 @@ const UserSchema = new Schema({
     phone_number:{
         type:String,
     },
+    company_name:{
+        type:String,
+    },
     
   
   userstatus:{
