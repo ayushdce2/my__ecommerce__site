@@ -72,7 +72,7 @@ const Footer = () => {
               </Link>
             </li>
             <li>
-              <Link to="/admin" className="hover:text-orange-500 transition">
+              <Link to="/admin/" className="hover:text-orange-500 transition">
                 Vendor Login
               </Link>
             </li>
