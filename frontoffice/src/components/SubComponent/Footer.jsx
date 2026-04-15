@@ -72,7 +72,7 @@ const Footer = () => {
               </Link>
             </li>
             <li>
-              <a href="/user/" className="hover:text-orange-500 transition">
+              <a href="https://wholesalio.in/user/" target='_blank' className="hover:text-orange-500 transition">
                 Vendor Login
               </a>
             </li>
