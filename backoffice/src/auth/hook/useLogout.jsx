@@ -39,7 +39,7 @@ const useLogout = () => {
         localStorage.removeItem("userRole");
 
         setTimeout(() => {
-          navigate("/admin");
+          navigate("/admin/login");
         }, 1000);
       }
 
