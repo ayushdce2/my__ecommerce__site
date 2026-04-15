@@ -17,7 +17,8 @@ function RefreshHandler({setisAuthenticated}) {
             setisAuthenticated(true);
             if(
                 location.pathname === "/" ||
-                location.pathname === "/signup" 
+                location.pathname === "/admin/login" ||
+                location.pathname === "/admin/signup" 
             ){
                 userRole==="employee" && navigate("/employee",{replace:false});
                 userRole==="admin" && navigate("/admin",{replace:false});
