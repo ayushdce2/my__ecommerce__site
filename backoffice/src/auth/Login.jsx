@@ -89,7 +89,7 @@ if(loadingserver){
             Login
           </button>
         </form>
-        <p className='text-center text-gray-500'>Don't have account <Link to="/signup" className='text-blue-400'>Create Account</Link></p>
+        <p className='text-center text-gray-500'>Don't have account <Link to="/admin/signup" className='text-blue-400'>Create Account</Link></p>
 
         {/* Footer */}
      
