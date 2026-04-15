@@ -24,20 +24,20 @@ function App() {
     <>
 
       
-      <BrowserRouter basename="/admin/">
+      <BrowserRouter>
       <RefreshHandler setisAuthenticated={setisAuthenticated}/>
         <Routes>
 
           <Route path="*" element={<NotFound />} />
-          <Route path="/login" element={<Login/>}></Route>
-          <Route path="/signup" element={<Signup/>}></Route>
+          <Route path="/admin" element={<Login/>}></Route>
+          <Route path="/admin/signup" element={<Signup/>}></Route>
           <Route path="/unauthorized" element={<Unauthorized/>}></Route>
           
           <Route path='/demo' element={<Demo/>}></Route>
 
           
           <Route path={"/employee/*"} element={<PrivateRoute element={<UserDetailsProvider><UserRolePermission roles={["employee"]}><AppThemeProvider><EmployeeHome/></AppThemeProvider></UserRolePermission></UserDetailsProvider>}/>}></Route>
-          <Route path={"/*"} element={<PrivateRoute element={<UserDetailsProvider><UserRolePermission roles={["admin"]}><AppThemeProvider><AdminHome/></AppThemeProvider></UserRolePermission></UserDetailsProvider>}/>}></Route>
+          <Route path={"/admin/*"} element={<PrivateRoute element={<UserDetailsProvider><UserRolePermission roles={["admin"]}><AppThemeProvider><AdminHome/></AppThemeProvider></UserRolePermission></UserDetailsProvider>}/>}></Route>
           <Route path={"/vendor/*"} element={<PrivateRoute element={<UserDetailsProvider><UserRolePermission roles={["vendor"]}><AppThemeProvider><VendorHome/></AppThemeProvider></UserRolePermission></UserDetailsProvider>}/>}></Route>
     
   
