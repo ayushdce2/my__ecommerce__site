@@ -76,6 +76,12 @@ const Footer = () => {
                 Vendor Login
               </a>
             </li>
+            
+            <li>
+              <a href="https://wholesalio.in/user/signup" target='_blank' className="hover:text-orange-500 transition">
+                Vendor SignUp
+              </a>
+            </li>
           </ul>
         </div>
 

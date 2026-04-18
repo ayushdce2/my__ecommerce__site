@@ -13,7 +13,7 @@ import {
 
 import { useProductDetails } from "../../utility/ProductDetailsContext";
 
-const ITEMS_PER_PAGE = 10;
+const ITEMS_PER_PAGE = 25;
 
 const CategoryPage = () => {
   const { categoryname } = useParams();

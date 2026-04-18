@@ -18,7 +18,7 @@ console.log(categoryname,"<============id");
               if(Loading){
         return (<div className=' h-full bg-gradient-to-b from-blue-400 to-indigo-200 text-gray-200 border-r-gray-950 p-3 flex flex-col gap-5 items-center justify-center'><img src="/images/loading.gif" className='w-[5rem]' loading="lazy"/> <p className='font-bold text-3xl text-shadow-2xs'>Loading</p></div>)
     }
-    console.log(productDetails.all_product,"<=productDetails")
+    console.log(productDetails?.all_product,"<=productDetails")
     return (
     <>
        <div >

@@ -11,7 +11,7 @@ const useManageUsers = () => {
   const [totalPages, setTotalPages] = useState(1);
   const [loading,setLoading]=useState(true)
 
-  const LIMIT = 5;
+  const LIMIT = 20;
 
   useEffect(() => {
     fetchUsers();

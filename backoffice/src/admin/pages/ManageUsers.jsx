@@ -44,30 +44,37 @@ const ManageUsers=()=> {
         <table className="w-full text-sm">
           <thead className="bg-blue-300  dark:bg-slate-800">
             <tr>
+              <th className="p-3 text-left">Company Name</th>
               <th className="p-3 text-left">Name</th>
               <th className="p-3 text-left">Email</th>
               <th className="p-3 text-left">Role</th>
               <th className="p-3 text-left">Status</th>
               <th className="p-3 text-left">Joined</th>
-              <th className="p-3 text-left">Company Name</th>              
+              <th className="p-3 text-left">Phone No.</th>              
               <th className="p-3 text-left">Action</th>
             </tr>
           </thead>
           <tbody>
             {users.map((u) => (
               <tr key={u._id} className="border-t border-slate-700 hover:bg-slate-800">
-                <td className="p-3">{u.name}</td>
-                <td className="p-3 text-slate-400">{u.email}</td>
+                <td className="p-3 text-slate-400 w-48 break-all">{u.company_name}</td>
+                <td className="p-3 text-slate-400 w-48 break-all">{u.name}</td>
+                <td className="p-3 text-slate-400 w-30 break-all">{u.email}</td>
                 <td className="p-3">
+                  {u.userRole=="vendor" ? (
                   <span className="px-2 py-1 text-xs rounded bg-blue-600/20 text-blue-400">
                     {u.userRole}
-                  </span>
+                  </span>) : (
+                  <span className="px-2 py-1 text-xs rounded bg-blue-600/20 text-red-400">
+                    {u.userRole}
+                  </span>)
+                  }
                 </td>
                 <td className="p-3 text-slate-400">{u.userstatus}</td>
                 <td className="p-3">
                   {new Date(u.createdAt).toLocaleDateString()}
                 </td>
-                <td className="p-3 text-slate-400">{u.company_name}</td>
+                <td className="p-3 text-slate-400">{u.phone_number}</td>
                 <td className="p-3">
                     <select value={u.userstatus} onChange={(e)=>{changeUserStatus(e,u._id)}}>
                         <option className="text-green-600">Active</option>

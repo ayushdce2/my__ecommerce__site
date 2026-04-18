@@ -12,7 +12,7 @@ const addProductfunction = async (req, res) => {
         // console.log(req.user,"req.user")
         const {email,userRole,_id} = req.user;
         // console.log(req.user,"<============req.user")
-        let { pname, pprice, categoryID, pstock,  pimage,platest,pcategory,imgPublicId, psize, pcolor, pmodel_number,pdescription } = req.body;
+        let { pname, pprice, categoryID, pstock,  pimage,platest,pcategory,imgPublicId, psize, pcolor, pmodel_number,pdescription,pstatus } = req.body;
         // console.log(pimage,"<=========pimage")
         // console.log(name, email, password, userRole,"signup Controller");
 
@@ -57,7 +57,7 @@ if (number_of_categories_used >= 4 && !alreadyExists) {
 
 // category limits 4 end
 
-        const product = new ProductModel({ pname, pprice, pcategory:categoryname, category:categoryID, pstock,  pimage,imgPublicId, email,platest,userID:_id,vendor_email:email, pmodel_number, pcolor, psize,pdescription });
+        const product = new ProductModel({ pname, pprice, pcategory:categoryname, category:categoryID, pstock,  pimage,imgPublicId, email,platest,userID:_id,vendor_email:email, pmodel_number, pcolor, psize,pdescription,pstatus });
         // const image = await Image.create(req.body);
         // user.password = await bcrypt.hash(password, 10);
         await product.save();

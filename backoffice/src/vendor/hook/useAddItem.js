@@ -15,7 +15,8 @@ const useAddItem = () => {
     pstock: "",
     pdescription: "",
     pimage: null,
-    platest:""
+    platest:"",
+    // pstatus:"Inactive"
   });
   const handleChange = (e) => {
     const { name, value, files } = e.target;
@@ -78,6 +79,7 @@ const useAddItem = () => {
   const cloud = await uploadToCloudinary(product.pimage);
   product.pimage= cloud.secure_url;
   product.imgPublicId= cloud.public_id
+  product.pstatus="Inactive"
 
             try {
                 const response = await API.post("vendor/product/add" ,product, headers);

@@ -24,7 +24,7 @@ const Homepage = () => {
     setSidebar(prev=>!prev)
   }
   let sidebar_props = {handleSidebar:handleSidebar,sidebar:sidebar,setSidebar:setSidebar}
-  console.log(sidebar,"<=========design");
+  // console.log(sidebar,"<=========design");
     
    
 

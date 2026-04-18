@@ -10,7 +10,8 @@ const viewFrontOfficeProduct = async (req,res)=>{
 const activeCategories = await CategoryModel.find({ status: "Active" }).select("_id");
   // const all_product = await ProductModel.find();
   const all_product = await ProductModel.find({
-  category: { $in: activeCategories.map(c => c._id) }
+  category: { $in: activeCategories.map(c => c._id) },
+  pstatus: "Active"
 });
 
 // console.log(products,">===============products")

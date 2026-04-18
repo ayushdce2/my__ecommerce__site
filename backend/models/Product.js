@@ -40,8 +40,9 @@ const ProductSchema = new Schema({
     },
     platest:{
       type:String,
-
-
+    },
+    pstatus:{
+      type:String
     },
     category: {
     type: mongoose.Schema.Types.ObjectId,

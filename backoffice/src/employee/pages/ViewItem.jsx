@@ -5,7 +5,7 @@ import useViewCategory from "../hook/useViewCategory.js";
 import { uploadToCloudinary } from "../../utility/cloudinary";
 import { useAppTheme } from "../../utility/ThemeContext";
 
-const LIMIT = 7;
+const LIMIT = 20;
 
 const initialForm = {
   pname: "",
@@ -88,7 +88,6 @@ const data = res.data;
     setTotal(data.total);
     setLoading(false);
       setApiLoading(false)
-    console.log(products,"<==============products")
   };
 
   /* ---------------- EDIT ---------------- */
@@ -105,7 +104,8 @@ const data = res.data;
       platest:product.platest,
       pcategory:product.pcategory,
       imgPublicId:product.imgPublicId,
-      pimage:product.pimage
+      pimage:product.pimage,
+      pstatus:product.pstatus
     });
     setShowEdit(true);
   };
@@ -172,6 +172,38 @@ console.log(productDeleteStatus,"productDeleteStatus")
   setApiLoading(false)
     fetchProducts();
   };
+
+const updateProductStatus = async (e, p) => {
+  const updatedForm = {
+    ...form,
+    ...p,
+    pstatus: e.target.value,
+    categoryID:p.category,
+  };
+
+  setForm(updatedForm);
+
+  // console.log(updatedForm, "<==============updated form");
+
+  try{
+setApiLoading(true)
+      
+  const updateProdStatus = await  API.put(
+  `employee/product/update/${p._id}`,updatedForm,
+  headers
+);
+
+    
+    fetchProducts();
+      setApiLoading(false)
+    }catch(error){
+      console.log(error,"error")
+      error.status==400 && handleError(error.response.data.error.details[0].message)
+      error.status==409 && handleError(error.response.data.message);
+      error.status==500 && handleError(error.response.data.error.codeName);
+        setApiLoading(false)
+    }
+};
 
   return (
     <div className="p-1 text-white">
@@ -250,6 +282,7 @@ console.log(productDeleteStatus,"productDeleteStatus")
               <th className="px-6 py-4">Latest</th>
               <th className="px-6 py-4">Image</th>
               <th className="px-6 py-4">Vendor</th>
+              <th className="px-6 py-4">Status</th>
               
               <th className="px-6 py-4 text-right">Actions</th>
             </tr>
@@ -276,6 +309,31 @@ console.log(productDeleteStatus,"productDeleteStatus")
                   <td className="px-6 py-4 text-center">{p.platest}</td>
                   <td className="px-6 py-4 text-center"><img src={p.pimage} className="w-8 h-8 mx-auto" /></td>
                   <td className="px-6 py-4 text-center">{p.vendor_email}</td>
+                  <td className="px-6 py-4 text-center">
+                    {/* {p.pstatus} */}
+                    {/* {console.log(form,"<==========================form")} */}
+                    {/* {p.pstatus && ( */}
+                    {(
+  <select
+    value={p.pstatus}
+    className={`${
+      p.pstatus === "Active" ? "text-green-500" : "text-red-500"
+    } w-full bg-gray-600 px-3 py-2 rounded mb-3 outline-0`}
+    onChange={(e) => updateProductStatus(e, p)}
+  >
+    <option value="" className="text-green-500">
+      Choose
+    </option>
+    <option value="Active" className="text-green-500">
+      Active
+    </option>
+    <option value="Inactive" className="text-red-500">
+      Inactive
+    </option>
+  </select>
+)}
+
+                    </td>
                   <td className="px-6 py-4 text-right space-x-2">
                     <button
                       onClick={() => openEditModal(p)}
@@ -377,7 +435,7 @@ console.log(productDeleteStatus,"productDeleteStatus")
 <div className="flex gap-2">
               <div className="basis-2/4">
               <label>Latest</label>
-              {console.log(form.platest,"<===============form.platest")}
+              {/* {console.log(form.platest,"<===============form.platest")} */}
             <select value={form.platest} className="w-full bg-slate-800 px-3 py-2 rounded mb-3" onChange={(e) =>
                   setForm({ ...form, "platest": e.target.value })
                 }>
