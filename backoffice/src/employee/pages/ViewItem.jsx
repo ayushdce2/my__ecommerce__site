@@ -312,8 +312,8 @@ setApiLoading(true)
                   <td className="px-6 py-4 text-center">
                     {/* {p.pstatus} */}
                     {/* {console.log(form,"<==========================form")} */}
-                    {/* {p.pstatus && ( */}
-                    {(
+                    {p.pstatus && (
+                    
   <select
     value={p.pstatus}
     className={`${
