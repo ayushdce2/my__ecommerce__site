@@ -27,7 +27,7 @@ const Sidebar = (props) => {
             {/* <FaUserTie /> */}
             {/* <span className="text-2xl">My Shop</span> */}
             <div className='w-24 p-[0.3rem] bg-white rounded'>
-              <img src='/user/assets/logo.png' className='w-full h-full object-contain' />
+              <img src='/user/assets/log_change.png' className='w-full h-full object-contain' />
             </div>
             
           </div>

@@ -41,7 +41,7 @@ const CategorySelect = () => {
         "
       >
         <option value="" >
-          Select Category
+          Select All Category
         </option>
         {allCategories?.map(
             (data,index) => (

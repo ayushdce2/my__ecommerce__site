@@ -25,7 +25,7 @@ const Footer = () => {
         <div>
           
            <div className='w-20 mb-1 bg-white p-[0.3rem] rounded'>
-              <img src='/assets/only_ws.svg' className='w-full h-full object-contain' />
+              <img src='/assets/log_change.png' className='w-full h-full object-contain' />
             </div>
           <p className="text-sm leading-relaxed mb-4">
             Wholesalio is a modern e-commerce platform offering premium products,
@@ -116,14 +116,19 @@ const Footer = () => {
           </h4>
           <ul className="space-y-3 text-sm">
             <li>
-              📍 India
+              📍 India<br></br>1090, Gaur City Mall, Gr. Noida, 201009 <br></br> 
+              📞 +91 8178046582 
+            </li>
+            <li>
+              📍 China<br></br>Office No. D4-1-3, Chengbei Road, Yiwu, Jinhua City, zhejiang Provience<br></br> 
+              📞 +86 18157966934 
             </li>
             <li>
               📧 email@wholesalio.com
             </li>
-            <li>
+            {/* <li>
               📞 +91 98765 43210
-            </li>
+            </li> */}
           </ul>
         </div>
 

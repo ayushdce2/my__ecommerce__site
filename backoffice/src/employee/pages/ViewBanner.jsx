@@ -35,7 +35,7 @@ const ViewBanner = () => {
     try {
       setLoading(true);
       const { data } = await API.get("/employee/banner/view", {
-        params: { search, status, page, limit: 6 },
+        params: { search, status, page, limit: 20 },
         headers,
       });
       setBanners(data.banners || []);
@@ -263,6 +263,55 @@ const ViewBanner = () => {
             </tbody>
           </table>
         )}
+        {/* PAGINATION */}
+{totalPages > 1 && (
+  <div className="flex justify-center items-center gap-2 mt-6 flex-wrap">
+    
+    {/* Prev */}
+    <button
+      disabled={page === 1}
+      onClick={() => setPage(page - 1)}
+      className={`px-3 py-1 rounded border ${
+        page === 1
+          ? "opacity-50 cursor-not-allowed text-white"
+          : "hover:bg-gray-200 dark:hover:bg-gray-700"
+      }`}
+    >
+      Prev
+    </button>
+
+    {/* Page Numbers */}
+    {[...Array(totalPages)].map((_, i) => {
+      const pageNumber = i + 1;
+      return (
+        <button
+          key={pageNumber}
+          onClick={() => setPage(pageNumber)}
+          className={`px-3 py-1 rounded border ${
+            page === pageNumber
+              ? "bg-blue-600 text-white"
+              : "hover:bg-gray-200 dark:hover:bg-gray-700 text-white"
+          }`}
+        >
+          {pageNumber}
+        </button>
+      );
+    })}
+
+    {/* Next */}
+    <button
+      disabled={page === totalPages}
+      onClick={() => setPage(page + 1)}
+      className={`px-3 py-1 rounded border ${
+        page === totalPages
+          ? "opacity-50 cursor-not-allowed text-white"
+          : "hover:bg-gray-200 dark:hover:bg-gray-700 text-white"
+      }`}
+    >
+      Next
+    </button>
+  </div>
+)}
       </div>
 
       {/* EDIT MODAL */}
