@@ -25,7 +25,7 @@ const Footer = () => {
         <div>
           
            <div className='w-20 mb-1 bg-white p-[0.3rem] rounded'>
-              <img src='/assets/logo.png' className='w-full h-full object-contain' />
+              <img src='/assets/only_ws.svg' className='w-full h-full object-contain' />
             </div>
           <p className="text-sm leading-relaxed mb-4">
             Wholesalio is a modern e-commerce platform offering premium products,

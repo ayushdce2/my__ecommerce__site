@@ -34,7 +34,7 @@ const handlesetMobilemainMenu=(e)=>{
           <Link to="/" className="text-2xl font-bold text-indigo-600 headingfont">
             {/* My Shop */}
             <div className='w-24 p-[0.3rem] bg-white rounded'>
-              <img src='/assets/logo.png' className='w-full h-full object-contain' />
+              <img src='/assets/only_ws.svg' className='w-full h-full object-contain' />
             </div>
           </Link>
 
