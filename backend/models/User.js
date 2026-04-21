@@ -26,6 +26,14 @@ const UserSchema = new Schema({
     company_name:{
         type:String,
     },
+    avatar:{
+        type:String,
+        default: null,
+    },
+    address:{
+        type:String,
+        default: null,
+    },
     
   
   userstatus:{

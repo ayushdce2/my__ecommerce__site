@@ -1,6 +1,7 @@
 const UserModel = require("../models/User.js");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
+const cloudinary = require("../config/cloudinary");
 
 const SignupFunction = async (req, res) => {
     try {
@@ -99,4 +100,70 @@ try {
     }
 }
 
-module.exports = {LoginFunction,SignupFunction,ProfileFunction, LogOutFunction};
+const updateUserProfile = async (req, res) => {
+  try {
+    const userId = req.params.id;
+
+    const {
+      name,
+      phone_number,
+      company_name,
+      address,
+      avatar,
+      avatarPublicId
+    } = req.body;
+
+    const user = await UserModel.findById(userId);
+
+    if (!user) {
+      return res.status(404).json({
+        message: "User not found"
+      });
+    }
+
+    // 🧠 delete old image ONLY if new image is uploaded
+    if (
+      avatar &&
+      user.avatarPublicId &&
+      user.avatarPublicId !== avatarPublicId
+    ) {
+      try {
+        await cloudinary.uploader.destroy(user.avatarPublicId);
+      } catch (err) {
+        console.error("Cloudinary delete error:", err.message);
+        // don't block update if delete fails
+      }
+    }
+
+    // 📝 update fields
+    user.name = name ?? user.name;
+    user.phone_number = phone_number ?? user.phone_number;
+    user.company_name = company_name ?? user.company_name;
+    user.address = address ?? user.address;
+
+    if (avatar) {
+      user.avatar = avatar;
+      user.avatarPublicId = avatarPublicId;
+    }
+
+    await user.save();
+
+    return res.status(200).json({
+      message: "Profile updated successfully",
+      avatar: user.avatar,
+      avatarPublicId: user.avatarPublicId,
+      user
+    });
+  } catch (error) {
+    console.error("Update user error:", error);
+
+    return res.status(500).json({
+      message: "Internal server error",
+      error: error.message
+    });
+  }
+};
+
+module.exports = updateUserProfile;
+
+module.exports = {LoginFunction,SignupFunction,ProfileFunction, LogOutFunction,updateUserProfile};
