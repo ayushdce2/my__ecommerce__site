@@ -164,22 +164,29 @@ const similar_prod_category = product?.pcategory;
                 Size: {product.psize}
             </p>
             )
+           }
+           {
+            product.pstock && (
+<p className="text-gray-600 dark:text-gray-300 mt-2 capitalize">
+                Minimum Quantity to Order: {product.pstock}
+            </p>
+            )
            } 
             
 </div>
  
-            <p className="text-xl font-semibold mt-4">
+            <p className="text-xl font-semibold my-5">
               RMB {product.pprice}
             </p>
 {
             product.pdescription && (
-<p className="text-gray-600 dark:text-gray-300 mt-2 capitalize italic">
+<p className="text-gray-600 dark:text-gray-300 my-2 capitalize italic">
                 {product.pdescription}
             </p>
             )
            } 
             {/* Quantity */}
-            <div className="flex items-center gap-4 mt-6">
+            <div className="flex items-center gap-4 my-6">
               <button
                 onClick={() => setQty(qty > 1 ? qty - 1 : 1)}
                 className="px-3 py-1 bg-gray-300 dark:bg-gray-700 rounded"
