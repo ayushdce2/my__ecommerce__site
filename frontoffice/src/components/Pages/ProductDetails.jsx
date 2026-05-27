@@ -135,13 +135,13 @@ const similar_prod_category = product?.pcategory;
         <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-8 bg-white dark:bg-gray-800 p-6 rounded-xl shadow">
           
           {/* Image */}
-          <div className="h-80  rounded flex items-center justify-center">
+          <div className="h-80 md:h-[70vh]  rounded flex items-center justify-center">
             <div className="h-full">
               <img src={product.pimage} className="object-cover h-full" loading="lazy"/>
             </div>
             
           </div>
-{/* {console.log(product,"<========product")} */}
+{/* {console.log(product,"<======== my product")} */}
           {/* Details */}
           <div>
             <h1 className="text-2xl font-bold">{product.pname}</h1>

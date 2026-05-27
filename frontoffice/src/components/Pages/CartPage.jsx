@@ -159,18 +159,18 @@ const CartPage = () => {
               <table className="w-full border-collapse mb-6" >
                 <thead>
                   <tr className="border-b-2">
-                    <th className="p-2 text-left">Product</th>
-                    <th className="p-2">Price</th>
-                    <th className="p-2">Qty</th>
-                    <th className="p-2">Total</th>
-                    <th className="p-2">Action</th>
+                    <th className="p-2 text-left" >Product</th>
+                    <th className="p-2 ">Price</th>
+                    <th className="p-2 ">Qty</th>
+                    <th className="p-2 ">Total</th>
+                    <th className="p-2 ">Action</th>
                   </tr>
                 </thead>
                 <tbody>
-                  {console.log(cartItems,"cartItems")}
+                  {/* {console.log(cartItems,"cartItems")} */}
                   {cartItems.map((item, index) => (
                     <tr key={index} className="border-b text-center" >
-                      <td className="font-bold capitalize text-left">
+                      <td className="font-bold capitalize text-left text-nowrap p-3" >
                         <div className="flex items-center gap-2">
                         <div className="w-8 h-8">
                           <img src={item.pimage} className="object-contain w-full h-full" loading="lazy"/>
@@ -179,8 +179,8 @@ const CartPage = () => {
                             <p>{item.productName}</p>
                         </div>
                         </div></td>
-                      <td>RMB {item.price}</td>
-                      <td>
+                      <td className="text-nowrap p-3">RMB {item.price}</td>
+                      <td className="text-nowrap p-3">
                         <div className="flex justify-center gap-2">
                           <button
                             onClick={() => decreaseQty(index)}
@@ -197,8 +197,8 @@ const CartPage = () => {
                           </button>
                         </div>
                       </td>
-                      <td>RMB {item.total}</td>
-                      <td>
+                      <td className="text-nowrap p-3">{item.price} RMB X <b className="text-xl">{item.quantity}</b> = RMB {item.total}</td>
+                      <td className="text-nowrap p-3">
                         <button
                           onClick={() => removeItem(index)}
                           className="px-3 py-1 my-1 bg-red-500 text-white rounded"
