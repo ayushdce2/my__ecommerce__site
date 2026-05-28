@@ -198,7 +198,7 @@ const CartPage = () => {
                         </div>
                       </td>
                       {/* {item.quantity} */}
-                      <td className="text-nowrap p-3"> RMB {item.price}  X {item.quantity} <b className="text-xl"><i>({item.minimum_qty * item.quantity}<i> pieces</i>)</i></b> = RMB {item.total}</td>
+                      <td className="text-nowrap p-3"> RMB {item.price}  X {item.quantity} <b className="text-xl"><i>({item.minimum_qty * item.quantity}<i> pieces</i>)</i></b> = RMB {(item.total).toFixed(2)}</td>
                       <td className="text-nowrap p-3">
                         <button
                           onClick={() => removeItem(index)}
@@ -214,7 +214,7 @@ const CartPage = () => {
 </div>
               <div className="flex justify-between items-center">
                 <h2 className="text-xl font-semibold">
-                  Grand Total: RMB {grandTotal}
+                  Grand Total: RMB {(grandTotal).toFixed(2)}
                 </h2>
 
                 <button
