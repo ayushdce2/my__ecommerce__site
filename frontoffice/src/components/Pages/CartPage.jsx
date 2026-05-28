@@ -184,20 +184,21 @@ const CartPage = () => {
                         <div className="flex justify-center gap-2">
                           <button
                             onClick={() => decreaseQty(index)}
-                            className="px-2 bg-gray-300"
+                            className="px-2 bg-gray-300 cursor-pointer hover:bg-gray-500"
                           >
                             -
                           </button>
                           <span>{item.quantity}</span>
                           <button
                             onClick={() => increaseQty(index)}
-                            className="px-2 bg-gray-300"
+                            className="px-2 bg-gray-300 cursor-pointer hover:bg-gray-500"
                           >
                             +
                           </button>
                         </div>
                       </td>
-                      <td className="text-nowrap p-3">{item.price} RMB X <b className="text-xl">{item.quantity}</b> = RMB {item.total}</td>
+                      {/* {item.quantity} */}
+                      <td className="text-nowrap p-3"> {item.price} RMB X <b className="text-xl">({item.minimum_qty * item.quantity} pieces)</b> = RMB {item.total}</td>
                       <td className="text-nowrap p-3">
                         <button
                           onClick={() => removeItem(index)}

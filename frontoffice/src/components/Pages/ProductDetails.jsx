@@ -102,6 +102,7 @@ const similar_prod_category = product?.pcategory;
         total: product.pprice * qty,
         pimage:product.pimage,
         vendor_email:product.vendor_email,
+        minimum_qty: product.pstock
       });
     }
 // console.log(product,"<===productproductproduct")
