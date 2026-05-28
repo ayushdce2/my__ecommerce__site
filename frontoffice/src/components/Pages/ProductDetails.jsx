@@ -91,15 +91,14 @@ const similar_prod_category = product?.pcategory;
 
     if (existingIndex !== -1) {
       cart[existingIndex].quantity += qty;
-      cart[existingIndex].total =
-        cart[existingIndex].quantity * cart[existingIndex].price;
+      cart[existingIndex].total = (cart[existingIndex].quantity * product.pstock) * cart[existingIndex].price;
     } else {
       cart.push({
         productId: product._id,
         productName: product.pname,
         price: product.pprice,
         quantity: qty,
-        total: product.pprice * qty,
+        total: product.pprice * (qty * product.pstock),
         pimage:product.pimage,
         vendor_email:product.vendor_email,
         minimum_qty: product.pstock

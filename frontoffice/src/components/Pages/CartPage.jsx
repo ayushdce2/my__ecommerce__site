@@ -39,17 +39,19 @@ const CartPage = () => {
   const increaseQty = (index) => {
     const updated = [...cartItems];
     updated[index].quantity += 1;
-    updated[index].total =
-      updated[index].quantity * updated[index].price;
+    // updated[index].minimum_qty += updated[index].minimum_qty;
+    updated[index].total = (updated[index].quantity * updated[index].minimum_qty) * updated[index].price;
     setCartItems(updated);
+    // console.log(updated,"<====ayush ayush")
   };
 
   const decreaseQty = (index) => {
     const updated = [...cartItems];
     if (updated[index].quantity > 1) {
       updated[index].quantity -= 1;
-      updated[index].total =
-        updated[index].quantity * updated[index].price;
+      // updated[index].minimum_qty -= updated[index].minimum_qty;
+      // updated[index].total = updated[index].quantity * updated[index].price;
+      updated[index].total = (updated[index].quantity * updated[index].minimum_qty) * updated[index].price;
       setCartItems(updated);
     }
   };
@@ -162,7 +164,7 @@ const CartPage = () => {
                   <tr className="border-b-2">
                     <th className="p-2 text-left" >Product</th>
                     <th className="p-2 ">Price</th>
-                    <th className="p-2 ">Qty</th>
+                    <th className="p-2 ">CTN / Qty</th>
                     <th className="p-2 ">Total</th>
                     <th className="p-2 ">Action</th>
                   </tr>
