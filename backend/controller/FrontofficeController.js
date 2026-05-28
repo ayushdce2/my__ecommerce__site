@@ -39,7 +39,8 @@ const{customer,items}=req.body;
 const{name,email, phone, address}=customer;
   const {productId,productName,price, quantity,total,vendor_email}=items[0];
   // console.log(vendor_email,"<=========vendor_email")
-    const pushedData = new CustomerLeadModel({name, email, phone, address, productName, quantity, price,productId,vendor_email});
+    // const pushedData = new CustomerLeadModel({name, email, phone, address, productName, quantity, price,productId,vendor_email});
+        const pushedData = new CustomerLeadModel({name, email, phone, address, items});
 await pushedData.save();
 
   res.status(201).json({ success: true, message: "We will contact Soon" });

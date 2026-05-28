@@ -16,7 +16,16 @@ const CustomerLeadSchema = new Schema(
     address: {
       type: String,
     },
-
+items: [
+    {
+      productId: String,
+      productName: String,
+      price: Number,
+      quantity: Number,
+      total: Number,
+      vendor_email: String
+    }
+  ],
     productName: {
       type: String,
     },

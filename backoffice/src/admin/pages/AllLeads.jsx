@@ -37,8 +37,8 @@ const AllLeads=()=> {
         headers,
       });
 console.log(res.data,"<================res.data")
-      setLeads(res.data.leads);
-      setTotalPages(res.data.totalPages);
+      setLeads(res.data?.leads);
+      setTotalPages(res.data?.totalPages);
     } catch (err) {
       console.error("Failed to fetch leads", err);
     } finally {
@@ -125,13 +125,18 @@ console.log(res.data,"<================res.data")
                     <div>{lead.phone}</div>
                   </td>
 
-                  <td className="px-4 py-3 text-gray-300">
+                  <td className="px-4 py-3 text-gray-300 !w-[150px]">
                     {lead.address}
                   </td>
 
                   <td className="px-4 py-3">
                     <span className="bg-blue-600/20 text-blue-400 px-2 py-1 rounded text-xs">
-                      {lead.productName}
+                      {lead.productName || lead.items?.map((productdetails,productindex)=>{
+                        return productdetails.productName +" ,"
+                      })}
+                      {/* {console.log(lead.items?.map((productdetails,productindex)=>{
+                        return productdetails.productName
+                      }),"<================ayush")} */}
                     </span>
                   </td>
 

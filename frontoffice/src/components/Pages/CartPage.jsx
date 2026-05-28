@@ -101,6 +101,7 @@ const CartPage = () => {
         items: cartItems,
         totalAmount: grandTotal,
       }
+      // console.log(AllClientData,"<===========AllClientData")
      const response = await API.post("/frontoffice/leadform/submit" ,AllClientData);
                 const data = response.data;
                 // handleSuccess(data.message);
