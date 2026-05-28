@@ -198,7 +198,7 @@ const CartPage = () => {
                         </div>
                       </td>
                       {/* {item.quantity} */}
-                      <td className="text-nowrap p-3"> {item.price} RMB X <b className="text-xl">({item.minimum_qty * item.quantity} pieces)</b> = RMB {item.total}</td>
+                      <td className="text-nowrap p-3"> RMB {item.price}  X <b className="text-xl">({item.minimum_qty * item.quantity} pieces)</b> = RMB {item.total}</td>
                       <td className="text-nowrap p-3">
                         <button
                           onClick={() => removeItem(index)}
