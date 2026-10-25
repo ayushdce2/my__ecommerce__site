@@ -1,5 +1,19 @@
+
+
+
 {
   "rewrites": [
-    { "source": "/(.*)", "destination": "/index.html" }
+    {
+      "source": "/user",
+      "destination": "https://backoffice-project.vercel.app/user"
+    },
+    {
+      "source": "/user/:path*",
+      "destination": "https://backoffice-project.vercel.app/user/:path*"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
   ]
 }
