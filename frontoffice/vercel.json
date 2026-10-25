@@ -5,11 +5,11 @@
   "rewrites": [
     {
       "source": "/user",
-      "destination": "https://backoffice-project.vercel.app/user"
+      "destination": "https://my-ecommerce-backoffice.vercel.app/user"
     },
     {
       "source": "/user/:path*",
-      "destination": "https://backoffice-project.vercel.app/user/:path*"
+      "destination": "https://my-ecommerce-backoffice.vercel.app/user:path*"
     },
     {
       "source": "/(.*)",
