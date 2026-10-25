@@ -9,7 +9,7 @@
     },
     {
       "source": "/user/:path*",
-      "destination": "https://my-ecommerce-backoffice.vercel.app/user:path*"
+      "destination": "https://my-ecommerce-backoffice.vercel.app/user/:path*"
     },
     {
       "source": "/(.*)",
